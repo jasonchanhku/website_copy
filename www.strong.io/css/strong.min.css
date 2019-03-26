@@ -15749,6 +15749,11 @@ body {
     color: #0b3d90 !important
 }
 
+.color--primary-j {
+    color: #0b3d90; !important
+    font-weight: 700
+}
+
 a {
     color: #0b3d90
 }
