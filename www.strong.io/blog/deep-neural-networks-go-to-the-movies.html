@@ -1,0 +1,311 @@
+<!doctype html>
+<html lang="en">
+    
+<!-- Mirrored from www.strong.io/blog/deep-neural-networks-go-to-the-movies by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 26 Mar 2019 06:10:35 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+        <meta charset="utf-8">
+        <title>Deep Neural Networks Go to the Movies &mdash; Strong Analytics</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="keywords" content="movies, convnet, imdb, deep learning">
+        <meta name="description" content="We used deep learning to analyze thousands of movie posters to ask whether our deep neural net could accurately classify which movies were good and which were bad.">
+        <meta name="csrf-token" content="pKLPK0xGEdCfg8Ag0cl6EY96IVjikMMnbHh6s1PF">
+        
+        <script>(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)})(window,document,'script','../../www.google-analytics.com/analytics.js','ga');ga('create','UA-10304921-10','auto');ga('require','GTM-N3NX8JR');ga('send','pageview');</script>
+
+        <link rel="icon" href="../favicon.ico" type="image/x-icon"/>
+		<link rel="apple-touch-icon" sizes="57x57" href="../favicon/xapple-icon-57x57.png.pagespeed.ic.VRUjB4O0KQ.png">
+		<link rel="apple-touch-icon" sizes="60x60" href="../favicon/xapple-icon-60x60.png.pagespeed.ic.vJVDTOCtI6.png">
+		<link rel="apple-touch-icon" sizes="72x72" href="../favicon/xapple-icon-72x72.png.pagespeed.ic.whp121EcVL.png">
+		<link rel="apple-touch-icon" sizes="76x76" href="../favicon/xapple-icon-76x76.png.pagespeed.ic.MgjQkXPKC1.png">
+		<link rel="apple-touch-icon" sizes="114x114" href="../favicon/xapple-icon-114x114.png.pagespeed.ic._QGzwKiKu-.png">
+		<link rel="apple-touch-icon" sizes="120x120" href="../favicon/xapple-icon-120x120.png.pagespeed.ic.Hz4AnLMGIL.png">
+		<link rel="apple-touch-icon" sizes="144x144" href="../favicon/xapple-icon-144x144.png.pagespeed.ic.bHG2b7g3rz.png">
+		<link rel="apple-touch-icon" sizes="152x152" href="../favicon/xapple-icon-152x152.png.pagespeed.ic.3JJoTM0DCX.png">
+		<link rel="apple-touch-icon" sizes="180x180" href="../favicon/xapple-icon-180x180.png.pagespeed.ic.bAFEspbAmS.png">
+		<link rel="icon" type="image/png" sizes="192x192" href="../favicon/xandroid-icon-192x192.png.pagespeed.ic.8sJXtxfCk2.png">
+		<link rel="icon" type="image/png" sizes="32x32" href="../favicon/xfavicon-32x32.png.pagespeed.ic.pLQe2o0-x8.png">
+		<link rel="icon" type="image/png" sizes="96x96" href="../favicon/xfavicon-96x96.png.pagespeed.ic.ftlKs2rhLH.png">
+		<link rel="icon" type="image/png" sizes="16x16" href="../favicon/xfavicon-16x16.png.pagespeed.ic.GwCISc5tnn.png">
+		<link rel="manifest" href="../favicon/manifest.json">
+		<meta name="msapplication-TileColor" content="#ffffff">
+		<meta name="msapplication-TileImage" content="/favicon/ms-icon-144x144.png">
+		<meta name="theme-color" content="#ffffff">
+        <link href="../css/A.strong.min.css.pagespeed.cf.LDJy99El4b.css" rel="stylesheet" type="text/css" media="all"/>
+        <link href="https://fonts.googleapis.com/css?family=Open+Sans:200,300,400,400i,500,600,700%7CMerriweather:300,300i%7CMaterial+Icons" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,400i,500,700" rel="stylesheet"/>
+        
+        <script src="../js/strong.min.js.pagespeed.jm.QqKV1RzJLn.js"></script>
+        	
+    </head>
+    <body class=" ">
+        <a id="start"></a>
+        <div class="nav-container ">
+            <div class="bar bar--sm visible-xs">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-xs-6 col-sm-6">
+                            <a href="../index.html">
+                                <img class="logo" alt="logo" src="../img/xstrong-data-science.png.pagespeed.ic.jMpbgW4o3L.png" alt="Strong Analytics - Data Science Consulting and Machine Learning Development Firm" title="Strong Analytics - Data Science Consulting and Machine Learning Development Firm"/>
+                            </a>
+                        </div>
+                        <div class="col-xs-6 col-sm-6 text-right">
+                            <a href="#" class="hamburger-toggle" data-toggle-class="#menu1;hidden-xs">
+                                <i class="icon icon--sm stack-interface stack-menu"></i>
+                            </a>
+                        </div>
+                    </div>
+                    <!--end of row-->
+                </div>
+                <!--end of container-->
+            </div>
+            <!--end bar-->
+            <nav id="menu1" class="bar bar-1 hidden-xs hiddem-sm" data-scroll-class='100vh:pos-fixed'>
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-3 col-sm-2 hidden-xs">
+                            <div class="bar__module">
+                                <a href="../index.html">
+                                    <img class="logo" alt="logo" src="../img/xstrong-data-science.png.pagespeed.ic.jMpbgW4o3L.png" alt="Strong Analytics - Data Science Consulting and Machine Learning Development Firm" title="Strong Analytics - Data Science Consulting and Machine Learning Development Firm"/>
+                                </a>
+                            </div>
+                            <!--end module-->
+                        </div>
+                        <div class="col-md-9 col-sm-12 text-right text-left-xs text-left-sm">
+                            <div class="bar__module">
+                                <ul class="menu-horizontal text-left">
+                                    <li class="dropdown">
+                                        <a href="../index.html">Home</a>
+                                    </li>
+                                    <li class="dropdown">
+                                        <span class="dropdown__trigger">Services</span>
+                                        <div class="dropdown__container">
+                                            <div class="container">
+                                                <div class="row">
+                                                    <div class="dropdown__content col-md-3 col-sm-6">
+                                                        <ul class="menu-vertical">
+	                                                        <li>
+                                                                <a href="../machine-learning-development.html">Machine Learning Development</a>
+                                                            </li>
+                                                            <li>
+                                                                <a href="../data-science-analytics.html">Data Science &amp; Analytics</a>
+                                                            </li>
+	                                                        <li>
+                                                                <a href="../big-data-infrastructure.html">Big Data Infrastructure</a>
+                                                            </li>
+                                                            <li>
+                                                                <a href="../app-development.html">Application Development</a>
+                                                            </li>
+                                                        </ul>
+                                                    </div>
+                                                    <!--end dropdown content-->
+                                                </div>
+                                                <!--end row-->
+                                            </div>
+                                        </div>
+                                        <!--end dropdown container-->
+                                    </li>
+                                    <li class="dropdown">
+                                        <span class="dropdown__trigger">Products</span>
+                                        <div class="dropdown__container">
+                                            <div class="container">
+                                                <div class="row">
+                                                    <div class="dropdown__content col-md-3 col-sm-6">
+                                                        <ul class="menu-vertical">
+	                                                        <li>
+                                                                <a href="../products/optimail.html">Optimail</a>
+                                                            </li>
+                                                        </ul>
+                                                    </div>
+                                                    <!--end dropdown content-->
+                                                </div>
+                                                <!--end row-->
+                                            </div>
+                                        </div>
+                                        <!--end dropdown container-->
+                                    </li>
+                                    <li class="dropdown">
+                                        <a href="../blog.html">Blog</a>
+                                    </li>
+                                    <li class="dropdown">
+                                        <span class="dropdown__trigger">Resources</span>
+                                        <div class="dropdown__container">
+                                            <div class="container">
+                                                <div class="row">
+                                                    <div class="dropdown__content col-md-3 col-sm-6">
+                                                        <ul class="menu-vertical">
+	                                                        <li>
+                                                                <a href="data-science-audit.html">Data Science Audit</a>
+                                                            </li>
+                                                            <li>
+                                                                <a href="../scholarship.html">Data Science Scholarship</a>
+                                                            </li>
+                                                            <li>
+                                                                <a href="predictive-model-roi-calculator.html">Predictive Model ROI Calculator</a>
+                                                            </li>
+                                                        </ul>
+                                                    </div>
+                                                    <!--end dropdown content-->
+                                                </div>
+                                                <!--end row-->
+                                            </div>
+                                        </div>
+                                        <!--end dropdown container-->
+                                    </li>
+                                    <li class="dropdown">
+                                        <a href="../team.html">Our Team</a>
+                                    </li>
+                                </ul>
+                            </div>
+                            <!--end module-->
+                            <div class="bar__module">
+                                <a class="btn btn--sm btn--primary type--uppercase" href="../contact.html">
+                                    <span class="btn__text">
+                                        Contact Us
+                                    </span>
+                                </a>
+                            </div>
+                            <!--end module-->
+                        </div>
+                        <!--end columns-->
+                    </div>
+                    <!--end of row-->
+                </div>
+                <!--end of container-->
+            </nav>
+        </div>
+        
+        <div class="main-container">
+	        
+	        			<section class="space--sm">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-sm-10 col-md-8 col-sm-offset-1 col-md-offset-2">
+                            <article>
+	                            <ol class="breadcrumbs">
+							        <li>
+							            <a href="../index.html">Home</a>
+							        </li>
+							        <li>
+							            <a href="../blog.html">Blog</a>
+							        </li>
+							    </ol>
+                                <div class="article__title text-center">
+                                    <a href="deep-neural-networks-go-to-the-movies.html">
+                                        <h2>Deep Neural Networks Go to the Movies</h2>
+                                    </a>
+                                    <span>Feb 23rd, 2016 by Jacob</span>
+                                </div>
+                                <!--end article title-->
+                                <div class="article__body">
+                                    <p>Let’s start with a little experiment… you’re trying to pick a movie for a date with the charming person you met on chatroulette. You fire up the movies app on your phone to watch a few trailers. Which of these would you definitely <strong>not</strong> click on? </p>
+<p><a target="_blank" href="../blog-images/movie-posters/trailers.jpg"><img src="../blog-images/movie-posters/200xNxtrailers.jpg.pagespeed.ic.sKwnDA_b84.jpg" style="width: 200px; max-width: 200px"/></a></p>
+<p>Perhaps you can’t tell the difference between <em>blue steel</em> and <em>le tigre</em>, or maybe you staunchly support Marvel and refuse to watch a DC movie, but if you’re anything like me you’d skip right over <em>Mountain Men</em>. An incredibly rigorous and official poll I conducted confirmed I was not alone in these preferences. Yet, despite widespread agreement that <em>Mountain Men</em> was probably a bad movie, people struggled to describe what made it seem so 'dumb' or 'hokey.' What specific visual features of it's poster convey this message?</p>
+<h2>Visual Perception or: How I Learned to Stop Worrying and Love Neural Plasticity</h2>
+<p>As humans, we’re good at recognizing a friend’s face or finding our keys on a messy desk-- and we get better at these visual tasks with practice. For example, radiologists undergo countless hours of training to improve their ability to detect anomalies in medical images. How does this work?</p>
+<p>The visual system extracts features from the world. At early stages of visual processing, simple cells in primary visual cortex are sensitive to edges and orientations. As we move up through the cortical hierarchy, we find areas responsive to more complex features including angles, motion, and combinations of features.</p>
+<p><a target="_blank" href="../blog-images/movie-posters/400px-Model.png"><img src="../blog-images/movie-posters/x400px-Model.png.pagespeed.ic.kFwy1tPq7-.png" alt=""/></a></p>
+<p>Through learning and experience, we discover that certain combinations of features are associated with particular objects and outcomes. For example, we might expect warmth when we see the lines and contours of our mother's face, or experience fear upon seeing the sharp angles of a gun shaped object. As we learn these associations, connections in our brain can re-wire or the strength of synaptic connectivity can be modulated to promote processing efficiency through a process of neural plasticity. This kind of learning extends throughout our visual lives including, of course, movie posters. Since the process of learning these associations is largely automatic, it's often difficult for us to describe what, how, and why certain features matter.</p>
+<p>Recent advances in machine learning use a similar process of feature extraction to learn about arbitrary relationships in data. This means that we can turn to machine learning -- or, more specifically, to <em>convolutional neural networks</em> -- to help us get a sense of the features that make <em>Mountain Men</em> seem like a bad movie.</p>
+<h2>The ConvNet Rises</h2>
+<p>Convolutional neural networks (ConvNets) are a powerful form of <a href="https://en.wikipedia.org/wiki/Deep_learning">deep learning</a> which has proven to be extremely accurate in a wide range of image recognition tasks. They operate by applying convolutions -- or filters -- across an image. Each filter can be responsive to different features of the image. Filters at early layers of the network tend to pick out low-level properties of the input image including spatial frequency, edges, and color. As we continue to stack additional convolutional layers, more complicated filters begin to emerge. </p>
+<p><a target="_blank" href="../blog-images/movie-posters/Slide6.png"><img src="../blog-images/movie-posters/xSlide6.png.pagespeed.ic.7O0E4OOD2g.jpg" alt=""/></a></p>
+<p>If you think this sounds strikingly similar to my description of the visual system above, you're indeed correct! There are certainly similarities (enough to warrant a <a href="http://www.visionsciences.org/2016-5-symposia/">symposium at this year's Vision Sciences Society conference</a>), although there are also plenty of notable dissimilarities. Interestingly, by looking at the output of a convolutional net we can begin to understand what properties of an image contribute to its classification in a particular category. </p>
+<h2>No Country for Bad Posters</h2>
+<p>Just in time for the Oscars, we decided to ask a ConvNet what the difference is between the posters of good movies and bad movies. To do so, we collected a set of 19,083 films released from 2001-2015 along with their movie posters. We first performed a stratified split on the movies to get the worst (those with an IMDB rating under 5.5) and the best (those above 7.0). We then trained a ConvNet to classify the posters of good and bad movies. </p>
+<p><strong>Technical details</strong>: We used <a href="https://github.com/Lasagne/Lasagne">Lasagne</a> and <a href="https://github.com/dnouri/nolearn">nolearn</a> to train GoogLeNet, a 22 layer deep network with over 10 million parameters, on the movie poster dataset using an NVidia GTX 980 GPU. The initial weights were loaded from the pre-trained model and we fine-tuned the weights with a full day of training. Our final model achieved 68% accuracy on a separate validation split (50% is random chance). </p>
+<h3>The Usual Suspects?</h3>
+<p>We then used the trained network to classify 2,500 movie posters it hadn't yet seen. By looking at what it thinks are the best and worst movies based on their posters, we can begin to understand the features that are important for this distinction.</p>
+<p>Here's a random selection of our classifications organized from best to worst (refresh for more):</p>
+<iframe src="movie-posters/grid.html" style="width: 100%" height="700px" frameborder="0"></iframe>
+<p>Looking at this array of movie posters, we can tell there are some obvious qualitative differences between good and bad movies:</p>
+<p>Movie posters of <strong>good</strong> movies tend to have <strong>clean, minimalistic design</strong>. Many feature a <strong>single color</strong> throughout the entire poster. In contrast, posters of <strong>bad</strong> movies tend have much <strong>busier design</strong> with <strong>multiple colors and textures</strong>.</p>
+<p>Posters of <strong>good</strong> movies tend to use <strong>simple, horizontal sans serif fonts</strong>, while posters of bad movies seem to be inspired by Microsoft Word Art circa 2005.</p>
+<p>Similarly, a common feature of <strong>bad</strong> movie posters seems to be <strong>red fonts</strong>, often slightly tilted. These features to be most prevalent in horror and ‘college’ type movies,  of which almost all are universally regarded as terrible.</p>
+<p>Interestingly, the ConvNet seemed to pick up on the fact that many well rated movies tend to place the <strong>laurel leaf award</strong> on the movie poster. So, in order to trick you into thinking this is a good blog post, I’ve added a laurel leaf award.
+<a target="_blank" href="../blog-images/movie-posters/laurel.png"><img src="../blog-images/movie-posters/xlaurel.png.pagespeed.ic.hrBCHrShO0.png" alt=""/></a></p>
+<h2>The Good, the Bad, and the Ugly</h2>
+<p><a target="_blank" href="../blog-images/movie-posters/mountain-men-v-cemetery-of-splendor.png"><img src="../blog-images/movie-posters/xmountain-men-v-cemetery-of-splendor.png.pagespeed.ic.MLgUe2koWg.jpg" alt=""/></a></p>
+<p>So, what was it about <em>Mountain Men</em> that seems so bad? Our model agrees with me about its quality: it is 82% confident that <em>Mountain Men</em> is a bad movie, while it's 73% confident that another movie on the page, <em>Cemetery of Splendor</em>, is a good one. It seems <em>Mountain Men</em> exhibits many of the traits of bad movies - most notably several overlaid textures and bright red text, while <em>Cemetery of Splendor</em> has clean white design with multiple laurel leaf awards.</p>
+<p>Does this mean that a we can add laurel leaves and clean fonts to the movie poster of a terrible movie and it will suddenly become good? Of course not. But it does mean that you could do so to try to convince people to see your movie. Given that many individuals implicitly have learned these associations, people might be more likely to engage with a poster that exhibits visual features of better movies. Indeed, more movies were misclassified as <em>good</em> than <em>bad</em> likely because of this: people who make bad movies might be able to create a great poster, but no one who is making a great movie accidentally makes a poster like <strong>Mountain Men</strong> or <strong>Jock: The Hero Dog</strong>.</p>
+<p>One important limitation of this analysis is that we focused entirely on IMDB ratings and not, for example, box-office grosses. It's not necessarily the case that higher rated movies are higher-grossing than lower rated movies. Moreover, as we've previously discussed (see our <a href="movie-ratings.html">post on movie ratings</a>), critics and fans don't always see eye-to-eye, so we might expect different patterns to emerge if we based our analysis on Metacritic ratings.</p>
+<p>See the code for the ConvNet <a href="https://github.com/strongio/movie-posters">on our Github</a>.</p>                                </div>
+                                
+                                <p>&nbsp;</p>
+                                <style>#dsq-content div,#dsq-content p,#dsq-content h3{clear:none!important}#dsq-content{overflow:auto!important}</style>
+								<div id="disqus_thread"></div>
+									<script type="text/javascript">var disqus_shortname='stronganalytics';var disqus_identifier='blog/deep-neural-networks-go-to-the-movies';var disqus_url='deep-neural-networks-go-to-the-movies.html';(function(){var dsq=document.createElement('script');dsq.type='text/javascript';dsq.async=true;dsq.src='http://'+disqus_shortname+'.disqus.com/embed.js';(document.getElementsByTagName('head')[0]||document.getElementsByTagName('body')[0]).appendChild(dsq);})();</script>
+									<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+								</div>
+                            </article>
+                        </div>
+                    </div>
+                    <!--end of row-->
+                </div>
+                <!--end of container-->
+            </section>
+	        
+	        <footer class="text-center-xs space--xs ">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-sm-7">
+                            <ul class="list-inline">
+                                <li>
+                                    <a href="../team.html">
+                                        <span class="h6 type--uppercase">Our Team</span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="../careers.html">
+                                        <span class="h6 type--uppercase">Careers</span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="../contact.html">
+                                        <span class="h6 type--uppercase">Contact Us</span>
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="col-sm-5 text-right text-center-xs">
+                            <ul class="social-list list-inline list--hover">
+                                <li>
+                                    <a href="http://www.twitter.com/stronganalytics">
+                                        <i class="socicon socicon-twitter icon icon--xs"></i>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="https://www.linkedin.com/company/strong-analytics">
+                                        <i class="socicon socicon-linkedin icon icon--xs"></i>
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    <!--end of row-->
+                    <div class="row">
+                        <div class="col-sm-7">
+                            <span class="type--fine-print">&copy;
+                                <span class="update-year"></span> Strong Analytics LLC &mdash; Chicago, IL, USA &amp; Vancouver, BC, Canada</span>
+                        </div>
+                        <div class="col-sm-5 text-right text-center-xs">
+                            <a class="type--fine-print" href="mailto:contact@strong.io">contact@strong.io</a>
+                        </div>
+                    </div>
+                    <!--end of row-->
+                </div>
+                <!--end of container-->
+            </footer>
+        </div>
+        <!--<div class="loader"></div>-->
+        <a class="back-to-top inner-link" href="#start" data-scroll-class="100vh:active">
+            <i class="stack-interface stack-up-open-big"></i>
+        </a>
+        
+        <!-- Intercom -->
+		<script>window.intercomSettings={app_id:"yhiz5h5i"};</script>
+		<script>(function(){var w=window;var ic=w.Intercom;if(typeof ic==="function"){ic('reattach_activator');ic('update',intercomSettings);}else{var d=document;var i=function(){i.c(arguments)};i.q=[];i.c=function(args){i.q.push(args)};w.Intercom=i;function l(){var s=d.createElement('script');s.type='text/javascript';s.async=true;s.src='https://widget.intercom.io/widget/yhiz5h5i';var x=d.getElementsByTagName('script')[0];x.parentNode.insertBefore(s,x);}if(w.attachEvent){w.attachEvent('onload',l);}else{w.addEventListener('load',l,false);}}})()</script>
+    </body>
+
+<!-- Mirrored from www.strong.io/blog/deep-neural-networks-go-to-the-movies by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 26 Mar 2019 06:10:45 GMT -->
+</html>

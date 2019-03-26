@@ -1,0 +1,311 @@
+<!doctype html>
+<html lang="en">
+    
+<!-- Mirrored from www.strong.io/blog/predicting-customer-behavior-machine-learning-to-identify-paying-customers by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 26 Mar 2019 06:08:51 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+        <meta charset="utf-8">
+        <title>Predicting Customer Behavior: How we use Machine Learning to Identify Paying Customers before they Subscribe &mdash; Strong Analytics</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="keywords" content="prediction, customer behaviour, machine learning, recurrent neural networks, conversion rates, conversion optimization, data science">
+        <meta name="description" content="Learn about how we used machine learning to accurately predict conversions for a popular SaaS app.">
+        <meta name="csrf-token" content="pKLPK0xGEdCfg8Ag0cl6EY96IVjikMMnbHh6s1PF">
+        
+        <script>(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)})(window,document,'script','../../www.google-analytics.com/analytics.js','ga');ga('create','UA-10304921-10','auto');ga('require','GTM-N3NX8JR');ga('send','pageview');</script>
+
+        <link rel="icon" href="../favicon.ico" type="image/x-icon"/>
+		<link rel="apple-touch-icon" sizes="57x57" href="../favicon/xapple-icon-57x57.png.pagespeed.ic.VRUjB4O0KQ.png">
+		<link rel="apple-touch-icon" sizes="60x60" href="../favicon/xapple-icon-60x60.png.pagespeed.ic.vJVDTOCtI6.png">
+		<link rel="apple-touch-icon" sizes="72x72" href="../favicon/xapple-icon-72x72.png.pagespeed.ic.whp121EcVL.png">
+		<link rel="apple-touch-icon" sizes="76x76" href="../favicon/xapple-icon-76x76.png.pagespeed.ic.MgjQkXPKC1.png">
+		<link rel="apple-touch-icon" sizes="114x114" href="../favicon/xapple-icon-114x114.png.pagespeed.ic._QGzwKiKu-.png">
+		<link rel="apple-touch-icon" sizes="120x120" href="../favicon/xapple-icon-120x120.png.pagespeed.ic.Hz4AnLMGIL.png">
+		<link rel="apple-touch-icon" sizes="144x144" href="../favicon/xapple-icon-144x144.png.pagespeed.ic.bHG2b7g3rz.png">
+		<link rel="apple-touch-icon" sizes="152x152" href="../favicon/xapple-icon-152x152.png.pagespeed.ic.3JJoTM0DCX.png">
+		<link rel="apple-touch-icon" sizes="180x180" href="../favicon/xapple-icon-180x180.png.pagespeed.ic.bAFEspbAmS.png">
+		<link rel="icon" type="image/png" sizes="192x192" href="../favicon/xandroid-icon-192x192.png.pagespeed.ic.8sJXtxfCk2.png">
+		<link rel="icon" type="image/png" sizes="32x32" href="../favicon/xfavicon-32x32.png.pagespeed.ic.pLQe2o0-x8.png">
+		<link rel="icon" type="image/png" sizes="96x96" href="../favicon/xfavicon-96x96.png.pagespeed.ic.ftlKs2rhLH.png">
+		<link rel="icon" type="image/png" sizes="16x16" href="../favicon/xfavicon-16x16.png.pagespeed.ic.GwCISc5tnn.png">
+		<link rel="manifest" href="../favicon/manifest.json">
+		<meta name="msapplication-TileColor" content="#ffffff">
+		<meta name="msapplication-TileImage" content="/favicon/ms-icon-144x144.png">
+		<meta name="theme-color" content="#ffffff">
+        <link href="../css/A.strong.min.css.pagespeed.cf.LDJy99El4b.css" rel="stylesheet" type="text/css" media="all"/>
+        <link href="https://fonts.googleapis.com/css?family=Open+Sans:200,300,400,400i,500,600,700%7CMerriweather:300,300i%7CMaterial+Icons" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,400i,500,700" rel="stylesheet"/>
+        
+        <script src="../js/strong.min.js.pagespeed.jm.QqKV1RzJLn.js"></script>
+        	
+    </head>
+    <body class=" ">
+        <a id="start"></a>
+        <div class="nav-container ">
+            <div class="bar bar--sm visible-xs">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-xs-6 col-sm-6">
+                            <a href="../index.html">
+                                <img class="logo" alt="logo" src="../img/xstrong-data-science.png.pagespeed.ic.jMpbgW4o3L.png" alt="Strong Analytics - Data Science Consulting and Machine Learning Development Firm" title="Strong Analytics - Data Science Consulting and Machine Learning Development Firm"/>
+                            </a>
+                        </div>
+                        <div class="col-xs-6 col-sm-6 text-right">
+                            <a href="#" class="hamburger-toggle" data-toggle-class="#menu1;hidden-xs">
+                                <i class="icon icon--sm stack-interface stack-menu"></i>
+                            </a>
+                        </div>
+                    </div>
+                    <!--end of row-->
+                </div>
+                <!--end of container-->
+            </div>
+            <!--end bar-->
+            <nav id="menu1" class="bar bar-1 hidden-xs hiddem-sm" data-scroll-class='100vh:pos-fixed'>
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-3 col-sm-2 hidden-xs">
+                            <div class="bar__module">
+                                <a href="../index.html">
+                                    <img class="logo" alt="logo" src="../img/xstrong-data-science.png.pagespeed.ic.jMpbgW4o3L.png" alt="Strong Analytics - Data Science Consulting and Machine Learning Development Firm" title="Strong Analytics - Data Science Consulting and Machine Learning Development Firm"/>
+                                </a>
+                            </div>
+                            <!--end module-->
+                        </div>
+                        <div class="col-md-9 col-sm-12 text-right text-left-xs text-left-sm">
+                            <div class="bar__module">
+                                <ul class="menu-horizontal text-left">
+                                    <li class="dropdown">
+                                        <a href="../index.html">Home</a>
+                                    </li>
+                                    <li class="dropdown">
+                                        <span class="dropdown__trigger">Services</span>
+                                        <div class="dropdown__container">
+                                            <div class="container">
+                                                <div class="row">
+                                                    <div class="dropdown__content col-md-3 col-sm-6">
+                                                        <ul class="menu-vertical">
+	                                                        <li>
+                                                                <a href="../machine-learning-development.html">Machine Learning Development</a>
+                                                            </li>
+                                                            <li>
+                                                                <a href="../data-science-analytics.html">Data Science &amp; Analytics</a>
+                                                            </li>
+	                                                        <li>
+                                                                <a href="../big-data-infrastructure.html">Big Data Infrastructure</a>
+                                                            </li>
+                                                            <li>
+                                                                <a href="../app-development.html">Application Development</a>
+                                                            </li>
+                                                        </ul>
+                                                    </div>
+                                                    <!--end dropdown content-->
+                                                </div>
+                                                <!--end row-->
+                                            </div>
+                                        </div>
+                                        <!--end dropdown container-->
+                                    </li>
+                                    <li class="dropdown">
+                                        <span class="dropdown__trigger">Products</span>
+                                        <div class="dropdown__container">
+                                            <div class="container">
+                                                <div class="row">
+                                                    <div class="dropdown__content col-md-3 col-sm-6">
+                                                        <ul class="menu-vertical">
+	                                                        <li>
+                                                                <a href="../products/optimail.html">Optimail</a>
+                                                            </li>
+                                                        </ul>
+                                                    </div>
+                                                    <!--end dropdown content-->
+                                                </div>
+                                                <!--end row-->
+                                            </div>
+                                        </div>
+                                        <!--end dropdown container-->
+                                    </li>
+                                    <li class="dropdown">
+                                        <a href="../blog.html">Blog</a>
+                                    </li>
+                                    <li class="dropdown">
+                                        <span class="dropdown__trigger">Resources</span>
+                                        <div class="dropdown__container">
+                                            <div class="container">
+                                                <div class="row">
+                                                    <div class="dropdown__content col-md-3 col-sm-6">
+                                                        <ul class="menu-vertical">
+	                                                        <li>
+                                                                <a href="data-science-audit.html">Data Science Audit</a>
+                                                            </li>
+                                                            <li>
+                                                                <a href="../scholarship.html">Data Science Scholarship</a>
+                                                            </li>
+                                                            <li>
+                                                                <a href="predictive-model-roi-calculator.html">Predictive Model ROI Calculator</a>
+                                                            </li>
+                                                        </ul>
+                                                    </div>
+                                                    <!--end dropdown content-->
+                                                </div>
+                                                <!--end row-->
+                                            </div>
+                                        </div>
+                                        <!--end dropdown container-->
+                                    </li>
+                                    <li class="dropdown">
+                                        <a href="../team.html">Our Team</a>
+                                    </li>
+                                </ul>
+                            </div>
+                            <!--end module-->
+                            <div class="bar__module">
+                                <a class="btn btn--sm btn--primary type--uppercase" href="../contact.html">
+                                    <span class="btn__text">
+                                        Contact Us
+                                    </span>
+                                </a>
+                            </div>
+                            <!--end module-->
+                        </div>
+                        <!--end columns-->
+                    </div>
+                    <!--end of row-->
+                </div>
+                <!--end of container-->
+            </nav>
+        </div>
+        
+        <div class="main-container">
+	        
+	        			<section class="space--sm">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-sm-10 col-md-8 col-sm-offset-1 col-md-offset-2">
+                            <article>
+	                            <ol class="breadcrumbs">
+							        <li>
+							            <a href="../index.html">Home</a>
+							        </li>
+							        <li>
+							            <a href="../blog.html">Blog</a>
+							        </li>
+							    </ol>
+                                <div class="article__title text-center">
+                                    <a href="predicting-customer-behavior-machine-learning-to-identify-paying-customers.html">
+                                        <h2>Predicting Customer Behavior: How we use Machine Learning to Identify Paying Customers before they Subscribe</h2>
+                                    </a>
+                                    <span>Jun 14th, 2016 by Brock</span>
+                                </div>
+                                <!--end article title-->
+                                <div class="article__body">
+                                    <p>What if you could predict your customers' behaviors — such as purchasing your product, seeking support, or switching to another provider — before they happened? This information could open up new, proactive strategies for your organization; for example, converting someone from <em>likely going to churn</em> to <em>upgrading to a more expensive product</em>.</p>
+<p>Recently, we worked with a small Software-as-a-Service (SaaS) startup to implement such a prediction engine and, in the process, opened their eyes to a critical new strategy for lean growth.</p>
+<p>They came to us with a simple problem: after years of solid growth, Monthly Recurring Revenue (MRR) increases were beginning to slow. They had spent most of their time to this point focused on their product (adding new features, re-designing its interface, and making the tech behind it more reliable), and now they wanted to focus on their customer acquisition. <strong>Over 2000 users were signing up for a 10-day free trial of their product each month, but only around 3% of them were converting to a paid subscription.</strong> What led trial users to subscribe? And how could they increase this conversion rate — a key metric of their company’s health?</p>
+<h2>An experiment yields new insight and opportunity</h2>
+<p>Early analyses of their typical support interactions with their customers made two things very clear. First, many of their users who submitted support tickets had trouble getting started with their product: they found the initial setup confusing and often had to leap a few technical hurdles in order to get it working. Second, a large number of users never submitted any support tickets, but never used the product either — they signed up and then disappeared forever.</p>
+<p>To better understand the typical customer and, moreover, their issues in getting started with the product, we encouraged the company to perform a simple experiment: hire some extra support personnel and, for an entire month, call or email every single person who signed up for a trial. Ask them what they think of the tool, if they are having any problems, and help them fix them. This turned their onboarding process from almost completely ‘hands-off’ into very ‘hands-on.’</p>
+<p>We learned several things from this experiment. First, users were indeed having lots of technical issues. But, more importantly, these calls really helped: most of their questions and issues could be readily addressed in a short conversation. <strong>Their conversion rate climbed from 3.7% to 5.4% by the end of the month.</strong> Finally, just like we saw in the support tickets, many users were simply not interested in purchasing — they were not in the target market (it was a B2B product) but signed up only to use a free tool that the company offered to all trial users.</p>
+<p><a target="_blank" href="../blog-images/predicting-conversions/fig1-conversion-rates.png"><img src="../blog-images/predicting-conversions/xfig1-conversion-rates.png.pagespeed.ic.wxSFRC29Ku.png" alt=""/></a></p>
+<p>Now, if this larger support team was practical for the long run, this would have been the end of our story. They would have continued to scale their support personnel and continued with the hands-on sales process.</p>
+<p>But, as is the case with most startups, this company wanted to take a more lean strategy. They only wanted to keep as many people as it would take to work with those users who were actually in their target market — the ‘high-value’ trial users who were most likely to convert if they could install the product successfully.</p>
+<p>This created an interesting opportunity: <strong>If we could find a way to identify the high-value trial users automatically, we could have customer support personnel focus their attention on these users and get the same conversion rate impact with less overhead expense.</strong></p>
+<h2>Our solution</h2>
+<p>We proposed to build and integrate a live prediction engine that could learn from historical data what kinds of users are likely to convert and, in real-time, generate conversion probabilities for current trial users. By feeding this information to the company’s Customer Relationship Manager (CRM), customer support personnel could then focus on high-probability/high-value users with their installation intervention technique.</p>
+<h2>Gathering and enriching the data</h2>
+<p>Robust predictions benefit from having high quality and easily accessible data. Thankfully, we had previously helped this company to set up their <a href="../data-science-analytics.html">data strategy and pipeline</a>, ensuring they were following <a href="five-things-every-startup-should-be-doing-with-its-data.html">the essential rules that we suggest should be part of any startup’s data strategy</a> and were ready to integrate <a href="../tools-development.html">data tools and products</a> into their business operations.</p>
+<p>For each user on a trial, we had standard information like their name, email, the number and timing of their logins, the number of times they had used various parts of the product, and their success rate with using the product, as well as several other metrics unique to their experience with this particular product.</p>
+<p>We enriched these data with other data points that we thought may be important given what we knew about the kinds of customers who had historically purchased the product, such as their gender (predicted using their first name and a name-gender database), the week day they signed up, the hour they signed up, and their email provider (tip: @yahoo.com accounts don’t buy many B2B products).</p>
+<p>In total, <strong>we had 70 unique datapoints for each customer, many of which were dynamic — changing each day of the 10-day free trial.</strong></p>
+<h2>Testing machine learning algorithms</h2>
+<p>We next auditioned several different machine learning algorithms to see which one would do the best job predicting from these data whether or not a user would convert to a paid subscription. Our goal was to balance the simplicity of the model (making it faster, easier to implement, and less likely to blow up) with its accuracy.</p>
+<p>We compared different models using their AUC (Area Under the Curve) scores. AUC scores are helpful because they simultaneously capture the <strong>sensitivity</strong> of the model (whether it tends to predict a conversion when a conversion occurs) as well as <strong>specificity</strong> (whether it tends <em>not</em> to predict a conversion when a conversion does not occur). We trained each model on data from one year, then tested it on new data it hadn't seen from the subsequent 6-month period.</p>
+<p>We began with simple logistic models (with predictors selected using <a href="https://en.wikipedia.org/wiki/Lasso_(statistics)">Lasso</a>). Our best logistic model had a 78% AUC. Moving upward in complexity, we then tried a random forest model (80% AUC) before finding great success with a well-tuned gradient boosting model (93% AUC).</p>
+<p>While gradient boosting yielded some promising results, it was doing so under a somewhat unrepresentative situation. Our gradient boosting model never accounted for the day-by-day nature of the day — instead, it just took all the data up to the current point as one big blob without any temporal structure. We were testing the models’ predictions on 6 months of new data where, for each user, it could see all 10 days of their trial period at once. In the <em>real implementation</em>, the model would only get to see the data from day 1, then day 2, day 3, etc. The model didn't perform as well when we tested it with more realistic data.</p>
+<p>This led us to implement a modeling technique which explicitly includes the temporal structure of the data — a Recurrent Neural Network (RNN). It did incredibly well, with a 95% AUC in our representative tests! As you can see in the plot below, it had above-chance accuracy from the first day of a user’s trial, but became even more accurate through the full 10 days.</p>
+<p><a target="_blank" href="../blog-images/predicting-conversions/fig2-rnn-accuracy.png"><img src="../blog-images/predicting-conversions/xfig2-rnn-accuracy.png.pagespeed.ic.FvnhpPkREK.png" alt=""/></a></p>
+<p>Despite the added complexity, we settled on this as our final model.</p>
+<h2>Integrating the predicted conversion probabilities</h2>
+<p>After doing some more testing, and scaling up the model to work with all the live data, <strong>we integrated its predictions into the company’s CRM</strong>. Now, their customer support personnel could not only see all the people on a free trial, they could see a predicted probability of converting beside their name. </p>
+<p><a target="_blank" href="../blog-images/predicting-conversions/fig3-crm.png"><img src="../blog-images/predicting-conversions/xfig3-crm.png.pagespeed.ic.poEwZUDRrS.png" alt=""/></a></p>
+<p>They were also now able to sort their 'free trial leads' view by the probability of conversion, targeting those high-value leads first to make sure that they weren't running into small issues that might keep them from converting. Low-value leads who simply wanted to use the free product once were at the bottom of the list, and didn't take up any of their time.</p>
+<p><strong>All of our work had boiled down to a single metric in a CRM.</strong>  But this little metric had a huge impact on the company: they were able to downsize their customer support personnel to their previous levels, while <strong>continuing to drive their conversion rate upward to its now-stable rate of around 7.4%</strong>.</p>
+<p>We see this not only as a big success for our client, but also a great demonstration of the important roles that data science, machine learning, and prediction can play even in relatively small businesses.</p>                                </div>
+                                
+                                <p>&nbsp;</p>
+                                <style>#dsq-content div,#dsq-content p,#dsq-content h3{clear:none!important}#dsq-content{overflow:auto!important}</style>
+								<div id="disqus_thread"></div>
+									<script type="text/javascript">var disqus_shortname='stronganalytics';var disqus_identifier='blog/predicting-customer-behavior-machine-learning-to-identify-paying-customers';var disqus_url='predicting-customer-behavior-machine-learning-to-identify-paying-customers.html';(function(){var dsq=document.createElement('script');dsq.type='text/javascript';dsq.async=true;dsq.src='http://'+disqus_shortname+'.disqus.com/embed.js';(document.getElementsByTagName('head')[0]||document.getElementsByTagName('body')[0]).appendChild(dsq);})();</script>
+									<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+								</div>
+                            </article>
+                        </div>
+                    </div>
+                    <!--end of row-->
+                </div>
+                <!--end of container-->
+            </section>
+	        
+	        <footer class="text-center-xs space--xs ">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-sm-7">
+                            <ul class="list-inline">
+                                <li>
+                                    <a href="../team.html">
+                                        <span class="h6 type--uppercase">Our Team</span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="../careers.html">
+                                        <span class="h6 type--uppercase">Careers</span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="../contact.html">
+                                        <span class="h6 type--uppercase">Contact Us</span>
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="col-sm-5 text-right text-center-xs">
+                            <ul class="social-list list-inline list--hover">
+                                <li>
+                                    <a href="http://www.twitter.com/stronganalytics">
+                                        <i class="socicon socicon-twitter icon icon--xs"></i>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="https://www.linkedin.com/company/strong-analytics">
+                                        <i class="socicon socicon-linkedin icon icon--xs"></i>
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    <!--end of row-->
+                    <div class="row">
+                        <div class="col-sm-7">
+                            <span class="type--fine-print">&copy;
+                                <span class="update-year"></span> Strong Analytics LLC &mdash; Chicago, IL, USA &amp; Vancouver, BC, Canada</span>
+                        </div>
+                        <div class="col-sm-5 text-right text-center-xs">
+                            <a class="type--fine-print" href="mailto:contact@strong.io">contact@strong.io</a>
+                        </div>
+                    </div>
+                    <!--end of row-->
+                </div>
+                <!--end of container-->
+            </footer>
+        </div>
+        <!--<div class="loader"></div>-->
+        <a class="back-to-top inner-link" href="#start" data-scroll-class="100vh:active">
+            <i class="stack-interface stack-up-open-big"></i>
+        </a>
+        
+        <!-- Intercom -->
+		<script>window.intercomSettings={app_id:"yhiz5h5i"};</script>
+		<script>(function(){var w=window;var ic=w.Intercom;if(typeof ic==="function"){ic('reattach_activator');ic('update',intercomSettings);}else{var d=document;var i=function(){i.c(arguments)};i.q=[];i.c=function(args){i.q.push(args)};w.Intercom=i;function l(){var s=d.createElement('script');s.type='text/javascript';s.async=true;s.src='https://widget.intercom.io/widget/yhiz5h5i';var x=d.getElementsByTagName('script')[0];x.parentNode.insertBefore(s,x);}if(w.attachEvent){w.attachEvent('onload',l);}else{w.addEventListener('load',l,false);}}})()</script>
+    </body>
+
+<!-- Mirrored from www.strong.io/blog/predicting-customer-behavior-machine-learning-to-identify-paying-customers by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 26 Mar 2019 06:08:58 GMT -->
+</html>

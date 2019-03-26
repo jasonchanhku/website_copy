@@ -1,0 +1,306 @@
+<!doctype html>
+<html lang="en">
+    
+<!-- Mirrored from www.strong.io/blog/landing-page-science-optimizing-conversion-rates by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 26 Mar 2019 06:10:30 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+        <meta charset="utf-8">
+        <title>Landing Page Science: How we Optimized the Conversion Rates of over Ten Thousand Landing Pages &mdash; Strong Analytics</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="keywords" content="optimization, landing pages, conversion rates, customer research, gradient boosting">
+        <meta name="description" content="Learn about how we used basic data science tools to optimize tens of thousands of landing pages for our client.">
+        <meta name="csrf-token" content="pKLPK0xGEdCfg8Ag0cl6EY96IVjikMMnbHh6s1PF">
+        
+        <script>(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)})(window,document,'script','../../www.google-analytics.com/analytics.js','ga');ga('create','UA-10304921-10','auto');ga('require','GTM-N3NX8JR');ga('send','pageview');</script>
+
+        <link rel="icon" href="../favicon.ico" type="image/x-icon"/>
+		<link rel="apple-touch-icon" sizes="57x57" href="../favicon/xapple-icon-57x57.png.pagespeed.ic.VRUjB4O0KQ.png">
+		<link rel="apple-touch-icon" sizes="60x60" href="../favicon/xapple-icon-60x60.png.pagespeed.ic.vJVDTOCtI6.png">
+		<link rel="apple-touch-icon" sizes="72x72" href="../favicon/xapple-icon-72x72.png.pagespeed.ic.whp121EcVL.png">
+		<link rel="apple-touch-icon" sizes="76x76" href="../favicon/xapple-icon-76x76.png.pagespeed.ic.MgjQkXPKC1.png">
+		<link rel="apple-touch-icon" sizes="114x114" href="../favicon/xapple-icon-114x114.png.pagespeed.ic._QGzwKiKu-.png">
+		<link rel="apple-touch-icon" sizes="120x120" href="../favicon/xapple-icon-120x120.png.pagespeed.ic.Hz4AnLMGIL.png">
+		<link rel="apple-touch-icon" sizes="144x144" href="../favicon/xapple-icon-144x144.png.pagespeed.ic.bHG2b7g3rz.png">
+		<link rel="apple-touch-icon" sizes="152x152" href="../favicon/xapple-icon-152x152.png.pagespeed.ic.3JJoTM0DCX.png">
+		<link rel="apple-touch-icon" sizes="180x180" href="../favicon/xapple-icon-180x180.png.pagespeed.ic.bAFEspbAmS.png">
+		<link rel="icon" type="image/png" sizes="192x192" href="../favicon/xandroid-icon-192x192.png.pagespeed.ic.8sJXtxfCk2.png">
+		<link rel="icon" type="image/png" sizes="32x32" href="../favicon/xfavicon-32x32.png.pagespeed.ic.pLQe2o0-x8.png">
+		<link rel="icon" type="image/png" sizes="96x96" href="../favicon/xfavicon-96x96.png.pagespeed.ic.ftlKs2rhLH.png">
+		<link rel="icon" type="image/png" sizes="16x16" href="../favicon/xfavicon-16x16.png.pagespeed.ic.GwCISc5tnn.png">
+		<link rel="manifest" href="../favicon/manifest.json">
+		<meta name="msapplication-TileColor" content="#ffffff">
+		<meta name="msapplication-TileImage" content="/favicon/ms-icon-144x144.png">
+		<meta name="theme-color" content="#ffffff">
+        <link href="../css/A.strong.min.css.pagespeed.cf.LDJy99El4b.css" rel="stylesheet" type="text/css" media="all"/>
+        <link href="https://fonts.googleapis.com/css?family=Open+Sans:200,300,400,400i,500,600,700%7CMerriweather:300,300i%7CMaterial+Icons" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,400i,500,700" rel="stylesheet"/>
+        
+        <script src="../js/strong.min.js.pagespeed.jm.QqKV1RzJLn.js"></script>
+        	
+    </head>
+    <body class=" ">
+        <a id="start"></a>
+        <div class="nav-container ">
+            <div class="bar bar--sm visible-xs">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-xs-6 col-sm-6">
+                            <a href="../index.html">
+                                <img class="logo" alt="logo" src="../img/xstrong-data-science.png.pagespeed.ic.jMpbgW4o3L.png" alt="Strong Analytics - Data Science Consulting and Machine Learning Development Firm" title="Strong Analytics - Data Science Consulting and Machine Learning Development Firm"/>
+                            </a>
+                        </div>
+                        <div class="col-xs-6 col-sm-6 text-right">
+                            <a href="#" class="hamburger-toggle" data-toggle-class="#menu1;hidden-xs">
+                                <i class="icon icon--sm stack-interface stack-menu"></i>
+                            </a>
+                        </div>
+                    </div>
+                    <!--end of row-->
+                </div>
+                <!--end of container-->
+            </div>
+            <!--end bar-->
+            <nav id="menu1" class="bar bar-1 hidden-xs hiddem-sm" data-scroll-class='100vh:pos-fixed'>
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-3 col-sm-2 hidden-xs">
+                            <div class="bar__module">
+                                <a href="../index.html">
+                                    <img class="logo" alt="logo" src="../img/xstrong-data-science.png.pagespeed.ic.jMpbgW4o3L.png" alt="Strong Analytics - Data Science Consulting and Machine Learning Development Firm" title="Strong Analytics - Data Science Consulting and Machine Learning Development Firm"/>
+                                </a>
+                            </div>
+                            <!--end module-->
+                        </div>
+                        <div class="col-md-9 col-sm-12 text-right text-left-xs text-left-sm">
+                            <div class="bar__module">
+                                <ul class="menu-horizontal text-left">
+                                    <li class="dropdown">
+                                        <a href="../index.html">Home</a>
+                                    </li>
+                                    <li class="dropdown">
+                                        <span class="dropdown__trigger">Services</span>
+                                        <div class="dropdown__container">
+                                            <div class="container">
+                                                <div class="row">
+                                                    <div class="dropdown__content col-md-3 col-sm-6">
+                                                        <ul class="menu-vertical">
+	                                                        <li>
+                                                                <a href="../machine-learning-development.html">Machine Learning Development</a>
+                                                            </li>
+                                                            <li>
+                                                                <a href="../data-science-analytics.html">Data Science &amp; Analytics</a>
+                                                            </li>
+	                                                        <li>
+                                                                <a href="../big-data-infrastructure.html">Big Data Infrastructure</a>
+                                                            </li>
+                                                            <li>
+                                                                <a href="../app-development.html">Application Development</a>
+                                                            </li>
+                                                        </ul>
+                                                    </div>
+                                                    <!--end dropdown content-->
+                                                </div>
+                                                <!--end row-->
+                                            </div>
+                                        </div>
+                                        <!--end dropdown container-->
+                                    </li>
+                                    <li class="dropdown">
+                                        <span class="dropdown__trigger">Products</span>
+                                        <div class="dropdown__container">
+                                            <div class="container">
+                                                <div class="row">
+                                                    <div class="dropdown__content col-md-3 col-sm-6">
+                                                        <ul class="menu-vertical">
+	                                                        <li>
+                                                                <a href="../products/optimail.html">Optimail</a>
+                                                            </li>
+                                                        </ul>
+                                                    </div>
+                                                    <!--end dropdown content-->
+                                                </div>
+                                                <!--end row-->
+                                            </div>
+                                        </div>
+                                        <!--end dropdown container-->
+                                    </li>
+                                    <li class="dropdown">
+                                        <a href="../blog.html">Blog</a>
+                                    </li>
+                                    <li class="dropdown">
+                                        <span class="dropdown__trigger">Resources</span>
+                                        <div class="dropdown__container">
+                                            <div class="container">
+                                                <div class="row">
+                                                    <div class="dropdown__content col-md-3 col-sm-6">
+                                                        <ul class="menu-vertical">
+	                                                        <li>
+                                                                <a href="data-science-audit.html">Data Science Audit</a>
+                                                            </li>
+                                                            <li>
+                                                                <a href="../scholarship.html">Data Science Scholarship</a>
+                                                            </li>
+                                                            <li>
+                                                                <a href="predictive-model-roi-calculator.html">Predictive Model ROI Calculator</a>
+                                                            </li>
+                                                        </ul>
+                                                    </div>
+                                                    <!--end dropdown content-->
+                                                </div>
+                                                <!--end row-->
+                                            </div>
+                                        </div>
+                                        <!--end dropdown container-->
+                                    </li>
+                                    <li class="dropdown">
+                                        <a href="../team.html">Our Team</a>
+                                    </li>
+                                </ul>
+                            </div>
+                            <!--end module-->
+                            <div class="bar__module">
+                                <a class="btn btn--sm btn--primary type--uppercase" href="../contact.html">
+                                    <span class="btn__text">
+                                        Contact Us
+                                    </span>
+                                </a>
+                            </div>
+                            <!--end module-->
+                        </div>
+                        <!--end columns-->
+                    </div>
+                    <!--end of row-->
+                </div>
+                <!--end of container-->
+            </nav>
+        </div>
+        
+        <div class="main-container">
+	        
+	        			<section class="space--sm">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-sm-10 col-md-8 col-sm-offset-1 col-md-offset-2">
+                            <article>
+	                            <ol class="breadcrumbs">
+							        <li>
+							            <a href="../index.html">Home</a>
+							        </li>
+							        <li>
+							            <a href="../blog.html">Blog</a>
+							        </li>
+							    </ol>
+                                <div class="article__title text-center">
+                                    <a href="landing-page-science-optimizing-conversion-rates.html">
+                                        <h2>Landing Page Science: How we Optimized the Conversion Rates of over Ten Thousand Landing Pages</h2>
+                                    </a>
+                                    <span>May 24th, 2016 by Brock</span>
+                                </div>
+                                <!--end article title-->
+                                <div class="article__body">
+                                    <p>The art of the landing page is no secret to digital marketers (see, for instance, <a href="http://unbounce.com/ppc/9-conversion-experts-on-ppc-landing-pages/">here</a>, <a href="http://blog.hubspot.com/blog/tabid/6307/bid/32566/Why-Landing-Pages-Are-an-Indispensable-Part-of-Marketing.aspx">here</a>, or <a href="https://www.quicksprout.com/landing-page-optimization-chapter-1">here</a>). A good landing page can catalyze a company’s growth by turning ad clicks into sales-leads without any need for intervention.</p>
+<p>Those in charge of building and maintaining landing pages spend a lot of their time ‘optimizing’ them. The key metric here is the <strong>conversion rate</strong>: what proportion of visitors who view this page give you their email, start a free trial, or engage with your site in some other way such that you can begin the process of selling them your wares? Dozens of services (e.g., <a href="https://www.optimizely.com/">Optimizely</a>) have sprouted to help marketers perform live experimentation (A/B testing) in the hopes of inching that conversion rate higher and higher over time.</p>
+<p>In most cases, marketers focus on one or two landing pages for their company — running their experiments, watching how their customers interact with the page, and hoping to drive up conversion rates.</p>
+<h2>Problem: How to optimize conversion rates for a website audit tool</h2>
+<p>Our team recently had the opportunity to do something slightly different in a project for <a href="http://mysiteauditor.com/">MySiteAuditor</a>. MySiteAuditor is a software-as-a-service company that offers digital marketing agencies a website audit tool to embed on their own landing pages. </p>
+<p>Here's the idea. A customer of MSA, call them Example Marketing Agency, gets the tool, and places it on their website. When visitors go to Example Marketing Agency’s website, they see this tool, and use it to perform an SEO audit their <em>own</em> website. In doing so, the visitor has to send their contact information to Example Marketing Agency. Example Marketing Agency now has a new lead.</p>
+<p>What we learned in a previous customer research project with MySiteAuditor is that how long a customer stays with MSA is <strong>heavily</strong> dependent on the leads their audit tool gets them. Customers who see high conversion rates with the audit tool tend to stick around for a long time, but customers with low conversion rates leave and presumably go try some other strategy to generate sales leads.</p>
+<h2>Our Solution: Improve your customer's customer retention</h2>
+<p>This led us to propose an idea to MySiteAuditor. Rather than having each of their customers trying to optimize the conversion rates of their <em>own</em> tools (in their silos), why don’t we do some research to figure out what can boost conversion rates for <em>all MySiteAuditor’s customers</em> (i.e., over ten thousand landing pages)?</p>
+<p>We pitched this as a win-win: MySiteAuditor’s customers would be happy because they are generating more leads. In turn, MySiteAuditor is happy because their customers are staying longer. And — bonus win! — we can help MySiteAuditor with a great blog post sharing these results to help attract <em>new</em> customers to the product. MySiteAuditor agreed, and off we went!</p>
+<h3>Auditing and analyzing</h3>
+<p>We began by sourcing our data. We couldn’t look at each of the landing pages one-by-one like the typical marketer, so we needed some way of gathering data automatically from each landing page. What we ended up doing was using MySiteAuditor’s own audit engine to analyze the landing pages with the audit tool on it, and using that data (encompassing page features, loading speed, content metrics, etc.) for our analysis. </p>
+<p>(For those reading closely, you might notice this is becoming <em>very</em> meta: we're auditing audit-web-pages using our client’s audit-tool in order to help our customer’s customers gain customers.)</p>
+<p>We ended up with a dataset containing one record for each landing page. Each record included the conversion rate of the landing page, total traffic to the landing page, and just under 100 features of the landing page, including the number of words/images/links on the page, its loading time, length of its URL, distance of the page from the domain root, and page authority.</p>
+<p>Now it was time to break out the machine learning algorithms. Using <em>just</em> these page features — not anything about the company, their marketing strategies, the semantics of the content on the page, etc. — can we predict conversion rates?</p>
+<p>We’ve recently been using <a href="http://www.saedsayad.com/docs/gbm2.pdf">gradient boosting models</a> in cases like this because, <a href="https://www.quora.com/When-would-one-use-Random-Forests-over-Gradient-Boosted-Machines-GBMs">unless you start tailoring their parameters to a given dataset</a>, they generally offer robust, generalizable predictions. Most importantly for our present problem, they avoid overfitting. With about 100 features being used as predictors, this is a big plus!</p>
+<p>GBMs also offer a straightforward way to determine the relative importance of each of the final model’s features: sum up all the absolute error decreases that come from splitting by that feature, and divide that by the absolute error decreased from splitting by any feature (Friedman, 2001, pdf <a href="https://statweb.stanford.edu/~jhf/ftp/trebst.pdf">here</a>).</p>
+<p>This model yielded 9 features that clustered really neatly into 3 conceptual categories: the kind of audit tool they were using, the content on the page, and the page loading speed. We can plot these categorized features by their relative importance in the model:</p>
+<p><a target="_blank" href="../blog-images/msa-form-conversions/graph-features.png"><img src="../blog-images/msa-form-conversions/xgraph-features.png.pagespeed.ic.6QakAuogZO.png" alt=""/></a></p>
+<p>These importance-ratings in GBMs don't actually tell us about the <em>direction</em> of the relation between each feature and conversion rates. But this isn't a huge obstacle for our purposes: many of the relations are intuitive and easily visualized. Take, for instance, the link between page-loading-speed and conversion-rates. Here's that link, visualized:</p>
+<p><a target="_blank" href="../blog-images/msa-form-conversions/graph-3-speed.png"><img src="../blog-images/msa-form-conversions/xgraph-3-speed.png.pagespeed.ic.jsgMwcIae2.png" alt=""/></a></p>
+<p>For every additional second a user had to wait for the page to load, their probability of conversion dropped by 1%! This was a standout finding to us—and something that any digital marketer in charge of landing pages should know.</p>
+<p>We ultimately worked with MySiteAuditor to <a href="http://mysiteauditor.com/blog/how-to-convert-30-of-your-visitors-into-seo-leads-landing-page-science/">prepare a blog post</a> about our findings, aimed at digital marketers.</p>
+<h2>Final notes</h2>
+<p>We couldn’t have anticipated cleaner results: not only are these results easy to understand (boiling down to three main components), but the features we identified are all very manipulable by MySiteAuditor’s customers.</p>
+<p>This is good news for two reasons: First, it gives them the chance to act on this information to improve their conversion rates (and stay happy MySiteAuditor customers forever). Second, it will allow us to do some later A/B testing between customers who act on this information. Sure, customers with faster landing pages get more conversions. But is this a causal link, or just correlation? If we take an individual website, and speed up their landing page, does this actually boost conversions? A/B tests can help decide on this crucial causal question.</p>
+<p>At the time of this post, things appear promising. The day after MySiteAuditor posted the blog post, their customers’ average conversion rate hit an annual high.</p>                                </div>
+                                
+                                <p>&nbsp;</p>
+                                <style>#dsq-content div,#dsq-content p,#dsq-content h3{clear:none!important}#dsq-content{overflow:auto!important}</style>
+								<div id="disqus_thread"></div>
+									<script type="text/javascript">var disqus_shortname='stronganalytics';var disqus_identifier='blog/landing-page-science-optimizing-conversion-rates';var disqus_url='landing-page-science-optimizing-conversion-rates.html';(function(){var dsq=document.createElement('script');dsq.type='text/javascript';dsq.async=true;dsq.src='http://'+disqus_shortname+'.disqus.com/embed.js';(document.getElementsByTagName('head')[0]||document.getElementsByTagName('body')[0]).appendChild(dsq);})();</script>
+									<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+								</div>
+                            </article>
+                        </div>
+                    </div>
+                    <!--end of row-->
+                </div>
+                <!--end of container-->
+            </section>
+	        
+	        <footer class="text-center-xs space--xs ">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-sm-7">
+                            <ul class="list-inline">
+                                <li>
+                                    <a href="../team.html">
+                                        <span class="h6 type--uppercase">Our Team</span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="../careers.html">
+                                        <span class="h6 type--uppercase">Careers</span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="../contact.html">
+                                        <span class="h6 type--uppercase">Contact Us</span>
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="col-sm-5 text-right text-center-xs">
+                            <ul class="social-list list-inline list--hover">
+                                <li>
+                                    <a href="http://www.twitter.com/stronganalytics">
+                                        <i class="socicon socicon-twitter icon icon--xs"></i>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="https://www.linkedin.com/company/strong-analytics">
+                                        <i class="socicon socicon-linkedin icon icon--xs"></i>
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    <!--end of row-->
+                    <div class="row">
+                        <div class="col-sm-7">
+                            <span class="type--fine-print">&copy;
+                                <span class="update-year"></span> Strong Analytics LLC &mdash; Chicago, IL, USA &amp; Vancouver, BC, Canada</span>
+                        </div>
+                        <div class="col-sm-5 text-right text-center-xs">
+                            <a class="type--fine-print" href="mailto:contact@strong.io">contact@strong.io</a>
+                        </div>
+                    </div>
+                    <!--end of row-->
+                </div>
+                <!--end of container-->
+            </footer>
+        </div>
+        <!--<div class="loader"></div>-->
+        <a class="back-to-top inner-link" href="#start" data-scroll-class="100vh:active">
+            <i class="stack-interface stack-up-open-big"></i>
+        </a>
+        
+        <!-- Intercom -->
+		<script>window.intercomSettings={app_id:"yhiz5h5i"};</script>
+		<script>(function(){var w=window;var ic=w.Intercom;if(typeof ic==="function"){ic('reattach_activator');ic('update',intercomSettings);}else{var d=document;var i=function(){i.c(arguments)};i.q=[];i.c=function(args){i.q.push(args)};w.Intercom=i;function l(){var s=d.createElement('script');s.type='text/javascript';s.async=true;s.src='https://widget.intercom.io/widget/yhiz5h5i';var x=d.getElementsByTagName('script')[0];x.parentNode.insertBefore(s,x);}if(w.attachEvent){w.attachEvent('onload',l);}else{w.addEventListener('load',l,false);}}})()</script>
+    </body>
+
+<!-- Mirrored from www.strong.io/blog/landing-page-science-optimizing-conversion-rates by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 26 Mar 2019 06:10:33 GMT -->
+</html>

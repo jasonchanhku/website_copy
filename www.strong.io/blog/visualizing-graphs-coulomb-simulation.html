@@ -1,0 +1,326 @@
+<!doctype html>
+<html lang="en">
+    
+<!-- Mirrored from www.strong.io/blog/visualizing-graphs-coulomb-simulation by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 26 Mar 2019 06:09:45 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+        <meta charset="utf-8">
+        <title>Visualizing Graphs using Simulations of Coulomb&#039;s Law &mdash; Strong Analytics</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="keywords" content="data visualization, coulomb&#039;s law, coulomb simulation, graphs, network data">
+        <meta name="description" content="Learn how simulations of Coulomb&#039;s Law can be used to draw graphs in an aesthetically-pleasing way, without requiring special knowledge about graph theory.">
+        <meta name="csrf-token" content="pKLPK0xGEdCfg8Ag0cl6EY96IVjikMMnbHh6s1PF">
+        
+        <script>(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)})(window,document,'script','../../www.google-analytics.com/analytics.js','ga');ga('create','UA-10304921-10','auto');ga('require','GTM-N3NX8JR');ga('send','pageview');</script>
+
+        <link rel="icon" href="../favicon.ico" type="image/x-icon"/>
+		<link rel="apple-touch-icon" sizes="57x57" href="../favicon/xapple-icon-57x57.png.pagespeed.ic.VRUjB4O0KQ.png">
+		<link rel="apple-touch-icon" sizes="60x60" href="../favicon/xapple-icon-60x60.png.pagespeed.ic.vJVDTOCtI6.png">
+		<link rel="apple-touch-icon" sizes="72x72" href="../favicon/xapple-icon-72x72.png.pagespeed.ic.whp121EcVL.png">
+		<link rel="apple-touch-icon" sizes="76x76" href="../favicon/xapple-icon-76x76.png.pagespeed.ic.MgjQkXPKC1.png">
+		<link rel="apple-touch-icon" sizes="114x114" href="../favicon/xapple-icon-114x114.png.pagespeed.ic._QGzwKiKu-.png">
+		<link rel="apple-touch-icon" sizes="120x120" href="../favicon/xapple-icon-120x120.png.pagespeed.ic.Hz4AnLMGIL.png">
+		<link rel="apple-touch-icon" sizes="144x144" href="../favicon/xapple-icon-144x144.png.pagespeed.ic.bHG2b7g3rz.png">
+		<link rel="apple-touch-icon" sizes="152x152" href="../favicon/xapple-icon-152x152.png.pagespeed.ic.3JJoTM0DCX.png">
+		<link rel="apple-touch-icon" sizes="180x180" href="../favicon/xapple-icon-180x180.png.pagespeed.ic.bAFEspbAmS.png">
+		<link rel="icon" type="image/png" sizes="192x192" href="../favicon/xandroid-icon-192x192.png.pagespeed.ic.8sJXtxfCk2.png">
+		<link rel="icon" type="image/png" sizes="32x32" href="../favicon/xfavicon-32x32.png.pagespeed.ic.pLQe2o0-x8.png">
+		<link rel="icon" type="image/png" sizes="96x96" href="../favicon/xfavicon-96x96.png.pagespeed.ic.ftlKs2rhLH.png">
+		<link rel="icon" type="image/png" sizes="16x16" href="../favicon/xfavicon-16x16.png.pagespeed.ic.GwCISc5tnn.png">
+		<link rel="manifest" href="../favicon/manifest.json">
+		<meta name="msapplication-TileColor" content="#ffffff">
+		<meta name="msapplication-TileImage" content="/favicon/ms-icon-144x144.png">
+		<meta name="theme-color" content="#ffffff">
+        <link href="../css/A.strong.min.css.pagespeed.cf.LDJy99El4b.css" rel="stylesheet" type="text/css" media="all"/>
+        <link href="https://fonts.googleapis.com/css?family=Open+Sans:200,300,400,400i,500,600,700%7CMerriweather:300,300i%7CMaterial+Icons" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,400i,500,700" rel="stylesheet"/>
+        
+        <script src="../js/strong.min.js.pagespeed.jm.QqKV1RzJLn.js"></script>
+        	
+    </head>
+    <body class=" ">
+        <a id="start"></a>
+        <div class="nav-container ">
+            <div class="bar bar--sm visible-xs">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-xs-6 col-sm-6">
+                            <a href="../index.html">
+                                <img class="logo" alt="logo" src="../img/xstrong-data-science.png.pagespeed.ic.jMpbgW4o3L.png" alt="Strong Analytics - Data Science Consulting and Machine Learning Development Firm" title="Strong Analytics - Data Science Consulting and Machine Learning Development Firm"/>
+                            </a>
+                        </div>
+                        <div class="col-xs-6 col-sm-6 text-right">
+                            <a href="#" class="hamburger-toggle" data-toggle-class="#menu1;hidden-xs">
+                                <i class="icon icon--sm stack-interface stack-menu"></i>
+                            </a>
+                        </div>
+                    </div>
+                    <!--end of row-->
+                </div>
+                <!--end of container-->
+            </div>
+            <!--end bar-->
+            <nav id="menu1" class="bar bar-1 hidden-xs hiddem-sm" data-scroll-class='100vh:pos-fixed'>
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-3 col-sm-2 hidden-xs">
+                            <div class="bar__module">
+                                <a href="../index.html">
+                                    <img class="logo" alt="logo" src="../img/xstrong-data-science.png.pagespeed.ic.jMpbgW4o3L.png" alt="Strong Analytics - Data Science Consulting and Machine Learning Development Firm" title="Strong Analytics - Data Science Consulting and Machine Learning Development Firm"/>
+                                </a>
+                            </div>
+                            <!--end module-->
+                        </div>
+                        <div class="col-md-9 col-sm-12 text-right text-left-xs text-left-sm">
+                            <div class="bar__module">
+                                <ul class="menu-horizontal text-left">
+                                    <li class="dropdown">
+                                        <a href="../index.html">Home</a>
+                                    </li>
+                                    <li class="dropdown">
+                                        <span class="dropdown__trigger">Services</span>
+                                        <div class="dropdown__container">
+                                            <div class="container">
+                                                <div class="row">
+                                                    <div class="dropdown__content col-md-3 col-sm-6">
+                                                        <ul class="menu-vertical">
+	                                                        <li>
+                                                                <a href="../machine-learning-development.html">Machine Learning Development</a>
+                                                            </li>
+                                                            <li>
+                                                                <a href="../data-science-analytics.html">Data Science &amp; Analytics</a>
+                                                            </li>
+	                                                        <li>
+                                                                <a href="../big-data-infrastructure.html">Big Data Infrastructure</a>
+                                                            </li>
+                                                            <li>
+                                                                <a href="../app-development.html">Application Development</a>
+                                                            </li>
+                                                        </ul>
+                                                    </div>
+                                                    <!--end dropdown content-->
+                                                </div>
+                                                <!--end row-->
+                                            </div>
+                                        </div>
+                                        <!--end dropdown container-->
+                                    </li>
+                                    <li class="dropdown">
+                                        <span class="dropdown__trigger">Products</span>
+                                        <div class="dropdown__container">
+                                            <div class="container">
+                                                <div class="row">
+                                                    <div class="dropdown__content col-md-3 col-sm-6">
+                                                        <ul class="menu-vertical">
+	                                                        <li>
+                                                                <a href="../products/optimail.html">Optimail</a>
+                                                            </li>
+                                                        </ul>
+                                                    </div>
+                                                    <!--end dropdown content-->
+                                                </div>
+                                                <!--end row-->
+                                            </div>
+                                        </div>
+                                        <!--end dropdown container-->
+                                    </li>
+                                    <li class="dropdown">
+                                        <a href="../blog.html">Blog</a>
+                                    </li>
+                                    <li class="dropdown">
+                                        <span class="dropdown__trigger">Resources</span>
+                                        <div class="dropdown__container">
+                                            <div class="container">
+                                                <div class="row">
+                                                    <div class="dropdown__content col-md-3 col-sm-6">
+                                                        <ul class="menu-vertical">
+	                                                        <li>
+                                                                <a href="data-science-audit.html">Data Science Audit</a>
+                                                            </li>
+                                                            <li>
+                                                                <a href="../scholarship.html">Data Science Scholarship</a>
+                                                            </li>
+                                                            <li>
+                                                                <a href="predictive-model-roi-calculator.html">Predictive Model ROI Calculator</a>
+                                                            </li>
+                                                        </ul>
+                                                    </div>
+                                                    <!--end dropdown content-->
+                                                </div>
+                                                <!--end row-->
+                                            </div>
+                                        </div>
+                                        <!--end dropdown container-->
+                                    </li>
+                                    <li class="dropdown">
+                                        <a href="../team.html">Our Team</a>
+                                    </li>
+                                </ul>
+                            </div>
+                            <!--end module-->
+                            <div class="bar__module">
+                                <a class="btn btn--sm btn--primary type--uppercase" href="../contact.html">
+                                    <span class="btn__text">
+                                        Contact Us
+                                    </span>
+                                </a>
+                            </div>
+                            <!--end module-->
+                        </div>
+                        <!--end columns-->
+                    </div>
+                    <!--end of row-->
+                </div>
+                <!--end of container-->
+            </nav>
+        </div>
+        
+        <div class="main-container">
+	        
+	        			<section class="space--sm">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-sm-10 col-md-8 col-sm-offset-1 col-md-offset-2">
+                            <article>
+	                            <ol class="breadcrumbs">
+							        <li>
+							            <a href="../index.html">Home</a>
+							        </li>
+							        <li>
+							            <a href="../blog.html">Blog</a>
+							        </li>
+							    </ol>
+                                <div class="article__title text-center">
+                                    <a href="visualizing-graphs-coulomb-simulation.html">
+                                        <h2>Visualizing Graphs using Simulations of Coulomb&#039;s Law</h2>
+                                    </a>
+                                    <span>Jul 11th, 2018 by Jade Cheng</span>
+                                </div>
+                                <!--end article title-->
+                                <div class="article__body">
+                                    <p>Graph drawing can be a difficult problem. Coulomb simulation is used in a class of algorithms for drawing graphs in an aesthetically-pleasing way without any special knowledge about graph theory. In a Coulomb simulation, we assign forces among the set of edges and the set of nodes. Based on their relative positions, we use these forces either to simulate the motion of the edges and nodes or to minimize their energy. We also call these methods force-directed algorithms.</p>
+<h2>Coulomb simulation</h2>
+<p>When an electrostatic force acts between two or more charged particles within a system, a potential energy can be assigned to that system. This energy is a result of conservative Coulomb forces and is based on the relative positions and magnitudes of the point charges. <a href="https://en.wikipedia.org/wiki/Coulomb%27s_law">Coulomb's Law</a> declares the magnitude of the electrostatic force of interaction between two point charges and the electrostatic potential energy stored in a system of charged particles. It is analogous to Isaac Newton's inverse-square law of gravitation. Coulomb simulation is a physical simulation of such a system.</p>
+<h2>Layout optimization</h2>
+<p>When the graph is simulated as a system of charged particles, its layout is achieved through motion simulations or energy minimization. We use the latter and apply the <a href="https://en.wikipedia.org/wiki/Nelder–Mead_method">Nelder-Mead simplex method</a> to minimize an objective function returning the electrostatic potential energy. Nelder-Mead optimization is an iterative process that continually refines a simplex of D + 1 vertices in D dimensions. The optimizer evaluates the objective function at each iteration and explore the parameter space through four actions, reflection, expansion, contraction, and shrinkage. The effect of each action is controlled by a scalar constant supplied to the algorithm.</p>
+<h2>Example web applications</h2>
+<p>As examples of Coulomb simulations, we present <a href="../blog-content/coulomb-graphs/nemetree/index.html">nemetree</a> and <a href="../blog-content/coulomb-graphs/nemepos/index.html">nemepos</a> for visualizing trees and partially-ordered sets, respectively. In both examples, we optimize graph layouts using numerical optimization over an objective function through Coulomb modeling of an electrostatic field.</p>
+<p><a href="https://github.com/strongio/coulomb-simulation-graph-visualization">All source code for these examples is available on our Github.</a></p>
+<h3>Tree visualization: nemetree</h3>
+<p>Visualizing tree structures play an important role in many fields. For example, a traditional way to illustrate phylogenetic relationships among species is to model them using a tree, i.e. a phylogeny or an additive tree. This type of tree forms the basics to represent differences between species and to analyze those differences statistically.</p>
+<p>Our web application accepts input tree structure in the <a href="https://en.wikipedia.org/wiki/Newick_format">Newick format</a>. For example, <code>(A:1,B:1,C:1)D;</code> is a tree of three equal-length edges and four nodes where D is the hub.</p>
+<p>Here's an example of a simple tree visualized by <strong>nemetree</strong>:</p>
+<p><a target="_blank" href="../blog-images/coulomb-graphs/2.png"><img src="../blog-images/coulomb-graphs/x2.png.pagespeed.ic.SWTDxtcvF3.png" alt=""/></a></p>
+<p>And here's what very large trees might look like:</p>
+<p><a target="_blank" href="../blog-images/coulomb-graphs/3.png"><img src="../blog-images/coulomb-graphs/x3.png.pagespeed.ic.ot11riptGp.png" alt=""/></a></p>
+<p>The left tree contains 528 nodes. The right tree contains 1014 nodes. (When dealing with <em>very</em> large trees we recommend disabling the optimizer.)</p>
+<h3>DAG visualization: nemepos</h3>
+<p><a href="https://en.wikipedia.org/wiki/Hasse_diagram">Hasse diagrams</a> visualize strict <a href="https://en.wikipedia.org/wiki/Partially_ordered_set">partial order relations</a> through a layered graphical representation of their transitive reductions (<a href="https://en.wikipedia.org/wiki/Directed_acyclic_graph">directed acyclic graphs</a>).  A Hasse diagram uniquely defines a finite partially ordered set (poset), but a poset maps to many Hasse diagrams. We call them isomorphisms. Even though Hasse diagrams are simple and intuitive, it's often hard to find a “good” one. A “bad” Hasse representation is mathematically correct but usually useless in practice.</p>
+<p><a target="_blank" href="../blog-images/coulomb-graphs/4.png"><img src="../blog-images/coulomb-graphs/x4.png.pagespeed.ic.8PZvNQ0t2k.png" alt=""/></a></p>
+<p>In the above figure, we see four isomorphisms representing the lattice of the subset of three. nemepos produces the first because it has the fewest edge crossings.</p>
+<p><strong>nemepos</strong> applies a compact layering schema for level assignment, a heuristic-based cross minimization and a targeted local cross elimination for within-level ordering, and a flexible sibling distances for internal structure exploration.</p>
+<p>For example, consider the two graphs below:</p>
+<p><a target="_blank" href="../blog-images/coulomb-graphs/5.png"><img src="../blog-images/coulomb-graphs/x5.png.pagespeed.ic.qK1UQYMrFW.png" alt=""/></a></p>
+<p>People commonly draw and prefer the left diagram. The right diagram has a different level assignment, and it was produced when minimizing the total number of different slopes. <strong>nemepos</strong> produces the graph on the left.</p>
+<p>In the next example (below), we see within-level ordering and cross elimination for modular lattice on three generators. The left diagram is drawn perfectly by hand and the right diagram is generated by nemepos. They have the same number of edge-crossings and are <em>similar</em> in their final forms.</p>
+<p><a target="_blank" href="../blog-images/coulomb-graphs/6.png"><img src="../blog-images/coulomb-graphs/x6.png.pagespeed.ic.ZnIsBGWHt-.png" alt=""/></a></p>
+<p><strong>nemepos</strong> can produce all three diagrams by adjusting the nodeForce and edgeForce model parameters through the JSON configuration.</p>
+<p><a target="_blank" href="../blog-images/coulomb-graphs/7.png"><img src="../blog-images/coulomb-graphs/x7.png.pagespeed.ic.sZFWaXLvbZ.png" alt=""/></a></p>
+<p>Another example of different sibling distances produced by nemepos through model parameter tuning:</p>
+<p><a target="_blank" href="../blog-images/coulomb-graphs/8.png"><img src="../blog-images/coulomb-graphs/x8.png.pagespeed.ic.YcpKZ27vkZ.png" alt=""/></a></p>
+<h3>Implementation notes</h3>
+<p>Both <strong>nemetree</strong> and <strong>nemepos</strong> are written in simple HTML, CSS, and TypeScript. The Nelder-Mead implementation determines the coefficients for reflection, expansion, contraction, and shrinkage based on the number of nodes in the graph and recommendations from Gao &amp; Han, 2012. For <strong>nemetree</strong>, the optimizer chooses an initial vertex by evenly positioning each node based on the number of parents in its branch. For nemepos, the optimizer evenly distributes and centers nodes within each layer. Optimization terminates after a series of iterations leaves the simplex with two conditions met: 1. the difference between its best and worst objective values is less than a constant value ε1, and 2. the maximum distance between any two vertices is less than another constant value ε2.</p>
+<h2>General network graph visualization: D3js force</h2>
+<p>Thus far, we presented example apps that using Coulomb's physics simulation to visualize two families of graphs, trees and DAGs/posets. General visualizations of network graphs can also benefit from Coulomb simulation. <a href="https://d3js.org/">D3js</a> provides a flexible framework for such implementations through its force layout. The crux of applying D3js-force is to set up all components and parameters needed for the Coulomb simulation, e.g. nodes, edges, charges, progression ticks, etc. For details on how to set up and visualize through a force simulation using D3js, we recommend <a href="http://d3indepth.com/force-layout/">this blog post at D3indepth</a>.</p>
+<p>In the example below, we show a D3js force visualization of a network graph for pairwise friendship relationships. This is neither a tree nor a DAG/poset. This visualization is produced with full-length tick progression, equal-negatively-charged nodes, center-node gravity, and variable link lengths.</p>
+<p><a target="_blank" href="../blog-images/coulomb-graphs/9.png"><img src="../blog-images/coulomb-graphs/x9.png.pagespeed.ic.AHkqT2oTQK.png" alt=""/></a></p>
+<p>Besides the fact that <strong>nemetree</strong> and <strong>nemepos</strong> are created for specific graph types and ingest pre-defined text representations of graphs, the major difference compared to D3js is how the final layout of graphical components is achieved. The two apps minimize system energy and converge to the optimal layout through the Nelder-Mead optimization algorithm. D3js-force applies the concept of tick, and it does not guarantee a final minimal Coulomb energy nor an absolute optimal layout.</p>
+<p>Instead, D3js offers fast computation for large graphs and leave it to the user to determine what's best for their particular use cases. Due to its flexibility and the power of Coulomb physics simulation, D3js not only is applicable to visualize general-purpose network graphs, it can also perform collision detection, gravity visualization, etc.</p>
+<p>To learn more about these techniques, please check out <a href="https://github.com/strongio/coulomb-simulation-graph-visualization">our Github</a>.</p>
+<h2>Related works</h2>
+<ul>
+<li>Kobourov, S.G., 2012. Spring embedders and force directed graph drawing algorithms. arXiv preprint arXiv:1201.3011.</li>
+<li>Nelder, J.A. and Mead, R., 1965. A simplex method for function minimization. The computer journal, 7(4), pp.308-313.</li>
+<li>Freese, R., 2004, February. Automated lattice drawing. In International Conference on Formal Concept Analysis (pp. 112-127). Springer, Berlin, Heidelberg.</li>
+<li>Stephan, J., 1987. Liniendiagramme von verbnden.</li>
+<li>Gao, F. and Han, L., 2012. Implementing the Nelder-Mead simplex algorithm with adaptive parameters. Computational Optimization and Applications, 51(1), pp.259-277.</li>
+</ul>                                </div>
+                                
+                                <p>&nbsp;</p>
+                                <style>#dsq-content div,#dsq-content p,#dsq-content h3{clear:none!important}#dsq-content{overflow:auto!important}</style>
+								<div id="disqus_thread"></div>
+									<script type="text/javascript">var disqus_shortname='stronganalytics';var disqus_identifier='blog/visualizing-graphs-coulomb-simulation';var disqus_url='visualizing-graphs-coulomb-simulation.html';(function(){var dsq=document.createElement('script');dsq.type='text/javascript';dsq.async=true;dsq.src='http://'+disqus_shortname+'.disqus.com/embed.js';(document.getElementsByTagName('head')[0]||document.getElementsByTagName('body')[0]).appendChild(dsq);})();</script>
+									<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+								</div>
+                            </article>
+                        </div>
+                    </div>
+                    <!--end of row-->
+                </div>
+                <!--end of container-->
+            </section>
+	        
+	        <footer class="text-center-xs space--xs ">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-sm-7">
+                            <ul class="list-inline">
+                                <li>
+                                    <a href="../team.html">
+                                        <span class="h6 type--uppercase">Our Team</span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="../careers.html">
+                                        <span class="h6 type--uppercase">Careers</span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="../contact.html">
+                                        <span class="h6 type--uppercase">Contact Us</span>
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="col-sm-5 text-right text-center-xs">
+                            <ul class="social-list list-inline list--hover">
+                                <li>
+                                    <a href="http://www.twitter.com/stronganalytics">
+                                        <i class="socicon socicon-twitter icon icon--xs"></i>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="https://www.linkedin.com/company/strong-analytics">
+                                        <i class="socicon socicon-linkedin icon icon--xs"></i>
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    <!--end of row-->
+                    <div class="row">
+                        <div class="col-sm-7">
+                            <span class="type--fine-print">&copy;
+                                <span class="update-year"></span> Strong Analytics LLC &mdash; Chicago, IL, USA &amp; Vancouver, BC, Canada</span>
+                        </div>
+                        <div class="col-sm-5 text-right text-center-xs">
+                            <a class="type--fine-print" href="mailto:contact@strong.io">contact@strong.io</a>
+                        </div>
+                    </div>
+                    <!--end of row-->
+                </div>
+                <!--end of container-->
+            </footer>
+        </div>
+        <!--<div class="loader"></div>-->
+        <a class="back-to-top inner-link" href="#start" data-scroll-class="100vh:active">
+            <i class="stack-interface stack-up-open-big"></i>
+        </a>
+        
+        <!-- Intercom -->
+		<script>window.intercomSettings={app_id:"yhiz5h5i"};</script>
+		<script>(function(){var w=window;var ic=w.Intercom;if(typeof ic==="function"){ic('reattach_activator');ic('update',intercomSettings);}else{var d=document;var i=function(){i.c(arguments)};i.q=[];i.c=function(args){i.q.push(args)};w.Intercom=i;function l(){var s=d.createElement('script');s.type='text/javascript';s.async=true;s.src='https://widget.intercom.io/widget/yhiz5h5i';var x=d.getElementsByTagName('script')[0];x.parentNode.insertBefore(s,x);}if(w.attachEvent){w.attachEvent('onload',l);}else{w.addEventListener('load',l,false);}}})()</script>
+    </body>
+
+<!-- Mirrored from www.strong.io/blog/visualizing-graphs-coulomb-simulation by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 26 Mar 2019 06:10:05 GMT -->
+</html>

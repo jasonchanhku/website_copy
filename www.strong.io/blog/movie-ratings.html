@@ -1,0 +1,316 @@
+<!doctype html>
+<html lang="en">
+    
+<!-- Mirrored from www.strong.io/blog/movie-ratings by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 26 Mar 2019 06:10:45 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+        <meta charset="utf-8">
+        <title>Movie Ratings: Do Critics and Fans See Eye-to-Eye? &mdash; Strong Analytics</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="keywords" content="movies, critics, imdb, metacritic, correlation, time series">
+        <meta name="description" content="We analyzed movie reviews from both critics and everyday fans.">
+        <meta name="csrf-token" content="pKLPK0xGEdCfg8Ag0cl6EY96IVjikMMnbHh6s1PF">
+        
+        <script>(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)})(window,document,'script','../../www.google-analytics.com/analytics.js','ga');ga('create','UA-10304921-10','auto');ga('require','GTM-N3NX8JR');ga('send','pageview');</script>
+
+        <link rel="icon" href="../favicon.ico" type="image/x-icon"/>
+		<link rel="apple-touch-icon" sizes="57x57" href="../favicon/xapple-icon-57x57.png.pagespeed.ic.VRUjB4O0KQ.png">
+		<link rel="apple-touch-icon" sizes="60x60" href="../favicon/xapple-icon-60x60.png.pagespeed.ic.vJVDTOCtI6.png">
+		<link rel="apple-touch-icon" sizes="72x72" href="../favicon/xapple-icon-72x72.png.pagespeed.ic.whp121EcVL.png">
+		<link rel="apple-touch-icon" sizes="76x76" href="../favicon/xapple-icon-76x76.png.pagespeed.ic.MgjQkXPKC1.png">
+		<link rel="apple-touch-icon" sizes="114x114" href="../favicon/xapple-icon-114x114.png.pagespeed.ic._QGzwKiKu-.png">
+		<link rel="apple-touch-icon" sizes="120x120" href="../favicon/xapple-icon-120x120.png.pagespeed.ic.Hz4AnLMGIL.png">
+		<link rel="apple-touch-icon" sizes="144x144" href="../favicon/xapple-icon-144x144.png.pagespeed.ic.bHG2b7g3rz.png">
+		<link rel="apple-touch-icon" sizes="152x152" href="../favicon/xapple-icon-152x152.png.pagespeed.ic.3JJoTM0DCX.png">
+		<link rel="apple-touch-icon" sizes="180x180" href="../favicon/xapple-icon-180x180.png.pagespeed.ic.bAFEspbAmS.png">
+		<link rel="icon" type="image/png" sizes="192x192" href="../favicon/xandroid-icon-192x192.png.pagespeed.ic.8sJXtxfCk2.png">
+		<link rel="icon" type="image/png" sizes="32x32" href="../favicon/xfavicon-32x32.png.pagespeed.ic.pLQe2o0-x8.png">
+		<link rel="icon" type="image/png" sizes="96x96" href="../favicon/xfavicon-96x96.png.pagespeed.ic.ftlKs2rhLH.png">
+		<link rel="icon" type="image/png" sizes="16x16" href="../favicon/xfavicon-16x16.png.pagespeed.ic.GwCISc5tnn.png">
+		<link rel="manifest" href="../favicon/manifest.json">
+		<meta name="msapplication-TileColor" content="#ffffff">
+		<meta name="msapplication-TileImage" content="/favicon/ms-icon-144x144.png">
+		<meta name="theme-color" content="#ffffff">
+        <link href="../css/A.strong.min.css.pagespeed.cf.LDJy99El4b.css" rel="stylesheet" type="text/css" media="all"/>
+        <link href="https://fonts.googleapis.com/css?family=Open+Sans:200,300,400,400i,500,600,700%7CMerriweather:300,300i%7CMaterial+Icons" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,400i,500,700" rel="stylesheet"/>
+        
+        <script src="../js/strong.min.js.pagespeed.jm.QqKV1RzJLn.js"></script>
+        	
+    </head>
+    <body class=" ">
+        <a id="start"></a>
+        <div class="nav-container ">
+            <div class="bar bar--sm visible-xs">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-xs-6 col-sm-6">
+                            <a href="../index.html">
+                                <img class="logo" alt="logo" src="../img/xstrong-data-science.png.pagespeed.ic.jMpbgW4o3L.png" alt="Strong Analytics - Data Science Consulting and Machine Learning Development Firm" title="Strong Analytics - Data Science Consulting and Machine Learning Development Firm"/>
+                            </a>
+                        </div>
+                        <div class="col-xs-6 col-sm-6 text-right">
+                            <a href="#" class="hamburger-toggle" data-toggle-class="#menu1;hidden-xs">
+                                <i class="icon icon--sm stack-interface stack-menu"></i>
+                            </a>
+                        </div>
+                    </div>
+                    <!--end of row-->
+                </div>
+                <!--end of container-->
+            </div>
+            <!--end bar-->
+            <nav id="menu1" class="bar bar-1 hidden-xs hiddem-sm" data-scroll-class='100vh:pos-fixed'>
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-3 col-sm-2 hidden-xs">
+                            <div class="bar__module">
+                                <a href="../index.html">
+                                    <img class="logo" alt="logo" src="../img/xstrong-data-science.png.pagespeed.ic.jMpbgW4o3L.png" alt="Strong Analytics - Data Science Consulting and Machine Learning Development Firm" title="Strong Analytics - Data Science Consulting and Machine Learning Development Firm"/>
+                                </a>
+                            </div>
+                            <!--end module-->
+                        </div>
+                        <div class="col-md-9 col-sm-12 text-right text-left-xs text-left-sm">
+                            <div class="bar__module">
+                                <ul class="menu-horizontal text-left">
+                                    <li class="dropdown">
+                                        <a href="../index.html">Home</a>
+                                    </li>
+                                    <li class="dropdown">
+                                        <span class="dropdown__trigger">Services</span>
+                                        <div class="dropdown__container">
+                                            <div class="container">
+                                                <div class="row">
+                                                    <div class="dropdown__content col-md-3 col-sm-6">
+                                                        <ul class="menu-vertical">
+	                                                        <li>
+                                                                <a href="../machine-learning-development.html">Machine Learning Development</a>
+                                                            </li>
+                                                            <li>
+                                                                <a href="../data-science-analytics.html">Data Science &amp; Analytics</a>
+                                                            </li>
+	                                                        <li>
+                                                                <a href="../big-data-infrastructure.html">Big Data Infrastructure</a>
+                                                            </li>
+                                                            <li>
+                                                                <a href="../app-development.html">Application Development</a>
+                                                            </li>
+                                                        </ul>
+                                                    </div>
+                                                    <!--end dropdown content-->
+                                                </div>
+                                                <!--end row-->
+                                            </div>
+                                        </div>
+                                        <!--end dropdown container-->
+                                    </li>
+                                    <li class="dropdown">
+                                        <span class="dropdown__trigger">Products</span>
+                                        <div class="dropdown__container">
+                                            <div class="container">
+                                                <div class="row">
+                                                    <div class="dropdown__content col-md-3 col-sm-6">
+                                                        <ul class="menu-vertical">
+	                                                        <li>
+                                                                <a href="../products/optimail.html">Optimail</a>
+                                                            </li>
+                                                        </ul>
+                                                    </div>
+                                                    <!--end dropdown content-->
+                                                </div>
+                                                <!--end row-->
+                                            </div>
+                                        </div>
+                                        <!--end dropdown container-->
+                                    </li>
+                                    <li class="dropdown">
+                                        <a href="../blog.html">Blog</a>
+                                    </li>
+                                    <li class="dropdown">
+                                        <span class="dropdown__trigger">Resources</span>
+                                        <div class="dropdown__container">
+                                            <div class="container">
+                                                <div class="row">
+                                                    <div class="dropdown__content col-md-3 col-sm-6">
+                                                        <ul class="menu-vertical">
+	                                                        <li>
+                                                                <a href="data-science-audit.html">Data Science Audit</a>
+                                                            </li>
+                                                            <li>
+                                                                <a href="../scholarship.html">Data Science Scholarship</a>
+                                                            </li>
+                                                            <li>
+                                                                <a href="predictive-model-roi-calculator.html">Predictive Model ROI Calculator</a>
+                                                            </li>
+                                                        </ul>
+                                                    </div>
+                                                    <!--end dropdown content-->
+                                                </div>
+                                                <!--end row-->
+                                            </div>
+                                        </div>
+                                        <!--end dropdown container-->
+                                    </li>
+                                    <li class="dropdown">
+                                        <a href="../team.html">Our Team</a>
+                                    </li>
+                                </ul>
+                            </div>
+                            <!--end module-->
+                            <div class="bar__module">
+                                <a class="btn btn--sm btn--primary type--uppercase" href="../contact.html">
+                                    <span class="btn__text">
+                                        Contact Us
+                                    </span>
+                                </a>
+                            </div>
+                            <!--end module-->
+                        </div>
+                        <!--end columns-->
+                    </div>
+                    <!--end of row-->
+                </div>
+                <!--end of container-->
+            </nav>
+        </div>
+        
+        <div class="main-container">
+	        
+	        			<section class="space--sm">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-sm-10 col-md-8 col-sm-offset-1 col-md-offset-2">
+                            <article>
+	                            <ol class="breadcrumbs">
+							        <li>
+							            <a href="../index.html">Home</a>
+							        </li>
+							        <li>
+							            <a href="../blog.html">Blog</a>
+							        </li>
+							    </ol>
+                                <div class="article__title text-center">
+                                    <a href="movie-ratings.html">
+                                        <h2>Movie Ratings: Do Critics and Fans See Eye-to-Eye?</h2>
+                                    </a>
+                                    <span>Feb 10th, 2016 by Brock</span>
+                                </div>
+                                <!--end article title-->
+                                <div class="article__body">
+                                    <blockquote>
+<p>Art and life are subjective. Not everybody's gonna dig what I dig, but I reserve the right to dig it. <em>- Whoopi Goldberg</em></p>
+</blockquote>
+<p>In that quote, Whoopi puts forth a widely-held belief about art: it’s subjective and, as such, its value or quality varies greatly across individuals. In movies, it’s not difficult to think of cases that support this view. One of my favourite movies is Baz Luhrmann’s <em>Romeo &amp; Juliet</em>, but most people — even some Baz fans — can hardly sit through it.</p>
+<p>The problem is that it’s just as easy to come up with cases in which people generally agree on a movie’s quality. <em>Hot Tub Time Machine</em> was surprisingly funny given its ridiculous premise, but no one was surprised when Oscar season came around and John Cusack and company didn’t get the nod.</p>
+<p>One case in which there may be more consistent disagreement over movie ratings is between film critics and regular movie fans. After all, critics not only watch a movie through their own eyes, but through the eyes of their readers — readers whose weekend plans they are constructing and who, in turn, establish judgments about a critic’s quality (and salary). This could alter reviewers’ judgments about a movie in comparison to fans who simply want to be entertained in the moment.</p>
+<p>I wanted to put this question of critics’ versus fans’ ratings to the test. Thankfully, for a few other ongoing side projects here at <a href="../index.html">Strong</a>, we had put together a massive database of 29,591 films released from 2001-2015. This database included lots of information about each film (title, year, director, summary, awards, etc.) and, most importantly for present purposes, ratings from IMDB (where fans go to rate movies) and Metacritic (where critics’ reviews are compiled).</p>
+<p>These data in hand, I could compare critics’ and fans’ ratings to ask several questions: Do critics and fans generally agree on a movie’s quality? How has the accessibility of critics’ reviews (now a search away on your smartphone) affected fans’ ratings? And what movies do critics and fans disagree on most?</p>
+<h2>Do critics and fans generally agree on a movie’s quality?</h2>
+<p>To answer this our first and most basic question, I simply looked at the correlation between Metacritic ratings and IMDB ratings on a film-by-film basis.</p>
+<p>A high positive correlation (approaching 1) would suggest that films rated highly by critics are also rated highly by fans. A non-correlation (around 0) would suggest that fans’ and critics’ ratings are entirely unrelated. And a high negative correlation (approaching -1) would suggest (in true bizarro world fashion) that films rated highly by critics and rated poorly by fans (and vice-versa).</p>
+<p>What we see is that, in fact, fans and critics tend to agree (<em>r</em> = .68). In my typical scientific efforts, a correlation like this would be cause for celebration — it’s not everyday I see such a strong link between two factors of interest. But considering what we are measuring here, it’s actually a fairly modest relation. A Pearson’s <em>r</em> of .68 means that only 46% of the variance between these two measures is shared — that leaves 54% to be explained by some additional factor (perhaps whether you are a fan or a critic?).
+<a target="_blank" href="../blog-images/movie-ratings/metacritic-imdb.png"><img src="../blog-images/movie-ratings/xmetacritic-imdb.png.pagespeed.ic.EI92OGTCQ3.png" alt=""/></a></p>
+<p>We can take a closer look at these data by breaking them down by genre:
+<a target="_blank" href="../blog-images/movie-ratings/metacritic-imdb-genres.png"><img src="../blog-images/movie-ratings/metacritic-imdb-genres.png.pagespeed.ce.DLrA50LoCj.png" alt=""/></a></p>
+<p>When we do so, we see roughly the same relationship in each, with two possible exceptions: (1) Documentaries seem to have a disproportionate number of outliers which critics thought were OK but fans hated and, (2) Sci-Fi movies seem to follow that bizarro-world negative correlation I discussed earlier: the more fans like a movie, the lower critics rate it. Of course, the small sample of Sci-Fi movies in this database means this latter observation may simply be the result of a few controversial movies.</p>
+<h2>Is the agreement between fans and critics changing over time?</h2>
+<p>We’ve established that critics and fans tend to think along the same lines about a movie. However, there’s reason to think that this current level of agreement is not necessarily historically accurate. Critics’ and fans’ ratings are now mutually more accessible than ever. Fans can read critics’ reviews on the way to the cinema on their phone on opening night, and critics can go online and see the fan buzz for a movie before they write their review.</p>
+<p>One possibility is that this has caused critics’ and fans’ views to slowly converge into a hive mind of movie opinion. But it’s just as likely <em>a priori</em> that this has caused them to diverge, as well: Maybe knowing that critics don’t like a movie is enough to make you think it’s actually pretty good, either because they lowered your expectations so much that it had to be pleasantly surprising or because, well, what do critics know anyway?</p>
+<p>As a first pass at addressing this question, I simply summarized the correlation between critics’ and fans’ ratings by year:
+<a target="_blank" href="../blog-images/movie-ratings/metacritic-imdb-year.png"><img src="../blog-images/movie-ratings/metacritic-imdb-year.png.pagespeed.ce.c2cLKQa2cE.png" alt=""/></a></p>
+<p>My first impression is… that this visualization is horrible. Unless there are <em>massive</em> differences year-to-year (unlikely), a graph like this which forces the reader to eyeball correlation estimates is essentially useless.</p>
+<p>Thankfully, because we are interested in trends <em>over time</em>, we have a much better option: we can estimate the correlation year-to-year and plot those values side-by-side — looking for differences on the y-axis over time as an indicating in changing levels of agreement. Note that, because I wanted to compare estimates to see whether they are different from one another, I not only plotted a point indicating each correlation, but also error bars indicating the 95% bootstrapped confidence intervals of this estimate — a means of indicating the precision of our estimate:
+<a target="_blank" href="../blog-images/movie-ratings/metacritic-imdb-cor-by-year.png"><img src="../blog-images/movie-ratings/xmetacritic-imdb-cor-by-year.png.pagespeed.ic.S_LOnNtly7.png" alt=""/></a></p>
+<p>This visualization tells us that, indeed, critics’ and fans’ agreement levels have changed over time. However, both our diverging versus converging possibilities appear to be wrong. Instead, we see a non-linear pattern: While levels of agreement were stable through 2001-2008, there was a sharp (and significant) dip in 2009, and a slow recovery since then.</p>
+<p>What happened in 2009? I have no idea. It could of course be that there were just a bunch of highly controversial movies that caused the sudden dip. But if that were the case, we might have expected a rebound in 2010; instead, the dip at 2009 was followed by a couple of other low-agreement years and then a gradual incline upward. Maybe it’s just a random walk over time, or maybe its a previously unknown (and the least important) effect of the mortgage crisis and recession — we’ll never know… at least not with only these correlations to work from.</p>
+<h2>What movies do critics and fans disagree on most?</h2>
+<p>In my final analysis, I wanted to take a look at those cases in which critics and fans disagreed most. Which movies do fans love that critics have panned? And which do critics praise while fans look the other way?</p>
+<p>For simplicity, I’ll call the former type of film a ‘fan favourite’ and the latter a ‘critical darling’. (Yes I know these classifications are bit strange — a movie can be a critical darling if it’s like by 50% of critics and 0% of fans — but I needed a shorthand).</p>
+<p>To classify films, we can simply take the movies with the greatest difference between their (normalized) IMDB and Metacritic scores. If we calculate this as <code>Metacritic score - IMDB score</code>, then a high (in absolute terms) negative value means that it’s a fan favourite and a high positive value means that it’s a critical darling.</p>
+<p>One way to view these results would be in a bar chart illustrating the absolute difference scores and each movie’s name below it. But we’ve already had one bad visualization in this post, so I’ll spare you another and just tell you: That’s a boring and confusing way to look at these data. It also breaks a key guideline for data visualization: Once you have a representational format that works, stick with it.</p>
+<p>So to illustrate the fan favourites and critical darlings, we can go back to our first visualization depicting agreement between Metacritic and IMDB. What you’ll see is that these high-disagreement movies are the points on the top-left and bottom-right perimeters of the cluster: As a sanity check, if you drew a line through only these points, you’d see the expected <em>negative</em> correlation:
+<a target="_blank" href="../blog-images/movie-ratings/fan-favs-and-critical-darlings.png"><img src="../blog-images/movie-ratings/xfan-favs-and-critical-darlings.png.pagespeed.ic.oRnzbFWU9E.png" alt=""/></a></p>
+<p>What we see here is that teenage musician concert movies mildly please critics while enraging fans, and <em>The Butterfly Effect</em> and <em>John Q</em> were actually pretty enjoyable despite poor reviews. More broadly, critics appear to remain steadfast in their feeling about a movie franchise even when their first reviews didn’t resonate with fans. Critics stuck by Justin Bieber (sort of) for both his original movie and follow-up despite poor fan reviews. They also gave the first two <em>Spy Kids</em> movies two thumbs up while fans remained less eager to see a third.</p>
+<h2>Conclusion</h2>
+<p>So is Whoopi right about art or, more specifically, film? Sort of. There are those movies that defy critics’ hatred and resonate with fans, and those movies that  flop at the box office but win Academy Awards. But in general, critics and fans appear to be seeing eye-to-eye, or at least sitting side-by-side.</p>
+<p>See the raw code and data for these analyses <a href="https://github.com/strongio/movie-ratings">on Github</a>. The data were retrieved from <a href="http://www.imdb.com/">IMDB</a> and the <a href="http://www.omdbapi.com/">Open Movie Database</a>. As always, I used <a href="https://github.com/hadley/dplyr">dplyr</a> and <a href="https://github.com/hadley/ggplot2">ggplot2</a> in <a href="https://www.r-project.org/">R</a> for the analysis. Here I also used the new <a href="https://github.com/slowkow/ggrepel">ggrepel</a> package for labelling movies in the last visualization. </p>                                </div>
+                                
+                                <p>&nbsp;</p>
+                                <style>#dsq-content div,#dsq-content p,#dsq-content h3{clear:none!important}#dsq-content{overflow:auto!important}</style>
+								<div id="disqus_thread"></div>
+									<script type="text/javascript">var disqus_shortname='stronganalytics';var disqus_identifier='blog/movie-ratings';var disqus_url='movie-ratings.html';(function(){var dsq=document.createElement('script');dsq.type='text/javascript';dsq.async=true;dsq.src='http://'+disqus_shortname+'.disqus.com/embed.js';(document.getElementsByTagName('head')[0]||document.getElementsByTagName('body')[0]).appendChild(dsq);})();</script>
+									<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+								</div>
+                            </article>
+                        </div>
+                    </div>
+                    <!--end of row-->
+                </div>
+                <!--end of container-->
+            </section>
+	        
+	        <footer class="text-center-xs space--xs ">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-sm-7">
+                            <ul class="list-inline">
+                                <li>
+                                    <a href="../team.html">
+                                        <span class="h6 type--uppercase">Our Team</span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="../careers.html">
+                                        <span class="h6 type--uppercase">Careers</span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="../contact.html">
+                                        <span class="h6 type--uppercase">Contact Us</span>
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="col-sm-5 text-right text-center-xs">
+                            <ul class="social-list list-inline list--hover">
+                                <li>
+                                    <a href="http://www.twitter.com/stronganalytics">
+                                        <i class="socicon socicon-twitter icon icon--xs"></i>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="https://www.linkedin.com/company/strong-analytics">
+                                        <i class="socicon socicon-linkedin icon icon--xs"></i>
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    <!--end of row-->
+                    <div class="row">
+                        <div class="col-sm-7">
+                            <span class="type--fine-print">&copy;
+                                <span class="update-year"></span> Strong Analytics LLC &mdash; Chicago, IL, USA &amp; Vancouver, BC, Canada</span>
+                        </div>
+                        <div class="col-sm-5 text-right text-center-xs">
+                            <a class="type--fine-print" href="mailto:contact@strong.io">contact@strong.io</a>
+                        </div>
+                    </div>
+                    <!--end of row-->
+                </div>
+                <!--end of container-->
+            </footer>
+        </div>
+        <!--<div class="loader"></div>-->
+        <a class="back-to-top inner-link" href="#start" data-scroll-class="100vh:active">
+            <i class="stack-interface stack-up-open-big"></i>
+        </a>
+        
+        <!-- Intercom -->
+		<script>window.intercomSettings={app_id:"yhiz5h5i"};</script>
+		<script>(function(){var w=window;var ic=w.Intercom;if(typeof ic==="function"){ic('reattach_activator');ic('update',intercomSettings);}else{var d=document;var i=function(){i.c(arguments)};i.q=[];i.c=function(args){i.q.push(args)};w.Intercom=i;function l(){var s=d.createElement('script');s.type='text/javascript';s.async=true;s.src='https://widget.intercom.io/widget/yhiz5h5i';var x=d.getElementsByTagName('script')[0];x.parentNode.insertBefore(s,x);}if(w.attachEvent){w.attachEvent('onload',l);}else{w.addEventListener('load',l,false);}}})()</script>
+    </body>
+
+<!-- Mirrored from www.strong.io/blog/movie-ratings by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 26 Mar 2019 06:10:58 GMT -->
+</html>

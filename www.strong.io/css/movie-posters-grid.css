@@ -1,0 +1,88 @@
+body {
+	margin: 0;
+	padding: 0;
+}
+
+ul.movieposters-grid {
+	list-style-type: none;
+	margin: 0;
+	padding: 0;
+	font-family: "arial", sans-serif;
+}
+
+ul.movieposters-grid li {
+	display: block;
+	float: left;
+	width: 10%; 
+	min-height: 140px;
+	background-size:     cover;   
+    background-repeat:   no-repeat;
+    background-position: center center;   
+	position: relative;
+	opacity: 1; /* set to .5 for hover effect */
+}
+
+ul.movieposters-grid li:hover {
+	opacity: 1;
+}
+
+@media screen and (max-width: 768px) {
+    ul.movieposters-grid li {
+        width: 20%;
+    }
+}
+
+ul.movieposters-grid li img {
+	width: 100%;
+}
+
+ul.movieposters-grid li div {
+	display: none;
+}
+
+ul.movieposters-grid div.rating-imdb {
+	position: absolute;
+	top: 0px;
+	left: 0;
+	width: 100%;
+	background-color: #000;
+	opacity: .85;
+	font-size: 7pt;
+	color: #fff;
+	padding: 4px 10px;
+	box-sizing: border-box;
+	text-align: center;
+}
+
+ul.movieposters-grid div.bar-good {
+	position: absolute;
+	bottom: 0;
+	left: 0;
+	width: 100%;
+	height: 20px;
+	background-color: #23ac36;
+	opacity: .85;
+}
+
+ul.movieposters-grid div.bar-bad {
+	position: absolute;
+	bottom: 0;
+	right: 0;
+	width: 100%;
+	height: 20px;
+	background-color: #c80f0f;
+	opacity: .85;
+}
+
+ul.movieposters-grid div.bar-text {
+	position: absolute;
+	bottom: 0;
+	right: 0;
+	width: 100%;
+	height: 20px;
+	box-sizing: border-box;
+	color: #fff;
+	padding: 4px 10px;
+	text-align: center;
+	font-size: 7pt;
+}

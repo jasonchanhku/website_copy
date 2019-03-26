@@ -1,0 +1,343 @@
+<!doctype html>
+<html lang="en">
+    
+<!-- Mirrored from www.strong.io/blog/customer-lifetime-value-avoid-common-pitfalls-and-build-smarter-metrics by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 26 Mar 2019 06:09:00 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+        <meta charset="utf-8">
+        <title>Customer Lifetime Value: How to Avoid Common Pitfalls and Build Smarter Metrics &mdash; Strong Analytics</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="keywords" content="lifetime value, LTV, survival analysis, churn rate, analytics, bayesian modeling">
+        <meta name="description" content="Calculate customer lifetime value (CLTV) for your subscription company (e.g., SaaS) using accurate, powerful statistical models.">
+        <meta name="csrf-token" content="pKLPK0xGEdCfg8Ag0cl6EY96IVjikMMnbHh6s1PF">
+        
+        <script>(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)})(window,document,'script','../../www.google-analytics.com/analytics.js','ga');ga('create','UA-10304921-10','auto');ga('require','GTM-N3NX8JR');ga('send','pageview');</script>
+
+        <link rel="icon" href="../favicon.ico" type="image/x-icon"/>
+		<link rel="apple-touch-icon" sizes="57x57" href="../favicon/xapple-icon-57x57.png.pagespeed.ic.VRUjB4O0KQ.png">
+		<link rel="apple-touch-icon" sizes="60x60" href="../favicon/xapple-icon-60x60.png.pagespeed.ic.vJVDTOCtI6.png">
+		<link rel="apple-touch-icon" sizes="72x72" href="../favicon/xapple-icon-72x72.png.pagespeed.ic.whp121EcVL.png">
+		<link rel="apple-touch-icon" sizes="76x76" href="../favicon/xapple-icon-76x76.png.pagespeed.ic.MgjQkXPKC1.png">
+		<link rel="apple-touch-icon" sizes="114x114" href="../favicon/xapple-icon-114x114.png.pagespeed.ic._QGzwKiKu-.png">
+		<link rel="apple-touch-icon" sizes="120x120" href="../favicon/xapple-icon-120x120.png.pagespeed.ic.Hz4AnLMGIL.png">
+		<link rel="apple-touch-icon" sizes="144x144" href="../favicon/xapple-icon-144x144.png.pagespeed.ic.bHG2b7g3rz.png">
+		<link rel="apple-touch-icon" sizes="152x152" href="../favicon/xapple-icon-152x152.png.pagespeed.ic.3JJoTM0DCX.png">
+		<link rel="apple-touch-icon" sizes="180x180" href="../favicon/xapple-icon-180x180.png.pagespeed.ic.bAFEspbAmS.png">
+		<link rel="icon" type="image/png" sizes="192x192" href="../favicon/xandroid-icon-192x192.png.pagespeed.ic.8sJXtxfCk2.png">
+		<link rel="icon" type="image/png" sizes="32x32" href="../favicon/xfavicon-32x32.png.pagespeed.ic.pLQe2o0-x8.png">
+		<link rel="icon" type="image/png" sizes="96x96" href="../favicon/xfavicon-96x96.png.pagespeed.ic.ftlKs2rhLH.png">
+		<link rel="icon" type="image/png" sizes="16x16" href="../favicon/xfavicon-16x16.png.pagespeed.ic.GwCISc5tnn.png">
+		<link rel="manifest" href="../favicon/manifest.json">
+		<meta name="msapplication-TileColor" content="#ffffff">
+		<meta name="msapplication-TileImage" content="/favicon/ms-icon-144x144.png">
+		<meta name="theme-color" content="#ffffff">
+        <link href="../css/A.strong.min.css.pagespeed.cf.LDJy99El4b.css" rel="stylesheet" type="text/css" media="all"/>
+        <link href="https://fonts.googleapis.com/css?family=Open+Sans:200,300,400,400i,500,600,700%7CMerriweather:300,300i%7CMaterial+Icons" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,400i,500,700" rel="stylesheet"/>
+        
+        <script src="../js/strong.min.js.pagespeed.jm.QqKV1RzJLn.js"></script>
+        	<script type="text/javascript" async src="../../cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJaxb198.js?config=TeX-MML-AM_CHTML"></script>
+    </head>
+    <body class=" ">
+        <a id="start"></a>
+        <div class="nav-container ">
+            <div class="bar bar--sm visible-xs">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-xs-6 col-sm-6">
+                            <a href="../index.html">
+                                <img class="logo" alt="logo" src="../img/xstrong-data-science.png.pagespeed.ic.jMpbgW4o3L.png" alt="Strong Analytics - Data Science Consulting and Machine Learning Development Firm" title="Strong Analytics - Data Science Consulting and Machine Learning Development Firm"/>
+                            </a>
+                        </div>
+                        <div class="col-xs-6 col-sm-6 text-right">
+                            <a href="#" class="hamburger-toggle" data-toggle-class="#menu1;hidden-xs">
+                                <i class="icon icon--sm stack-interface stack-menu"></i>
+                            </a>
+                        </div>
+                    </div>
+                    <!--end of row-->
+                </div>
+                <!--end of container-->
+            </div>
+            <!--end bar-->
+            <nav id="menu1" class="bar bar-1 hidden-xs hiddem-sm" data-scroll-class='100vh:pos-fixed'>
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-3 col-sm-2 hidden-xs">
+                            <div class="bar__module">
+                                <a href="../index.html">
+                                    <img class="logo" alt="logo" src="../img/xstrong-data-science.png.pagespeed.ic.jMpbgW4o3L.png" alt="Strong Analytics - Data Science Consulting and Machine Learning Development Firm" title="Strong Analytics - Data Science Consulting and Machine Learning Development Firm"/>
+                                </a>
+                            </div>
+                            <!--end module-->
+                        </div>
+                        <div class="col-md-9 col-sm-12 text-right text-left-xs text-left-sm">
+                            <div class="bar__module">
+                                <ul class="menu-horizontal text-left">
+                                    <li class="dropdown">
+                                        <a href="../index.html">Home</a>
+                                    </li>
+                                    <li class="dropdown">
+                                        <span class="dropdown__trigger">Services</span>
+                                        <div class="dropdown__container">
+                                            <div class="container">
+                                                <div class="row">
+                                                    <div class="dropdown__content col-md-3 col-sm-6">
+                                                        <ul class="menu-vertical">
+	                                                        <li>
+                                                                <a href="../machine-learning-development.html">Machine Learning Development</a>
+                                                            </li>
+                                                            <li>
+                                                                <a href="../data-science-analytics.html">Data Science &amp; Analytics</a>
+                                                            </li>
+	                                                        <li>
+                                                                <a href="../big-data-infrastructure.html">Big Data Infrastructure</a>
+                                                            </li>
+                                                            <li>
+                                                                <a href="../app-development.html">Application Development</a>
+                                                            </li>
+                                                        </ul>
+                                                    </div>
+                                                    <!--end dropdown content-->
+                                                </div>
+                                                <!--end row-->
+                                            </div>
+                                        </div>
+                                        <!--end dropdown container-->
+                                    </li>
+                                    <li class="dropdown">
+                                        <span class="dropdown__trigger">Products</span>
+                                        <div class="dropdown__container">
+                                            <div class="container">
+                                                <div class="row">
+                                                    <div class="dropdown__content col-md-3 col-sm-6">
+                                                        <ul class="menu-vertical">
+	                                                        <li>
+                                                                <a href="../products/optimail.html">Optimail</a>
+                                                            </li>
+                                                        </ul>
+                                                    </div>
+                                                    <!--end dropdown content-->
+                                                </div>
+                                                <!--end row-->
+                                            </div>
+                                        </div>
+                                        <!--end dropdown container-->
+                                    </li>
+                                    <li class="dropdown">
+                                        <a href="../blog.html">Blog</a>
+                                    </li>
+                                    <li class="dropdown">
+                                        <span class="dropdown__trigger">Resources</span>
+                                        <div class="dropdown__container">
+                                            <div class="container">
+                                                <div class="row">
+                                                    <div class="dropdown__content col-md-3 col-sm-6">
+                                                        <ul class="menu-vertical">
+	                                                        <li>
+                                                                <a href="data-science-audit.html">Data Science Audit</a>
+                                                            </li>
+                                                            <li>
+                                                                <a href="../scholarship.html">Data Science Scholarship</a>
+                                                            </li>
+                                                            <li>
+                                                                <a href="predictive-model-roi-calculator.html">Predictive Model ROI Calculator</a>
+                                                            </li>
+                                                        </ul>
+                                                    </div>
+                                                    <!--end dropdown content-->
+                                                </div>
+                                                <!--end row-->
+                                            </div>
+                                        </div>
+                                        <!--end dropdown container-->
+                                    </li>
+                                    <li class="dropdown">
+                                        <a href="../team.html">Our Team</a>
+                                    </li>
+                                </ul>
+                            </div>
+                            <!--end module-->
+                            <div class="bar__module">
+                                <a class="btn btn--sm btn--primary type--uppercase" href="../contact.html">
+                                    <span class="btn__text">
+                                        Contact Us
+                                    </span>
+                                </a>
+                            </div>
+                            <!--end module-->
+                        </div>
+                        <!--end columns-->
+                    </div>
+                    <!--end of row-->
+                </div>
+                <!--end of container-->
+            </nav>
+        </div>
+        
+        <div class="main-container">
+	        
+	        			<section class="space--sm">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-sm-10 col-md-8 col-sm-offset-1 col-md-offset-2">
+                            <article>
+	                            <ol class="breadcrumbs">
+							        <li>
+							            <a href="../index.html">Home</a>
+							        </li>
+							        <li>
+							            <a href="../blog.html">Blog</a>
+							        </li>
+							    </ol>
+                                <div class="article__title text-center">
+                                    <a href="customer-lifetime-value-avoid-common-pitfalls-and-build-smarter-metrics.html">
+                                        <h2>Customer Lifetime Value: How to Avoid Common Pitfalls and Build Smarter Metrics</h2>
+                                    </a>
+                                    <span>Jun 22nd, 2016 by Jacob</span>
+                                </div>
+                                <!--end article title-->
+                                <div class="article__body">
+                                    <p>Whether you're at the helm of an early-stage startup campaigning for funding, or a well-established organization looking to stay competitive, understanding the <em>lifetime value</em> of your customers is an essential guide to how much you can spend on customer acquisition and support.</p>
+<p>Unfortunately, the usual way of calculating this critical metric rests on a lot of <strong>assumptions about your business</strong> — assumptions that are not usually met in the real world. If you rely on the usual way, you're missing out: at the very least, you're overlooking key insights and a deeper understanding of your customers and, at worst, you're getting information that's simply <em>wrong.</em></p>
+<p>We want to spread the word about these limitations, and take the opportunity to highlight a statistical-model-based approach we prefer here at Strong Analytics. To do this, we'll contrast the two approaches on real data from a subscription-based company with which we recently worked. But the lessons we'll learn from looking at this specific company will be general ones that apply to <em>any</em> business— including yours.</p>
+<h3>LTV: The Conventional Way</h3>
+<p>Lifetime value seems simple enough at first: it's just how much revenue the &quot;typical&quot; customer will bring in over their lifetime. For a monthly-subscription service (which our example dataset comes from), you can think of this as the typical customer's monthly payments, spread over the typical customer's account-duration.</p>
+<p>However, you can't actually <em>calculate</em> LTV in this way — by multiplying average monthly revenue-per-account by the average account-duration. That's because — unless you're engaging in a post-mortem of a failed venture — you have a large contingent of customers who are <em>still members</em> and thus <em>still generating revenue</em>. For any current customer, their <em>current</em> account duration is necessarily an under-estimate of their <em>true</em> account duration. If you want the lifetime of a typical customer, you won't get an accurate picture by taking the average account-duration.</p>
+<p>Fortunately, a conventional approach to calculating LTV gets around this problem by transforming our question about <em>durations</em> to a question about <em>rates.</em> If I run at a <em>rate</em> of 10 miles per hour, then you should expect to wait an average <em>duration</em> of six minutes for me to complete each mile. This is how LTV is conventionally calculated. We start with the <em>churn rate</em> — the percentage of customers who cancel within a month — and take its reciprocal. This gives us the average account-duration (the average amount of time we expect to wait for a customer to cancel), which we then multiply by the average revenue per-customer per-month.</p>
+<p>$$LTV = \frac{Average Revenue Per Account (ARPA)}{Churn Rate}$$</p>
+<p>Where an estimate of churn-rate might be:</p>
+<p>$$Churn Rate = \frac{Num. Customers Churned this Month}{Total Num. Customers Last Month}$$</p>
+<p>Let's do these calculations for the dataset from our example company.</p>
+<p><a target="_blank" href="../blog-images/ltv/SaaS-Metrics-1.png"><img src="../blog-images/ltv/xSaaS-Metrics-1.png.pagespeed.ic.Llotic5UZu.png" alt=""/></a></p>
+<p>We can see that this estimate of LTV is extremely noisy: it varies a lot from month-to-month. But even through this noise, we can see that LTV is going up over time: since the company was founded, the general trend seems to be that customers are paying more and/or churning more slowly. Either way — good news, right? Time to update the pitch-decks for investors?</p>
+<p>Not so fast. It may not seem like it from the simple formula above, but we've just made our first statistical model of the customer lifecycle. Like any model, it makes assumptions about the data that goes into it — which means assumptions about how the business operates and how the customers behave. The main assumption made here is that the <em>'churn rate' is constant over a customer's lifetime</em>. In other words, the LTV calculation we just made is only valid if a customer has the same probability of cancelling their account no matter how long they've been with your company. This assumption can easily be wrong. Maybe lots of customers sign up initially, but are only really interested in using the product once and so quickly churn; while customers who have stuck around for a year are the type of people who use the product repeatedly and are unlikely to churn. Or things could be reversed: perhaps almost all customers feel like they get something useful out of the product in the first year, but after that they generally find that they've exhausted its usefulness.</p>
+<p>You probably don't want to make critical decisions about your business based on faulty assumptions. If we're going to use a statistical model anyways, we might as well take a closer look at these assumptions, and figure out the <em>right</em> statistical model.</p>
+<h3>Finding the Right Statistical Model: Survival Analysis</h3>
+<p>So far we've used a simple formula for LTV. A more statistical description of this simple formula is that it assumes customers' account-durations are drawn from an <a href="https://en.wikipedia.org/wiki/Exponential_distribution">exponential distribution</a>. This distribution is meant to model waiting-times for events that have a constant probability of occurring. This distribution has a <em>rate</em> parameter, which we can think of as the probability of that event occurring in a given time-unit (e.g., a churn-rate is the probability of a customer cancelling each month).</p>
+<p>Of course, many events don't occur at a constant rate. I might <em>average</em> a rate of 10 miles per hour... for the first 30 seconds of my run. After that, my rate quickly drops off — so you definitely shouldn't expect to wait 6 minutes for me to complete a mile. Events which don't have a constant probability of occurring over time can be modeled as coming from <a href="https://en.wikipedia.org/wiki/Weibull_distribution">a weibull distribution</a>. The Weibull distribution is a generalization of the exponential distribution, in which an extra parameter determines whether (and how quickly) the probability of the event increases or decreases over time.</p>
+<p>Using a Weibull model of customer-lifetime frees us from the restrictive assumption that customers are equally likely to cancel throughout their lifetime. But it also means we can't do the quick-and-easy calculation we did before. Instead, in order to construct our model of customer lifetime, we'll recruit tools from an area of statistics known as &quot;survival analysis.&quot;</p>
+<p>&quot;Survival analysis&quot; deals with 'time-to-event' data, where the event of interest hasn't necessarily happened for everyone in our dataset. In our case, the 'event' is a customer cancelling their account. In survival analysis, we are interested in the 'survival' curve, which gives us a new way of expressing churn over time. Imagine all of your customers started at the exact same time, and you have a 15% churn rate. In the first month, you should expect (1 - .15) = 85% of the customers to be retained. In the second month, you should expect (1 - .15)*(1 - .15) = 72% of the original customers to be retained. In the third month, (1 - .15)^3 = 61%, etc.</p>
+<p>This describes the process that might generate a survival curve, but we can also do things in the other direction: we can take all of customers' account durations, and plot the percentage of customers whose accounts are at least X number of months. Here's what that looks like for our dataset.</p>
+<p><a target="_blank" href="../blog-images/ltv/Cumulative-Survival-1.png"><img src="../blog-images/ltv/xCumulative-Survival-1.png.pagespeed.ic.QBE_e1zUi9.png" alt=""/></a></p>
+<p>However, this curve isn't quite right yet: we aren't correctly factoring in customer who are still members. For example, there's a steep drop-off in the curve at 5-months, but this isn't because lots of customers cancelled at this point. There was just a big cohort of customers who started 5-months ago who are still members. In survival analysis, this is known as the problem of &quot;censoring&quot;. The account-durations of the current customers are censored: we know that they are at least 5-months long, but we don't know how much longer than that they will ultimately be.</p>
+<p>We can re-do our calculation of the curve in a way that correctly factors in these current customers. For customers who cancel, we'll lower the height of the curve just as before; but for customers who are &quot;censored&quot;, we'll use them in the percentage calculations before they become censored, then simply remove them from these calculations at the point on the x-axis where they become censored. The resulting curve is called a <a href="https://en.wikipedia.org/wiki/Kaplan–Meier_estimator">&quot;Kaplan-Meier&quot;</a> survival curve. We can see that this KM curve doesn't have the steep dropoff point at 5-months, and it's generally higher than the first curve, reflecting the fact that the original curve was under-estimating retention.</p>
+<p><a target="_blank" href="../blog-images/ltv/KM-Curve-1.png"><img src="../blog-images/ltv/xKM-Curve-1.png.pagespeed.ic.itSYiilsmE.png" alt=""/></a></p>
+<p>Now we have an estimate of how customers churn over time, one that correctly factors in 'censored' customers. We can finally fit our Weibull model to this data. Here we plot the inverse <a href="https://en.wikipedia.org/wiki/Cumulative_distribution_function">cumulative distribution function</a> of a Weibull distribution fit to this data (using R's <a href="https://cran.r-project.org/web/packages/flexsurv/index.html">flexsurv</a> package).</p>
+<p><a target="_blank" href="../blog-images/ltv/Fit-Model-1.png"><img src="../blog-images/ltv/xFit-Model-1.png.pagespeed.ic.1xWwVgxwxm.png" alt=""/></a></p>
+<p>Our current model tells us that the 'shape' parameter of the weibull distribution is 1.08, with a 95% <a href="https://en.wikipedia.org/wiki/Confidence_interval">confidence interval</a> of (1.05, 1.12). When this shape parameter is greater than one, it means the probability of the event increases over time (while shape &lt; 1 means it decreases over time, and shape = 1 is just the exponential distribution). So our model suggests that the data we're looking at significantly deviates from the exponential-distribution model of constant churn over time: instead, the customers at this company become more likely to cancel the longer they remain subscribed.</p>
+<h3>LTV and Beyond with Survival Models</h3>
+<p>Now that we've got our survival model of customer lifetime, how can we use it to estimate lifetime value? A simple yet valuable property of the inverted cumulative distribution function we plotted above is that the area under this curve is the <a href="https://en.wikipedia.org/wiki/Expected_value">expected value</a> — in our case, the average customer lifetime. (This might seem a little opaque, but it actually follows straightforwardly from how we made the curve. The average account-duration is just each account-duration multiplied by the proportion of times that account-duration occurs in the dataset. In the survival curve, if a customer has been around for 1-month, then they will take up one unit of area in the survival curve; if they've been around for 5-months, they will take up five units. Since each unit of area represents a proportion, we have account-duration times proportion — or the average account-duration.)</p>
+<p>The nice thing about fitting a <a href="https://en.wikipedia.org/wiki/Parametric_statistics">parametric</a> model to our data is that — thanks to the wonders of calculus — we can calculate the area under our curve <strong>out to infinity.</strong> If we multiply this by the average price-per-month, we get an estimate of lifetime value. In this case, we get $186. </p>
+<hr/>
+<p>So far I've talked a lot about the statistics behind this new approach to estimating LTV. It's time to make this a bit more concrete and intuitive. While the quick-and-easy LTV calculation we started with gave us a measure that bounced around a lot from month-to-month, overall that measure doesn't seem to be too far off from the number we got from survival analysis. Was it worth all the extra work?</p>
+<h3>Advantage # 1: Better Estimates</h3>
+<p>Let's make things more concrete and consequential: let's imagine that exactly one year ago, our company started calculating LTV <em>both</em> ways: recording the back-of-the-envelope measure that assumes constant churn, and also recording the results of a Weibull survival-model. Now after a year of this experiment, we want to know which method was better. </p>
+<p>How can we do this? One advantage to framing customer retention in terms of survival curves is that these curves don't just give us a single number. If we take the area under the curve between zero and infinity (and multiply it by average revenue), we'll get the LTV assuming our business keeps running indefinitely. But if we take the area under the curve between zero and twelve-months (again, times revenue), we'll get the expected revenue after one year. So our survival-curve can be used as a function that takes an amount of time we're willing to wait, and returns the expected revenue after waiting that long:</p>
+<p><a target="_blank" href="../blog-images/ltv/Cumulative-Value-Curve-1.png"><img src="../blog-images/ltv/xCumulative-Value-Curve-1.png.pagespeed.ic.2xKxb1IAvI.png" alt=""/></a></p>
+<p>So after a year of calculating LTV two different ways, we want to compare our weibull model of customer lifetime to the conventional constant-churn-rate model. This should be easy enough: let's just look at all the customers who had active memberships one year ago when we started our experiment, and plug them into the graph above. This should tell us how much more money we should expect from each customer, based on how long they've been around. If we add this up, this estimate should be a number that's very close to how much revenue they <em>actually</em> brought it.</p>
+<p><a target="_blank" href="../blog-images/ltv/Comparing-two-methods-1.png"><img src="../blog-images/ltv/xComparing-two-methods-1.png.pagespeed.ic.L46gUXTZPh.png" alt=""/></a></p>
+<p>The results are clear. The conventional calculation applies the same churn-rate to all customers, regardless of their stage in their life-cycle. By optimistically assuming late-stage customers have the same probability of cancelling as early-stage ones, it over-estimates the revenue it expects to get from these late customers — leading to an overall over-estimate of almost twelve-thousand-dollars. In contrast, our Weibull model takes into consideration the life-cycle-stage of each customer in order to estimate how much more time (and value) we should expect from their membership on an individual basis.</p>
+<h3>Advantage # 2: Deeper insights about the Lifecycle</h3>
+<p>Another advantage to taking the survival-analysis approach is that it lets us investigate patterns in the customer life-cycle that aren't necessarily reflected in overall lifetime value.</p>
+<p>One example of this is how customer-lifecycle has changed since the business featured here was originally founded. When we plotted our initial quick-and-easy LTV calculations, it looked like LTV was very slightly increasing over time. While this might have seemed like an indicator of business health, we now know that we can't necessarily trust this: if the business is constantly adding more and more customers, then this will artificially lower the churn rate (since, as we now know, new customers churn less than old customers). This shouldn't be confused with an increasing lifetime value among <em>current</em> customers.</p>
+<p>Instead, we can examine how the survival curve of our customers has changed over the years. For now we can just pick an arbitrary split-point and compare:</p>
+<p><a target="_blank" href="../blog-images/ltv/LTV-1.png"><img src="../blog-images/ltv/xLTV-1.png.pagespeed.ic.td_9IhWwNn.png" alt=" "/></a></p>
+<p>We can see from these curves that the customer lifecycle has been shifting over the years — even though the average account-duration hasn't actually changed! Customers have become more likely to stay in the early stages of their membership, but have become less persistently loyal in later stages of their membership. This is an important insight about a potentially shifting customer-base, with core bedrock customers becoming harder to come-by. This particular company has a social component to its services, with forums and community providing value to customers (more on that later). So a lack of bedrock loyal customers who help build the community might signal trouble for the company's future growth. </p>
+<h3>Advantage # 3: Customer-Segmentation and LTV</h3>
+<p>Above we got a glimpse into the advantages of segmenting our customer-base, splitting our survival curve by early vs. late adopters. We can extend this to a more general approach by incorporating <em>covariates</em> into our survival regression.</p>
+<p>We implemented a Bayesian <a href="https://en.wikipedia.org/wiki/Markov_chain_Monte_Carlo">MCMC</a> survival model (using the <a href="https://en.wikipedia.org/wiki/Just_another_Gibbs_sampler">JAGS</a> language) to estimate the effects of several predictors on customers' retention. In this framework, regression coefficients can affect both the 'shape' and 'scale' parameters of the weibull distribution, which can then be translated into effects on the survival curve and on LTV. For example, this company leaves it up to the customer whether they want to fill in extra profile information, such as their interests, website, and occupation. We can use this to split our customer-base into two groups, and plot the two KM-curves model estimates separately. </p>
+<p><a target="_blank" href="../blog-images/ltv/Example-Segmented-Curve-1.png"><img src="../blog-images/ltv/xExample-Segmented-Curve-1.png.pagespeed.ic.E_9Hh9pz2Y.png" alt=""/></a></p>
+<p>We can see that customers who fill in this optional profile information tend to stick around much longer on average, with their survival curve consistently above those who omit this profile info.</p>
+<p>We can summarize the effect of predictors like this one on customers' LTV. For example, another predictor — whether or not a customer used the company's forums — had an average of $47 more lifetime value <em>for every post they made per month!</em> This is a dramatic effect.</p>
+<p><a target="_blank" href="../blog-images/ltv/Coef-on-LTV-1.png"><img src="../blog-images/ltv/xCoef-on-LTV-1.png.pagespeed.ic.7UW73gcI-b.png" alt=""/></a></p>
+<p>Estimating the effects of customer-attributes and behavior on their life-cycle can provide insights into what makes customers stay with your company, which in turn can provide valuable strategic guidance. For the company featured here, the large effect of forum activity suggests that the community-driven aspects of this company might be especially important to customers. This in turn suggests that promoting community-engagement could promote retention. Future directions would involve pursuing A/B testing to confirm this possibility.</p>
+<p>Another reason that predicting LTV based on attributes of your customers can be valuable is that it tells you not just <em>what</em> affects LTV, but by <em>how much</em>. Especially if your company is in its early-stages, it's tempting to compute a single LTV number and assume this will remain stable as your company grows. In reality, as you acquire customers from new and diverse sources, LTV can change in ways you won't be ready for if you're just computing a single number. By understanding how segments of customers differ in their LTV, you can be better prepared for how your LTV will change as the composition of your customer-base changes. This kind of information can be valuable in knowing how much to spend on new acquisition or marketing strategies— from large-scale advertising campaigns to simple promotions for new customers.</p>
+<h3>Advantage # 4: Live Predictions</h3>
+<p>A far-reaching analytics plan for your business doesn't end with one-off insights about the LTV of various customer-segments. Eventually you want to <a href="../tools-development.html">automate</a> the models that generate these insights into your operations. You want your team to be able to ask the kinds of nuanced questions enabled by survival analysis, without needing to worry about the details of Kaplan-Meier estimators or MCMC sampling.</p>
+<p>You might also be interested in drilling more closely into <strong>predictions</strong> for individual customers' retention. This means using live data about customers' attributes and actions to generate on-the-fly predictions about who is at risk of churning. This advanced approach can be implemented using the very same survival models I've described in this post: these models can incorporate not only static predictors like profile information or demographics, but dynamic predictors such as login-frequency, workflow-patterns, and anything else you might be collecting. The models themselves are not what limits the possibilities; instead the limit here is <em>only</em> what you're collecting. Not every company can implement these advanced models from the get-go, because they depend on having already established a sturdy foundation of a mature <a href="../data-science-analytics.html">data strategy</a>. </p>
+<p>If you're hoping to learn more about how we can use survival models to make on-the-fly predictions for individual customers' retention, then stay-tuned— in a later post, we'll be looking at another company that has a well-established data-strategy that makes these models possible.</p>
+<h3>Wrapping Up</h3>
+<p>In this post, I compared two ways of calculating gross lifetime value: the conventional quick-and-easy way, and a technique based in survival analysis. </p>
+<p>Lots of disadvantages to the conventional method were readily apparent. It can give you incorrect answers about the revenue you get from your customers, and about how this changes over time. It also prevents you from gaining deeper insights into how customer-attributes and customer-behavior can be used to segment and predict retention and LTV.</p>
+<p>Despite how apparent these disadvantages were, this was actually an extremely simple dataset, in which the cards were stacked in favor of the traditional approach. This business operates through monthly subscriptions, making cancellations obvious and churn easy to calculate. But what about businesses with more complicated membership models (e.g., pay-per-use)? In this case, we can't simply flag customers as churned or not— we have to infer whether they've churned based on their account-usage. Or consider the simple pricing model here: all of the customers paid the same amount per month, without any tiers or usage-based discounts. But what about businesses in which prices vary over a customer's lifetime? Once again, we'd have take an approach in which price-over-time is estimated and extrapolated. In either of these cases, the traditional approaches to lifetime-value won't just be slightly wrong— they'll be hopeless.</p>
+<p>There are no real shortcuts to understanding your business and its customers; even simple metrics rely upon deep statistical assumptions. If you're going to use a statistical model anyways, you might as well be aware of it— and make sure you're using the right one.</p>                                </div>
+                                
+                                <p>&nbsp;</p>
+                                <style>#dsq-content div,#dsq-content p,#dsq-content h3{clear:none!important}#dsq-content{overflow:auto!important}</style>
+								<div id="disqus_thread"></div>
+									<script type="text/javascript">var disqus_shortname='stronganalytics';var disqus_identifier='blog/customer-lifetime-value-avoid-common-pitfalls-and-build-smarter-metrics';var disqus_url='customer-lifetime-value-avoid-common-pitfalls-and-build-smarter-metrics.html';(function(){var dsq=document.createElement('script');dsq.type='text/javascript';dsq.async=true;dsq.src='http://'+disqus_shortname+'.disqus.com/embed.js';(document.getElementsByTagName('head')[0]||document.getElementsByTagName('body')[0]).appendChild(dsq);})();</script>
+									<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+								</div>
+                            </article>
+                        </div>
+                    </div>
+                    <!--end of row-->
+                </div>
+                <!--end of container-->
+            </section>
+	        
+	        <footer class="text-center-xs space--xs ">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-sm-7">
+                            <ul class="list-inline">
+                                <li>
+                                    <a href="../team.html">
+                                        <span class="h6 type--uppercase">Our Team</span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="../careers.html">
+                                        <span class="h6 type--uppercase">Careers</span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="../contact.html">
+                                        <span class="h6 type--uppercase">Contact Us</span>
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="col-sm-5 text-right text-center-xs">
+                            <ul class="social-list list-inline list--hover">
+                                <li>
+                                    <a href="http://www.twitter.com/stronganalytics">
+                                        <i class="socicon socicon-twitter icon icon--xs"></i>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="https://www.linkedin.com/company/strong-analytics">
+                                        <i class="socicon socicon-linkedin icon icon--xs"></i>
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    <!--end of row-->
+                    <div class="row">
+                        <div class="col-sm-7">
+                            <span class="type--fine-print">&copy;
+                                <span class="update-year"></span> Strong Analytics LLC &mdash; Chicago, IL, USA &amp; Vancouver, BC, Canada</span>
+                        </div>
+                        <div class="col-sm-5 text-right text-center-xs">
+                            <a class="type--fine-print" href="mailto:contact@strong.io">contact@strong.io</a>
+                        </div>
+                    </div>
+                    <!--end of row-->
+                </div>
+                <!--end of container-->
+            </footer>
+        </div>
+        <!--<div class="loader"></div>-->
+        <a class="back-to-top inner-link" href="#start" data-scroll-class="100vh:active">
+            <i class="stack-interface stack-up-open-big"></i>
+        </a>
+        
+        <!-- Intercom -->
+		<script>window.intercomSettings={app_id:"yhiz5h5i"};</script>
+		<script>(function(){var w=window;var ic=w.Intercom;if(typeof ic==="function"){ic('reattach_activator');ic('update',intercomSettings);}else{var d=document;var i=function(){i.c(arguments)};i.q=[];i.c=function(args){i.q.push(args)};w.Intercom=i;function l(){var s=d.createElement('script');s.type='text/javascript';s.async=true;s.src='https://widget.intercom.io/widget/yhiz5h5i';var x=d.getElementsByTagName('script')[0];x.parentNode.insertBefore(s,x);}if(w.attachEvent){w.attachEvent('onload',l);}else{w.addEventListener('load',l,false);}}})()</script>
+    </body>
+
+<!-- Mirrored from www.strong.io/blog/customer-lifetime-value-avoid-common-pitfalls-and-build-smarter-metrics by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 26 Mar 2019 06:09:09 GMT -->
+</html>

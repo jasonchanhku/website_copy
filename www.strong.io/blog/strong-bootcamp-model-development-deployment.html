@@ -1,0 +1,407 @@
+<!doctype html>
+<html lang="en">
+    
+<!-- Mirrored from www.strong.io/blog/strong-bootcamp-model-development-deployment by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 26 Mar 2019 06:09:12 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+        <meta charset="utf-8">
+        <title>Introducing Strong-Bootcamp: An Ultra-Lightweight Solution for Rigorous Machine Learning Development &mdash; Strong Analytics</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="keywords" content="machine learning model development, machine learning deployment, reproducible machine learning">
+        <meta name="description" content="Building and deploying machine learning solutions can be a messy business. In this post, we review hallmarks of rigorous, reproducible approaches to machine learning development that encourage model iteration, simplify model validation, and ease deployment. We also introduce `strong-bootcamp`, a simple Python package that implements these principles.">
+        <meta name="csrf-token" content="pKLPK0xGEdCfg8Ag0cl6EY96IVjikMMnbHh6s1PF">
+        
+        <script>(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)})(window,document,'script','../../www.google-analytics.com/analytics.js','ga');ga('create','UA-10304921-10','auto');ga('require','GTM-N3NX8JR');ga('send','pageview');</script>
+
+        <link rel="icon" href="../favicon.ico" type="image/x-icon"/>
+		<link rel="apple-touch-icon" sizes="57x57" href="../favicon/xapple-icon-57x57.png.pagespeed.ic.VRUjB4O0KQ.png">
+		<link rel="apple-touch-icon" sizes="60x60" href="../favicon/xapple-icon-60x60.png.pagespeed.ic.vJVDTOCtI6.png">
+		<link rel="apple-touch-icon" sizes="72x72" href="../favicon/xapple-icon-72x72.png.pagespeed.ic.whp121EcVL.png">
+		<link rel="apple-touch-icon" sizes="76x76" href="../favicon/xapple-icon-76x76.png.pagespeed.ic.MgjQkXPKC1.png">
+		<link rel="apple-touch-icon" sizes="114x114" href="../favicon/xapple-icon-114x114.png.pagespeed.ic._QGzwKiKu-.png">
+		<link rel="apple-touch-icon" sizes="120x120" href="../favicon/xapple-icon-120x120.png.pagespeed.ic.Hz4AnLMGIL.png">
+		<link rel="apple-touch-icon" sizes="144x144" href="../favicon/xapple-icon-144x144.png.pagespeed.ic.bHG2b7g3rz.png">
+		<link rel="apple-touch-icon" sizes="152x152" href="../favicon/xapple-icon-152x152.png.pagespeed.ic.3JJoTM0DCX.png">
+		<link rel="apple-touch-icon" sizes="180x180" href="../favicon/xapple-icon-180x180.png.pagespeed.ic.bAFEspbAmS.png">
+		<link rel="icon" type="image/png" sizes="192x192" href="../favicon/xandroid-icon-192x192.png.pagespeed.ic.8sJXtxfCk2.png">
+		<link rel="icon" type="image/png" sizes="32x32" href="../favicon/xfavicon-32x32.png.pagespeed.ic.pLQe2o0-x8.png">
+		<link rel="icon" type="image/png" sizes="96x96" href="../favicon/xfavicon-96x96.png.pagespeed.ic.ftlKs2rhLH.png">
+		<link rel="icon" type="image/png" sizes="16x16" href="../favicon/xfavicon-16x16.png.pagespeed.ic.GwCISc5tnn.png">
+		<link rel="manifest" href="../favicon/manifest.json">
+		<meta name="msapplication-TileColor" content="#ffffff">
+		<meta name="msapplication-TileImage" content="/favicon/ms-icon-144x144.png">
+		<meta name="theme-color" content="#ffffff">
+        <link href="../css/A.strong.min.css.pagespeed.cf.LDJy99El4b.css" rel="stylesheet" type="text/css" media="all"/>
+        <link href="https://fonts.googleapis.com/css?family=Open+Sans:200,300,400,400i,500,600,700%7CMerriweather:300,300i%7CMaterial+Icons" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,400i,500,700" rel="stylesheet"/>
+        
+        <script src="../js/strong.min.js.pagespeed.jm.QqKV1RzJLn.js"></script>
+        	
+    </head>
+    <body class=" ">
+        <a id="start"></a>
+        <div class="nav-container ">
+            <div class="bar bar--sm visible-xs">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-xs-6 col-sm-6">
+                            <a href="../index.html">
+                                <img class="logo" alt="logo" src="../img/xstrong-data-science.png.pagespeed.ic.jMpbgW4o3L.png" alt="Strong Analytics - Data Science Consulting and Machine Learning Development Firm" title="Strong Analytics - Data Science Consulting and Machine Learning Development Firm"/>
+                            </a>
+                        </div>
+                        <div class="col-xs-6 col-sm-6 text-right">
+                            <a href="#" class="hamburger-toggle" data-toggle-class="#menu1;hidden-xs">
+                                <i class="icon icon--sm stack-interface stack-menu"></i>
+                            </a>
+                        </div>
+                    </div>
+                    <!--end of row-->
+                </div>
+                <!--end of container-->
+            </div>
+            <!--end bar-->
+            <nav id="menu1" class="bar bar-1 hidden-xs hiddem-sm" data-scroll-class='100vh:pos-fixed'>
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-3 col-sm-2 hidden-xs">
+                            <div class="bar__module">
+                                <a href="../index.html">
+                                    <img class="logo" alt="logo" src="../img/xstrong-data-science.png.pagespeed.ic.jMpbgW4o3L.png" alt="Strong Analytics - Data Science Consulting and Machine Learning Development Firm" title="Strong Analytics - Data Science Consulting and Machine Learning Development Firm"/>
+                                </a>
+                            </div>
+                            <!--end module-->
+                        </div>
+                        <div class="col-md-9 col-sm-12 text-right text-left-xs text-left-sm">
+                            <div class="bar__module">
+                                <ul class="menu-horizontal text-left">
+                                    <li class="dropdown">
+                                        <a href="../index.html">Home</a>
+                                    </li>
+                                    <li class="dropdown">
+                                        <span class="dropdown__trigger">Services</span>
+                                        <div class="dropdown__container">
+                                            <div class="container">
+                                                <div class="row">
+                                                    <div class="dropdown__content col-md-3 col-sm-6">
+                                                        <ul class="menu-vertical">
+	                                                        <li>
+                                                                <a href="../machine-learning-development.html">Machine Learning Development</a>
+                                                            </li>
+                                                            <li>
+                                                                <a href="../data-science-analytics.html">Data Science &amp; Analytics</a>
+                                                            </li>
+	                                                        <li>
+                                                                <a href="../big-data-infrastructure.html">Big Data Infrastructure</a>
+                                                            </li>
+                                                            <li>
+                                                                <a href="../app-development.html">Application Development</a>
+                                                            </li>
+                                                        </ul>
+                                                    </div>
+                                                    <!--end dropdown content-->
+                                                </div>
+                                                <!--end row-->
+                                            </div>
+                                        </div>
+                                        <!--end dropdown container-->
+                                    </li>
+                                    <li class="dropdown">
+                                        <span class="dropdown__trigger">Products</span>
+                                        <div class="dropdown__container">
+                                            <div class="container">
+                                                <div class="row">
+                                                    <div class="dropdown__content col-md-3 col-sm-6">
+                                                        <ul class="menu-vertical">
+	                                                        <li>
+                                                                <a href="../products/optimail.html">Optimail</a>
+                                                            </li>
+                                                        </ul>
+                                                    </div>
+                                                    <!--end dropdown content-->
+                                                </div>
+                                                <!--end row-->
+                                            </div>
+                                        </div>
+                                        <!--end dropdown container-->
+                                    </li>
+                                    <li class="dropdown">
+                                        <a href="../blog.html">Blog</a>
+                                    </li>
+                                    <li class="dropdown">
+                                        <span class="dropdown__trigger">Resources</span>
+                                        <div class="dropdown__container">
+                                            <div class="container">
+                                                <div class="row">
+                                                    <div class="dropdown__content col-md-3 col-sm-6">
+                                                        <ul class="menu-vertical">
+	                                                        <li>
+                                                                <a href="data-science-audit.html">Data Science Audit</a>
+                                                            </li>
+                                                            <li>
+                                                                <a href="../scholarship.html">Data Science Scholarship</a>
+                                                            </li>
+                                                            <li>
+                                                                <a href="predictive-model-roi-calculator.html">Predictive Model ROI Calculator</a>
+                                                            </li>
+                                                        </ul>
+                                                    </div>
+                                                    <!--end dropdown content-->
+                                                </div>
+                                                <!--end row-->
+                                            </div>
+                                        </div>
+                                        <!--end dropdown container-->
+                                    </li>
+                                    <li class="dropdown">
+                                        <a href="../team.html">Our Team</a>
+                                    </li>
+                                </ul>
+                            </div>
+                            <!--end module-->
+                            <div class="bar__module">
+                                <a class="btn btn--sm btn--primary type--uppercase" href="../contact.html">
+                                    <span class="btn__text">
+                                        Contact Us
+                                    </span>
+                                </a>
+                            </div>
+                            <!--end module-->
+                        </div>
+                        <!--end columns-->
+                    </div>
+                    <!--end of row-->
+                </div>
+                <!--end of container-->
+            </nav>
+        </div>
+        
+        <div class="main-container">
+	        
+	        			<section class="space--sm">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-sm-10 col-md-8 col-sm-offset-1 col-md-offset-2">
+                            <article>
+	                            <ol class="breadcrumbs">
+							        <li>
+							            <a href="../index.html">Home</a>
+							        </li>
+							        <li>
+							            <a href="../blog.html">Blog</a>
+							        </li>
+							    </ol>
+                                <div class="article__title text-center">
+                                    <a href="strong-bootcamp-model-development-deployment.html">
+                                        <h2>Introducing Strong-Bootcamp: An Ultra-Lightweight Solution for Rigorous Machine Learning Development</h2>
+                                    </a>
+                                    <span>Oct 23rd, 2018 by Brock Ferguson</span>
+                                </div>
+                                <!--end article title-->
+                                <div class="article__body">
+                                    <p>At <a href="../index.html">Strong</a>, we help companies integrate machine learning into products, internal tools and automated processes.</p>
+<p>Through our work, we’ve learned a <em>lot</em> about what makes a machine learning project or platform successful. Of course, a large part of an ML project' success can be attributed to doing the necessary algorithmic research and optimization to settle on the best solution. But another major contributor, separate from the particulars of any solution, is how one <em>approaches</em> the problem:</p>
+<ul>
+<li><em>How should we compare models?</em></li>
+<li><em>How can we collaborate on the problem?</em></li>
+<li><em>How should we measure performance?</em></li>
+<li><em>How should we integrate the ML components with the rest of the project?</em></li>
+<li><em>How will we share training and validation data?</em></li>
+<li><em>How do we modify models after deployment?</em></li>
+</ul>
+<p>Answering these questions isn't easy and well beyond the scope of this brief blog post (sorry!). But it's important that — when you <em>do</em> answer these questions — you reify your approach by building a technical ecosystem that enforces your decisions.</p>
+<p>By settling on a rigorous, well-defined approach, you can avoid problematic practices we see in the field, such as:</p>
+<ul>
+<li><strong>Training and comparing models on different datasets</strong>. Which model is better? Well, place your bets, then throw those bets out the window because you'll never really know!</li>
+<li><strong>Building applications around the particulars of a certain algorithmic implementation</strong>, instead of allowing for new implementations to be easily swapped in later.</li>
+<li><strong>Building models in a Jupyter notebook and, when happy with performance, doing some manual export/import process to embed and deploy the model</strong> (with fingers crossed, of course).</li>
+<li><strong>Not logging and archiving experimentation results.</strong> On the one hand, it’s a huge wasted effort for your data science team. On the other hand, it can be a real bonding experience for every new data scientist to unknowingly run the same experiments and run into the same issues.</li>
+</ul>
+<p>Each of these practices makes model development and deployment less rigorous and more error-prone. More generally, they are hallmarks of unreproducible science — processes that are inadequately documented and difficult or impossible to replicate.</p>
+<p>Pre-existing data-science-platforms-as-a-service like <a href="https://www.dominodatalab.com/">Domino</a> can enforce rigorous standards by requiring data scientists to adopt a workflow enforced by the platform. However, third-party services like this can also add a lot of overhead in terms of cost and process complexity for an otherwise simple project executed by a small team.</p>
+<p>For these simpler cases, we built <a href="https://github.com/strongio/strong-bootcamp">strong-bootcamp</a>, an ultra-lightweight Python package that provides a flexible ecosystem in which to develop, compare, and deploy machine learning flows with increased rigor and reproducibility.</p>
+<h2>How it works</h2>
+<h3>Build a “bootcamp”</h3>
+<p>A bootcamp is a simple Python class that gathers data (likely, in <code>__init__()</code>), passes that data to a candidate model in <code>train()</code>, and passes validation data to a trained model in <code>validate()</code> method before calculating standardized performance metrics based on the model’s predictions.</p>
+<p>Example:</p>
+<pre><code>from collections import namedtuple
+
+define an example data structure that will be used
+text = namedtuple('text', ['string'])
+
+class Camp(object):
+    def __init__(self):
+        # pre-load data for use in training and testing
+        self.training_data = [
+            text(string='I am a nice string'),
+            text(string='I am also a very average string')
+        ]
+
+        self.training_classes = [True, False]
+
+        self.validation_data = [
+            text(string='I am a new string'),
+            text(string='I am another new string')
+        ]
+
+        self.validation_classes = [False, False]
+
+    def train(self, model):
+        """
+        Receive an untrained model and pass it whatever is required to train it.
+        """
+        model.train(text=self.training_data, classes=self.training_classes)
+
+    def validate(self, model):
+        """
+        Receive a trained model and pass it whatever is required to validate it. Return
+        the validation dictionary it returns.
+        """
+
+        # before doing statistical validation, we can do some miscellaneous validations
+        if type(model).__name__ == 'random':
+        raise Exception("Models can't be named random. It scares the marketing team.")
+
+        #run the validation and return the results
+        predictions = model.predict(text=self.validation_data)
+
+        return {
+            'accuracy': sum([1 if p == self.validation_classes[i] else 0 for i, p in enumerate(predictions)]) / float(len(predictions))
+        }</code></pre>
+<h3>Configure your Bootcamp</h3>
+<p>Bootcamp configuration files are YAML files that point to the location of your Bootcamp class (above), define the minimum requirements for models that can solve this problem, and define the metrics that will be gathered.</p>
+<p>Along with actually being loaded and used to validate models before we begin training (and stumble upon a bug a few hours down the line), these simple configuration files serve to document the problem and the requirements for potential solutions. Ideally, this encourages model building — especially later, after the problem has been generally forgotten and companies run the risk of leaving models as-is because people are afraid of breaking things.</p>
+<p>An example configuration file:</p>
+<pre><code>bootcamp:
+ module: example.camp
+ callable: Camp
+model_requirements:
+  parameters:
+    n_epochs
+  methods:
+    train: [text, classes]
+    save: [path]
+    load: [path]
+    predict: [text]
+  validation_metrics:
+    accuracy</code></pre>
+<h3>Configure your models</h3>
+<p>All that’s left is defining a final configuration file that is meant to declare the active candidate models for the bootcamp (aside from, you know, actually building and implementing the models…).</p>
+<p>Model configuration files give names to each model, describe where they can be found (it assumes they are Python classes that exist in some callable module), as well as ranges of hyperparameters that will be explored in a grid search every time you run the bootcamp.</p>
+<p>Here’s an example of a model configuration file for two models with slightly different parameterizations:</p>
+<pre><code>models:
+  linear:
+    module: example.models.linear
+    callable: LinearModel
+    parameters:
+      l1: [.1, .5, .9]
+  loglinear:
+    module: example.models.loglinear
+    callable: LogLinearModel
+    parameters:
+      l2: [.1, .2, .3]</code></pre>
+<h3>Run the bootcamp</h3>
+<p>Once everything is in place, you can run the bootcamp at any time from the command line:</p>
+<p><code>bootcamp --config=bootcamp.yml --models=models.yml --results=./results/</code></p>
+<p>Once started, the bootcamp will:</p>
+<ol>
+<li>Validate each of your models</li>
+<li>Prepare the bootcamp</li>
+<li>Prepare the grid-search for each candidate model</li>
+<li>Initialize and then pass each model for training</li>
+<li>Validate each model and save the metrics (and parameter/model metadata) to the results folder.</li>
+</ol>
+<p>You can monitor progress as you go in the logs. Results are saved as JSON files with metadata and metrics, and are therefore easily importable into R or Python for further analysis and visualization.</p>
+<h2>Why use Strong Bootcamp?</h2>
+<p>Going back to the questions we touched on earlier, and the kinds of problems we saw in machine learning, one can see how <code>strong-bootcamp</code> implements a few key principles that can help make machine learning development projects successful. It helps you to:</p>
+<ul>
+<li>Build and test models collaboratively in a shared ecosystem.</li>
+<li>Strictly enforce shared training/validation data across models.</li>
+<li>Gather the same metrics for each candidate model.</li>
+<li>Log experiment results in an archive with appropriate meta-data.</li>
+</ul>
+<p>Moreover, because it’s so lightweight, it enables you to train and validate models <em>in situ</em> — i.e., in the context of your broader application — while remaining <em>naïve</em> to how your models are implemented internally. Models expose APIs, but the bootcamp and the rest of the application are otherwise completely naïve to the models’ internals. This solves two additional problems:</p>
+<ul>
+<li>Deploying models should be easy. Models are validated and tested before deployment and, in most cases, ‘deployment’ should just mean pointing to your best-performing model without any error-prone, manual intervention required. A good rule of thumb (and a sign that your bootcamp is properly setup): <strong>A model that makes it through your bootcamp is fit to deploy.</strong></li>
+<li>You won't get cornered into a certain implementation. By defining the minimum requirements for a model and validating those that are essential for integration into your application, you encourage exploration and iteration on all other fronts.</li>
+</ul>
+<p>We don’t always use <code>strong-bootcamp</code>. Sometimes it’s <em>too</em> simple, and it’s far from the full-featured data platforms that some projects and teams demand. Nevertheless, it can provide just the right amount of structure to facilitate model development and deployment for some projects.</p>
+<p>Interested in trying it out yourself? Check out the <a href="https://github.com/strongio/strong-bootcamp">strong-bootcamp Github repository</a>!</p>                                </div>
+                                
+                                <p>&nbsp;</p>
+                                <style>#dsq-content div,#dsq-content p,#dsq-content h3{clear:none!important}#dsq-content{overflow:auto!important}</style>
+								<div id="disqus_thread"></div>
+									<script type="text/javascript">var disqus_shortname='stronganalytics';var disqus_identifier='blog/strong-bootcamp-model-development-deployment';var disqus_url='strong-bootcamp-model-development-deployment.html';(function(){var dsq=document.createElement('script');dsq.type='text/javascript';dsq.async=true;dsq.src='http://'+disqus_shortname+'.disqus.com/embed.js';(document.getElementsByTagName('head')[0]||document.getElementsByTagName('body')[0]).appendChild(dsq);})();</script>
+									<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+								</div>
+                            </article>
+                        </div>
+                    </div>
+                    <!--end of row-->
+                </div>
+                <!--end of container-->
+            </section>
+	        
+	        <footer class="text-center-xs space--xs ">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-sm-7">
+                            <ul class="list-inline">
+                                <li>
+                                    <a href="../team.html">
+                                        <span class="h6 type--uppercase">Our Team</span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="../careers.html">
+                                        <span class="h6 type--uppercase">Careers</span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="../contact.html">
+                                        <span class="h6 type--uppercase">Contact Us</span>
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="col-sm-5 text-right text-center-xs">
+                            <ul class="social-list list-inline list--hover">
+                                <li>
+                                    <a href="http://www.twitter.com/stronganalytics">
+                                        <i class="socicon socicon-twitter icon icon--xs"></i>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="https://www.linkedin.com/company/strong-analytics">
+                                        <i class="socicon socicon-linkedin icon icon--xs"></i>
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    <!--end of row-->
+                    <div class="row">
+                        <div class="col-sm-7">
+                            <span class="type--fine-print">&copy;
+                                <span class="update-year"></span> Strong Analytics LLC &mdash; Chicago, IL, USA &amp; Vancouver, BC, Canada</span>
+                        </div>
+                        <div class="col-sm-5 text-right text-center-xs">
+                            <a class="type--fine-print" href="mailto:contact@strong.io">contact@strong.io</a>
+                        </div>
+                    </div>
+                    <!--end of row-->
+                </div>
+                <!--end of container-->
+            </footer>
+        </div>
+        <!--<div class="loader"></div>-->
+        <a class="back-to-top inner-link" href="#start" data-scroll-class="100vh:active">
+            <i class="stack-interface stack-up-open-big"></i>
+        </a>
+        
+        <!-- Intercom -->
+		<script>window.intercomSettings={app_id:"yhiz5h5i"};</script>
+		<script>(function(){var w=window;var ic=w.Intercom;if(typeof ic==="function"){ic('reattach_activator');ic('update',intercomSettings);}else{var d=document;var i=function(){i.c(arguments)};i.q=[];i.c=function(args){i.q.push(args)};w.Intercom=i;function l(){var s=d.createElement('script');s.type='text/javascript';s.async=true;s.src='https://widget.intercom.io/widget/yhiz5h5i';var x=d.getElementsByTagName('script')[0];x.parentNode.insertBefore(s,x);}if(w.attachEvent){w.attachEvent('onload',l);}else{w.addEventListener('load',l,false);}}})()</script>
+    </body>
+
+<!-- Mirrored from www.strong.io/blog/strong-bootcamp-model-development-deployment by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 26 Mar 2019 06:09:12 GMT -->
+</html>

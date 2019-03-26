@@ -1,0 +1,329 @@
+<!doctype html>
+<html lang="en">
+    
+<!-- Mirrored from www.strong.io/blog/keanu-enter-the-model-matrix by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 26 Mar 2019 06:10:05 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+        <meta charset="utf-8">
+        <title>Keanu: Enter the Model.Matrix &mdash; Strong Analytics</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="keywords" content="custom model function, model fitting, R, keanu">
+        <meta name="description" content="Learn about our open-source R package, keanu.">
+        <meta name="csrf-token" content="pKLPK0xGEdCfg8Ag0cl6EY96IVjikMMnbHh6s1PF">
+        
+        <script>(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)})(window,document,'script','../../www.google-analytics.com/analytics.js','ga');ga('create','UA-10304921-10','auto');ga('require','GTM-N3NX8JR');ga('send','pageview');</script>
+
+        <link rel="icon" href="../favicon.ico" type="image/x-icon"/>
+		<link rel="apple-touch-icon" sizes="57x57" href="../favicon/xapple-icon-57x57.png.pagespeed.ic.VRUjB4O0KQ.png">
+		<link rel="apple-touch-icon" sizes="60x60" href="../favicon/xapple-icon-60x60.png.pagespeed.ic.vJVDTOCtI6.png">
+		<link rel="apple-touch-icon" sizes="72x72" href="../favicon/xapple-icon-72x72.png.pagespeed.ic.whp121EcVL.png">
+		<link rel="apple-touch-icon" sizes="76x76" href="../favicon/xapple-icon-76x76.png.pagespeed.ic.MgjQkXPKC1.png">
+		<link rel="apple-touch-icon" sizes="114x114" href="../favicon/xapple-icon-114x114.png.pagespeed.ic._QGzwKiKu-.png">
+		<link rel="apple-touch-icon" sizes="120x120" href="../favicon/xapple-icon-120x120.png.pagespeed.ic.Hz4AnLMGIL.png">
+		<link rel="apple-touch-icon" sizes="144x144" href="../favicon/xapple-icon-144x144.png.pagespeed.ic.bHG2b7g3rz.png">
+		<link rel="apple-touch-icon" sizes="152x152" href="../favicon/xapple-icon-152x152.png.pagespeed.ic.3JJoTM0DCX.png">
+		<link rel="apple-touch-icon" sizes="180x180" href="../favicon/xapple-icon-180x180.png.pagespeed.ic.bAFEspbAmS.png">
+		<link rel="icon" type="image/png" sizes="192x192" href="../favicon/xandroid-icon-192x192.png.pagespeed.ic.8sJXtxfCk2.png">
+		<link rel="icon" type="image/png" sizes="32x32" href="../favicon/xfavicon-32x32.png.pagespeed.ic.pLQe2o0-x8.png">
+		<link rel="icon" type="image/png" sizes="96x96" href="../favicon/xfavicon-96x96.png.pagespeed.ic.ftlKs2rhLH.png">
+		<link rel="icon" type="image/png" sizes="16x16" href="../favicon/xfavicon-16x16.png.pagespeed.ic.GwCISc5tnn.png">
+		<link rel="manifest" href="../favicon/manifest.json">
+		<meta name="msapplication-TileColor" content="#ffffff">
+		<meta name="msapplication-TileImage" content="/favicon/ms-icon-144x144.png">
+		<meta name="theme-color" content="#ffffff">
+        <link href="../css/A.strong.min.css.pagespeed.cf.LDJy99El4b.css" rel="stylesheet" type="text/css" media="all"/>
+        <link href="https://fonts.googleapis.com/css?family=Open+Sans:200,300,400,400i,500,600,700%7CMerriweather:300,300i%7CMaterial+Icons" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,400i,500,700" rel="stylesheet"/>
+        
+        <script src="../js/strong.min.js.pagespeed.jm.QqKV1RzJLn.js"></script>
+        	<script type="text/javascript" async src="../../cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJaxb198.js?config=TeX-MML-AM_CHTML"></script>
+    </head>
+    <body class=" ">
+        <a id="start"></a>
+        <div class="nav-container ">
+            <div class="bar bar--sm visible-xs">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-xs-6 col-sm-6">
+                            <a href="../index.html">
+                                <img class="logo" alt="logo" src="../img/xstrong-data-science.png.pagespeed.ic.jMpbgW4o3L.png" alt="Strong Analytics - Data Science Consulting and Machine Learning Development Firm" title="Strong Analytics - Data Science Consulting and Machine Learning Development Firm"/>
+                            </a>
+                        </div>
+                        <div class="col-xs-6 col-sm-6 text-right">
+                            <a href="#" class="hamburger-toggle" data-toggle-class="#menu1;hidden-xs">
+                                <i class="icon icon--sm stack-interface stack-menu"></i>
+                            </a>
+                        </div>
+                    </div>
+                    <!--end of row-->
+                </div>
+                <!--end of container-->
+            </div>
+            <!--end bar-->
+            <nav id="menu1" class="bar bar-1 hidden-xs hiddem-sm" data-scroll-class='100vh:pos-fixed'>
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-3 col-sm-2 hidden-xs">
+                            <div class="bar__module">
+                                <a href="../index.html">
+                                    <img class="logo" alt="logo" src="../img/xstrong-data-science.png.pagespeed.ic.jMpbgW4o3L.png" alt="Strong Analytics - Data Science Consulting and Machine Learning Development Firm" title="Strong Analytics - Data Science Consulting and Machine Learning Development Firm"/>
+                                </a>
+                            </div>
+                            <!--end module-->
+                        </div>
+                        <div class="col-md-9 col-sm-12 text-right text-left-xs text-left-sm">
+                            <div class="bar__module">
+                                <ul class="menu-horizontal text-left">
+                                    <li class="dropdown">
+                                        <a href="../index.html">Home</a>
+                                    </li>
+                                    <li class="dropdown">
+                                        <span class="dropdown__trigger">Services</span>
+                                        <div class="dropdown__container">
+                                            <div class="container">
+                                                <div class="row">
+                                                    <div class="dropdown__content col-md-3 col-sm-6">
+                                                        <ul class="menu-vertical">
+	                                                        <li>
+                                                                <a href="../machine-learning-development.html">Machine Learning Development</a>
+                                                            </li>
+                                                            <li>
+                                                                <a href="../data-science-analytics.html">Data Science &amp; Analytics</a>
+                                                            </li>
+	                                                        <li>
+                                                                <a href="../big-data-infrastructure.html">Big Data Infrastructure</a>
+                                                            </li>
+                                                            <li>
+                                                                <a href="../app-development.html">Application Development</a>
+                                                            </li>
+                                                        </ul>
+                                                    </div>
+                                                    <!--end dropdown content-->
+                                                </div>
+                                                <!--end row-->
+                                            </div>
+                                        </div>
+                                        <!--end dropdown container-->
+                                    </li>
+                                    <li class="dropdown">
+                                        <span class="dropdown__trigger">Products</span>
+                                        <div class="dropdown__container">
+                                            <div class="container">
+                                                <div class="row">
+                                                    <div class="dropdown__content col-md-3 col-sm-6">
+                                                        <ul class="menu-vertical">
+	                                                        <li>
+                                                                <a href="../products/optimail.html">Optimail</a>
+                                                            </li>
+                                                        </ul>
+                                                    </div>
+                                                    <!--end dropdown content-->
+                                                </div>
+                                                <!--end row-->
+                                            </div>
+                                        </div>
+                                        <!--end dropdown container-->
+                                    </li>
+                                    <li class="dropdown">
+                                        <a href="../blog.html">Blog</a>
+                                    </li>
+                                    <li class="dropdown">
+                                        <span class="dropdown__trigger">Resources</span>
+                                        <div class="dropdown__container">
+                                            <div class="container">
+                                                <div class="row">
+                                                    <div class="dropdown__content col-md-3 col-sm-6">
+                                                        <ul class="menu-vertical">
+	                                                        <li>
+                                                                <a href="data-science-audit.html">Data Science Audit</a>
+                                                            </li>
+                                                            <li>
+                                                                <a href="../scholarship.html">Data Science Scholarship</a>
+                                                            </li>
+                                                            <li>
+                                                                <a href="predictive-model-roi-calculator.html">Predictive Model ROI Calculator</a>
+                                                            </li>
+                                                        </ul>
+                                                    </div>
+                                                    <!--end dropdown content-->
+                                                </div>
+                                                <!--end row-->
+                                            </div>
+                                        </div>
+                                        <!--end dropdown container-->
+                                    </li>
+                                    <li class="dropdown">
+                                        <a href="../team.html">Our Team</a>
+                                    </li>
+                                </ul>
+                            </div>
+                            <!--end module-->
+                            <div class="bar__module">
+                                <a class="btn btn--sm btn--primary type--uppercase" href="../contact.html">
+                                    <span class="btn__text">
+                                        Contact Us
+                                    </span>
+                                </a>
+                            </div>
+                            <!--end module-->
+                        </div>
+                        <!--end columns-->
+                    </div>
+                    <!--end of row-->
+                </div>
+                <!--end of container-->
+            </nav>
+        </div>
+        
+        <div class="main-container">
+	        
+	        			<section class="space--sm">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-sm-10 col-md-8 col-sm-offset-1 col-md-offset-2">
+                            <article>
+	                            <ol class="breadcrumbs">
+							        <li>
+							            <a href="../index.html">Home</a>
+							        </li>
+							        <li>
+							            <a href="../blog.html">Blog</a>
+							        </li>
+							    </ol>
+                                <div class="article__title text-center">
+                                    <a href="keanu-enter-the-model-matrix.html">
+                                        <h2>Keanu: Enter the Model.Matrix</h2>
+                                    </a>
+                                    <span>Mar 28th, 2018 by Jacob Dink</span>
+                                </div>
+                                <!--end article title-->
+                                <div class="article__body">
+                                    <p>One of R’s strengths is its powerful formula-based interface to modelling. It saves you the headache of one-hot-encoding categorical variables, manually constructing higher-level interactions, and rewriting models just to add or drop terms. Instead, you just specify the model you want in high-level notation, and R will handle transforming it into the raw numerical model-matrix that’s needed for model-fitting.</p>
+<p>Thanks to R’s rich ecosystem of packages, for many situations you’ll find a ready-to-use modelling solution that leverages this formula interface. But there will inevitably be situations where out-of-the-box solutions don’t fit your use-case. When that happens, you’re stuck with something more time-consuming: hand-coding the underlying model-fitting, perhaps using numerical optimization (e.g., <code>stats::optim</code>) or a language like Stan.</p>
+<p>We wrote <a href="https://github.com/strongio/keanu">keanu</a> to make tackling situations like these painless and fruitful. It allows you to focus on the core aspects of your models, because it provides tools that handle the busywork of translating abstract model-specifications into the nuts-and-bolts of model-fitting.</p>
+<p>Let me introduce the package with a quick example.</p>
+<h2>An Example</h2>
+<p>An online retailer is interested in better understanding and predicting the purchasing behavior of a customer segment. This segment consists of customers who visited the website once, didn’t make a purchase, then later returned and made a purchase. The retailer would like to take metrics from that first visit and use them to predict the purchase-amount on the second visit.</p>
+<p>They’re particularly interested in the relationship between first-visit session-length and second-visit purchase-amount:</p>
+<p><a target="_blank" href="../blog-images/keanu/keanu-figure-1.png"><img src="../blog-images/keanu/xkeanu-figure-1.png.pagespeed.ic.aRlNhy2DEt.png" alt=""/></a></p>
+<p>We’d like to better understand these data. We have a handful of predictors, and we’d like to assess how they work together — rather than looking at them in isolation like in the plot above. One simple approach is multiple regression. We’ll try two versions: first on the vanilla data, then after log-transforming the target-variable (since it’s skewed and constrained to be positive).</p>
+<p><a target="_blank" href="../blog-images/keanu/keanu-figure-2.png"><img src="../blog-images/keanu/xkeanu-figure-2.png.pagespeed.ic.eRVLKfpuVL.png" alt=""/></a></p>
+<p><a target="_blank" href="../blog-images/keanu/keanu-figure-3.png"><img src="../blog-images/keanu/xkeanu-figure-3.png.pagespeed.ic.VAKPphEJDg.png" alt=""/></a></p>
+<p>A first glance at the results suggests that the log-transformed model is probably more appropriate: its residuals are more normally-distributed, which is an important assumption in regression models like these. No surprises there.</p>
+<p>However, if we look closely, something very strange is going on across these two models. Our “session-length” predictor is flipping signs!</p>
+<p>We already plotted session-length against checkout amount, where we could clearly see the checkout amount increasing with longer sessions. This matches the vanilla model. The log-transformed model says the opposite. Let’s try re-doing that plot but with log-scaling on our y-axis:</p>
+<p><a target="_blank" href="../blog-images/keanu/keanu-figure-4.png"><img src="../blog-images/keanu/xkeanu-figure-4.png.pagespeed.ic.KIVDQNvQmr.png" alt=""/></a></p>
+<p>Once we’ve re-scaled the values like this, it looks like longer sessions mean smaller purchases (just like the log-transformed model said).</p>
+<p>What is happening here is a conflict between the mean and the median. As session-length goes down, the median checkout-amount goes down. But the variance increases, and checkout amounts are always positive, so this has an asymmetric effect: while the median goes down, the mean goes up.</p>
+<p><a target="_blank" href="../blog-images/keanu/keanu-figure-5.png"><img src="../blog-images/keanu/xkeanu-figure-5.png.pagespeed.ic.ohLIsh0VpF.png" alt=""/></a></p>
+<p>This is a frustrating situation: two out-of-the-box solutions to modelling our data are giving us conflicting and hard-to-interpret results due to violated model-assumptions. Perhaps we should avoid modelling altogether, using descriptives and visualizations on each predictor separately? Or in the opposite direction, we could spend time coding up a custom model. Neither of these situations are ideal: we’re looking for quick insights in order to drive the more time-consuming, central tasks on the project — we don’t want our kick-off analysis to get bogged down like this.</p>
+<h2>Keanu in Action</h2>
+<p>Luckily, <a href="https://github.com/strongio/keanu">keanu</a> offers a better route, by letting us define a custom modelling function like <code>lm</code> within seconds.</p>
+<p>Above, we pinned our issue on a conflict between the mean and median. This conflict was due to the fact that, as session-length increases, the median goes down, but the variance goes up. So we just need a model that not only captures the central-tendency of the data, but also its variance.</p>
+<p>First, we write out the likelihood function that describes (the error in) our data. The lognormal distribution seems like a good choice, since our data was very close to normally distributed when we log-transformed it.</p>
+<p>R provides the density for the lognormal distribution, we’ll just wrap it in a function so that it gives us the log-density by default:</p>
+<pre><code>lognormal_loglik_fun &lt;- function(Y, mu, sigma) dlnorm(x = Y, meanlog = mu, sdlog = sigma, log = TRUE)</code></pre>
+<p>Next, we just pass this to <a href="https://github.com/strongio/keanu">keanu</a>'s <code>modeller_from_loglik</code>. This is a “function factory”: it is a function that produces a function.</p>
+<pre><code>lognormal_model &lt;- modeller_from_loglik(loglik_fun = lognormal_loglik_fun)</code></pre>
+<p>In this case, the function produced is <code>lognormal_model</code>. It acts a lot like other modelling functions in R, like <code>lm</code>. The biggest difference is that we pass it a list of formulas, instead of a single formula. And instead of just specifying the DV in our formulas, we also specify the parameter of the DV that’s being modelled by that formula.</p>
+<p>For example, to model the <code>mu</code> parameter of our <code>checkout_amount_v2</code> using just <code>session_length</code>, we’d write:</p>
+<pre><code>mu(checkout_amount_v2) ~ session_length</code></pre>
+<p>For sigma, we’d write something similar. But since the sigma parameter must be greater than zero, we’ll specify a log-link:</p>
+<pre><code>sigma(checkout_amount_v2, link = "log") ~ session_length</code></pre>
+<p>Now let’s put it all together, using all predictors:</p>
+<pre><code>keanu_model &lt;- lognormal_model(
+
+  formulas =  list( mu(checkout_amount_v2) ~ .,
+                    sigma(checkout_amount_v2, link='log') ~ . ),
+
+  data = df_return_segment[c('checkout_amount_v2', predictors)]
+
+)</code></pre>
+<p>And… that’s it! Looking at the coefficients (I’ve removed all but the interesting ones to avoid clutter), we see that the model has exactly captured the paradox above. Session-length has a negative coefficient when predicting the <code>mu</code> parameter, but a very large positive coefficient when predicting the <code>sigma</code> parameter:</p>
+<p><a target="_blank" href="../blog-images/keanu/keanu-figure-6.png"><img src="../blog-images/keanu/xkeanu-figure-6.png.pagespeed.ic.3GDHlP3Kaf.png" alt=""/></a></p>
+<p>Since the mu parameter of the lognormal distribution corresponds to the median, this explains why the median decreased. Meanwhile, the mean (expected value) of this distribution is given by:</p>
+<p>$$exp(\mu + \frac{\sigma^2}{2})$$</p>
+<p>When we plug our coefficients into this, we can see that model correctly captures that the expected-value goes up with longer sessions:</p>
+<p><a target="_blank" href="../blog-images/keanu/keanu-figure-7.png"><img src="../blog-images/keanu/xkeanu-figure-7.png.pagespeed.ic.qIJY8Pjm8e.png" alt=""/></a></p>
+<p>The example here showcases the virtues of <a href="https://github.com/strongio/keanu">keanu</a> nicely. We’ve not only done a better job at building a model that fits our data, but this model also provides more insight than our initial attempts: its coefficient-estimates perfectly capture the paradoxical relationship between session-length and checkout-amount.</p>
+<p>So to recap: <a href="https://github.com/strongio/keanu">keanu</a> gives us an fast and easy way of defining modelling functions — all we need to do is provide the likelihood function for our data. These functions let us do quick analyses of data that don’t fit into the mold of out-of-the-box modelling tools in R.</p>
+<p>Want to use Keanu in your own work? <a href="https://github.com/strongio/keanu">Check it out on Github</a>.</p>                                </div>
+                                
+                                <p>&nbsp;</p>
+                                <style>#dsq-content div,#dsq-content p,#dsq-content h3{clear:none!important}#dsq-content{overflow:auto!important}</style>
+								<div id="disqus_thread"></div>
+									<script type="text/javascript">var disqus_shortname='stronganalytics';var disqus_identifier='blog/keanu-enter-the-model-matrix';var disqus_url='keanu-enter-the-model-matrix.html';(function(){var dsq=document.createElement('script');dsq.type='text/javascript';dsq.async=true;dsq.src='http://'+disqus_shortname+'.disqus.com/embed.js';(document.getElementsByTagName('head')[0]||document.getElementsByTagName('body')[0]).appendChild(dsq);})();</script>
+									<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+								</div>
+                            </article>
+                        </div>
+                    </div>
+                    <!--end of row-->
+                </div>
+                <!--end of container-->
+            </section>
+	        
+	        <footer class="text-center-xs space--xs ">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-sm-7">
+                            <ul class="list-inline">
+                                <li>
+                                    <a href="../team.html">
+                                        <span class="h6 type--uppercase">Our Team</span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="../careers.html">
+                                        <span class="h6 type--uppercase">Careers</span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="../contact.html">
+                                        <span class="h6 type--uppercase">Contact Us</span>
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="col-sm-5 text-right text-center-xs">
+                            <ul class="social-list list-inline list--hover">
+                                <li>
+                                    <a href="http://www.twitter.com/stronganalytics">
+                                        <i class="socicon socicon-twitter icon icon--xs"></i>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="https://www.linkedin.com/company/strong-analytics">
+                                        <i class="socicon socicon-linkedin icon icon--xs"></i>
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    <!--end of row-->
+                    <div class="row">
+                        <div class="col-sm-7">
+                            <span class="type--fine-print">&copy;
+                                <span class="update-year"></span> Strong Analytics LLC &mdash; Chicago, IL, USA &amp; Vancouver, BC, Canada</span>
+                        </div>
+                        <div class="col-sm-5 text-right text-center-xs">
+                            <a class="type--fine-print" href="mailto:contact@strong.io">contact@strong.io</a>
+                        </div>
+                    </div>
+                    <!--end of row-->
+                </div>
+                <!--end of container-->
+            </footer>
+        </div>
+        <!--<div class="loader"></div>-->
+        <a class="back-to-top inner-link" href="#start" data-scroll-class="100vh:active">
+            <i class="stack-interface stack-up-open-big"></i>
+        </a>
+        
+        <!-- Intercom -->
+		<script>window.intercomSettings={app_id:"yhiz5h5i"};</script>
+		<script>(function(){var w=window;var ic=w.Intercom;if(typeof ic==="function"){ic('reattach_activator');ic('update',intercomSettings);}else{var d=document;var i=function(){i.c(arguments)};i.q=[];i.c=function(args){i.q.push(args)};w.Intercom=i;function l(){var s=d.createElement('script');s.type='text/javascript';s.async=true;s.src='https://widget.intercom.io/widget/yhiz5h5i';var x=d.getElementsByTagName('script')[0];x.parentNode.insertBefore(s,x);}if(w.attachEvent){w.attachEvent('onload',l);}else{w.addEventListener('load',l,false);}}})()</script>
+    </body>
+
+<!-- Mirrored from www.strong.io/blog/keanu-enter-the-model-matrix by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 26 Mar 2019 06:10:20 GMT -->
+</html>

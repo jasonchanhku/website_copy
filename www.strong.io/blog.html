@@ -1,0 +1,591 @@
+<!doctype html>
+<html lang="en">
+    
+<!-- Mirrored from www.strong.io/blog by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 26 Mar 2019 06:07:09 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+        <meta charset="utf-8">
+        <title>Data Science &amp; Machine Learning Blog &mdash; Strong Analytics</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="keywords" content="data science consulting, machine learning development, big data consulting, data scientists chicago, data scientists vancouver, machine learning chicago, machine learning vancouver, predictive models">
+        <meta name="description" content="We are a data science consulting and machine learning development firm that works with organizations of all sizes.">
+        <meta name="csrf-token" content="pKLPK0xGEdCfg8Ag0cl6EY96IVjikMMnbHh6s1PF">
+        
+        <script>(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)})(window,document,'script','../www.google-analytics.com/analytics.js','ga');ga('create','UA-10304921-10','auto');ga('require','GTM-N3NX8JR');ga('send','pageview');</script>
+
+        <link rel="icon" href="favicon.ico" type="image/x-icon"/>
+		<link rel="apple-touch-icon" sizes="57x57" href="favicon/xapple-icon-57x57.png.pagespeed.ic.VRUjB4O0KQ.png">
+		<link rel="apple-touch-icon" sizes="60x60" href="favicon/xapple-icon-60x60.png.pagespeed.ic.vJVDTOCtI6.png">
+		<link rel="apple-touch-icon" sizes="72x72" href="favicon/xapple-icon-72x72.png.pagespeed.ic.whp121EcVL.png">
+		<link rel="apple-touch-icon" sizes="76x76" href="favicon/xapple-icon-76x76.png.pagespeed.ic.MgjQkXPKC1.png">
+		<link rel="apple-touch-icon" sizes="114x114" href="favicon/xapple-icon-114x114.png.pagespeed.ic._QGzwKiKu-.png">
+		<link rel="apple-touch-icon" sizes="120x120" href="favicon/xapple-icon-120x120.png.pagespeed.ic.Hz4AnLMGIL.png">
+		<link rel="apple-touch-icon" sizes="144x144" href="favicon/xapple-icon-144x144.png.pagespeed.ic.bHG2b7g3rz.png">
+		<link rel="apple-touch-icon" sizes="152x152" href="favicon/xapple-icon-152x152.png.pagespeed.ic.3JJoTM0DCX.png">
+		<link rel="apple-touch-icon" sizes="180x180" href="favicon/xapple-icon-180x180.png.pagespeed.ic.bAFEspbAmS.png">
+		<link rel="icon" type="image/png" sizes="192x192" href="favicon/xandroid-icon-192x192.png.pagespeed.ic.8sJXtxfCk2.png">
+		<link rel="icon" type="image/png" sizes="32x32" href="favicon/xfavicon-32x32.png.pagespeed.ic.pLQe2o0-x8.png">
+		<link rel="icon" type="image/png" sizes="96x96" href="favicon/xfavicon-96x96.png.pagespeed.ic.ftlKs2rhLH.png">
+		<link rel="icon" type="image/png" sizes="16x16" href="favicon/xfavicon-16x16.png.pagespeed.ic.GwCISc5tnn.png">
+		<link rel="manifest" href="favicon/manifest.json">
+		<meta name="msapplication-TileColor" content="#ffffff">
+		<meta name="msapplication-TileImage" content="/favicon/ms-icon-144x144.png">
+		<meta name="theme-color" content="#ffffff">
+        <link href="css/A.strong.min.css.pagespeed.cf.LDJy99El4b.css" rel="stylesheet" type="text/css" media="all"/>
+        <link href="https://fonts.googleapis.com/css?family=Open+Sans:200,300,400,400i,500,600,700%7CMerriweather:300,300i%7CMaterial+Icons" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,400i,500,700" rel="stylesheet"/>
+        
+        <script src="js/strong.min.js.pagespeed.jm.QqKV1RzJLn.js"></script>
+            </head>
+    <body class=" ">
+        <a id="start"></a>
+        <div class="nav-container ">
+            <div class="bar bar--sm visible-xs">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-xs-6 col-sm-6">
+                            <a href="index.html">
+                                <img class="logo" alt="logo" src="img/xstrong-data-science.png.pagespeed.ic.jMpbgW4o3L.png" alt="Strong Analytics - Data Science Consulting and Machine Learning Development Firm" title="Strong Analytics - Data Science Consulting and Machine Learning Development Firm"/>
+                            </a>
+                        </div>
+                        <div class="col-xs-6 col-sm-6 text-right">
+                            <a href="#" class="hamburger-toggle" data-toggle-class="#menu1;hidden-xs">
+                                <i class="icon icon--sm stack-interface stack-menu"></i>
+                            </a>
+                        </div>
+                    </div>
+                    <!--end of row-->
+                </div>
+                <!--end of container-->
+            </div>
+            <!--end bar-->
+            <nav id="menu1" class="bar bar-1 hidden-xs hiddem-sm" data-scroll-class='100vh:pos-fixed'>
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-3 col-sm-2 hidden-xs">
+                            <div class="bar__module">
+                                <a href="index.html">
+                                    <img class="logo" alt="logo" src="img/xstrong-data-science.png.pagespeed.ic.jMpbgW4o3L.png" alt="Strong Analytics - Data Science Consulting and Machine Learning Development Firm" title="Strong Analytics - Data Science Consulting and Machine Learning Development Firm"/>
+                                </a>
+                            </div>
+                            <!--end module-->
+                        </div>
+                        <div class="col-md-9 col-sm-12 text-right text-left-xs text-left-sm">
+                            <div class="bar__module">
+                                <ul class="menu-horizontal text-left">
+                                    <li class="dropdown">
+                                        <a href="index.html">Home</a>
+                                    </li>
+                                    <li class="dropdown">
+                                        <span class="dropdown__trigger">Services</span>
+                                        <div class="dropdown__container">
+                                            <div class="container">
+                                                <div class="row">
+                                                    <div class="dropdown__content col-md-3 col-sm-6">
+                                                        <ul class="menu-vertical">
+	                                                        <li>
+                                                                <a href="machine-learning-development.html">Machine Learning Development</a>
+                                                            </li>
+                                                            <li>
+                                                                <a href="data-science-analytics.html">Data Science &amp; Analytics</a>
+                                                            </li>
+	                                                        <li>
+                                                                <a href="big-data-infrastructure.html">Big Data Infrastructure</a>
+                                                            </li>
+                                                            <li>
+                                                                <a href="app-development.html">Application Development</a>
+                                                            </li>
+                                                        </ul>
+                                                    </div>
+                                                    <!--end dropdown content-->
+                                                </div>
+                                                <!--end row-->
+                                            </div>
+                                        </div>
+                                        <!--end dropdown container-->
+                                    </li>
+                                    <li class="dropdown">
+                                        <span class="dropdown__trigger">Products</span>
+                                        <div class="dropdown__container">
+                                            <div class="container">
+                                                <div class="row">
+                                                    <div class="dropdown__content col-md-3 col-sm-6">
+                                                        <ul class="menu-vertical">
+	                                                        <li>
+                                                                <a href="products/optimail.html">Optimail</a>
+                                                            </li>
+                                                        </ul>
+                                                    </div>
+                                                    <!--end dropdown content-->
+                                                </div>
+                                                <!--end row-->
+                                            </div>
+                                        </div>
+                                        <!--end dropdown container-->
+                                    </li>
+                                    <li class="dropdown">
+                                        <a href="blog.html">Blog</a>
+                                    </li>
+                                    <li class="dropdown">
+                                        <span class="dropdown__trigger">Resources</span>
+                                        <div class="dropdown__container">
+                                            <div class="container">
+                                                <div class="row">
+                                                    <div class="dropdown__content col-md-3 col-sm-6">
+                                                        <ul class="menu-vertical">
+	                                                        <li>
+                                                                <a href="blog/data-science-audit.html">Data Science Audit</a>
+                                                            </li>
+                                                            <li>
+                                                                <a href="scholarship.html">Data Science Scholarship</a>
+                                                            </li>
+                                                            <li>
+                                                                <a href="blog/predictive-model-roi-calculator.html">Predictive Model ROI Calculator</a>
+                                                            </li>
+                                                        </ul>
+                                                    </div>
+                                                    <!--end dropdown content-->
+                                                </div>
+                                                <!--end row-->
+                                            </div>
+                                        </div>
+                                        <!--end dropdown container-->
+                                    </li>
+                                    <li class="dropdown">
+                                        <a href="team.html">Our Team</a>
+                                    </li>
+                                </ul>
+                            </div>
+                            <!--end module-->
+                            <div class="bar__module">
+                                <a class="btn btn--sm btn--primary type--uppercase" href="contact.html">
+                                    <span class="btn__text">
+                                        Contact Us
+                                    </span>
+                                </a>
+                            </div>
+                            <!--end module-->
+                        </div>
+                        <!--end columns-->
+                    </div>
+                    <!--end of row-->
+                </div>
+                <!--end of container-->
+            </nav>
+        </div>
+        
+        <div class="main-container">
+	        
+	        			<section class="text-center height-50">
+                <div class="container pos-vertical-center">
+                    <div class="row">
+                        <div class="col-sm-8 col-md-6">
+                            <h1>Strong Blog</h1>
+                            <p class="lead">
+                                Read our thoughts on data science, machine learning, predictive models, and optimization.
+                            </p>
+                            <hr>
+                        </div>
+                    </div>
+                    <!--end of row-->
+                </div>
+                <!--end of container-->
+            </section>
+            <section class="space--sm">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-sm-10 col-md-8 col-sm-offset-1 col-md-offset-2">
+                                                        
+                            <article>
+                                <div class="article__title text-center">
+                                    <a href="blog/strong-bootcamp-model-development-deployment.html">
+                                        <h2>Introducing Strong-Bootcamp: An Ultra-Lightweight Solution for Rigorous Machine Learning Development</h2>
+                                    </a>
+                                    <span>Oct 23rd, 2018 by Brock Ferguson</span>
+                                </div>
+                                <!--end article title-->
+                                <div class="article__body">
+                                    <p>Building and deploying machine learning solutions can be a messy business. In this post, we review hallmarks of rigorous, reproducible approaches to machine learning development that encourage model iteration, simplify model validation, and ease deployment. We also introduce `strong-bootcamp`, a simple Python package that implements these principles.</p>
+                                    <a href="blog/strong-bootcamp-model-development-deployment.html">Continue reading &raquo;</a>
+                                </div>
+                            </article>
+                            
+                            <p>&nbsp;</p>
+                            <hr>
+                            <p>&nbsp;</p>
+
+                                                        
+                            <article>
+                                <div class="article__title text-center">
+                                    <a href="blog/evolutionary-optimization.html">
+                                        <h2>Evolutionary Optimization: A Review and Implementation of Several Algorithms</h2>
+                                    </a>
+                                    <span>Oct 17th, 2018 by Jade Cheng</span>
+                                </div>
+                                <!--end article title-->
+                                <div class="article__body">
+                                    <p>Black-box and derivative-free optimization is a discipline in mathematical optimization that does not use derivative information in the classical sense to find optimal solutions. Unlike most optimization algorithms, a derivate-free algorithm may query the value of objective function at a given point, but it does not obtain gradient information, and in particular it cannot make any assumptions regarding the analytic form of the objective function. Here we overview one class of derivative-free algorithms, evolutionary algorithms (EA), and present a suite of robust Python implementations of each.</p>
+                                    <a href="blog/evolutionary-optimization.html">Continue reading &raquo;</a>
+                                </div>
+                            </article>
+                            
+                            <p>&nbsp;</p>
+                            <hr>
+                            <p>&nbsp;</p>
+
+                                                        
+                            <article>
+                                <div class="article__title text-center">
+                                    <a href="blog/visualizing-graphs-coulomb-simulation.html">
+                                        <h2>Visualizing Graphs using Simulations of Coulomb&#039;s Law</h2>
+                                    </a>
+                                    <span>Jul 11th, 2018 by Jade Cheng</span>
+                                </div>
+                                <!--end article title-->
+                                <div class="article__body">
+                                    <p>Visualizing graphs as pairwise relations in a network can be a challenging task. In this post, we discuss how simulations of Coulomb&#039;s Law can be used to draw graphs in an aesthetically-pleasing way without requiring sophisticated knowledge about graph theory.</p>
+                                    <a href="blog/visualizing-graphs-coulomb-simulation.html">Continue reading &raquo;</a>
+                                </div>
+                            </article>
+                            
+                            <p>&nbsp;</p>
+                            <hr>
+                            <p>&nbsp;</p>
+
+                                                        
+                            <article>
+                                <div class="article__title text-center">
+                                    <a href="blog/keanu-enter-the-model-matrix.html">
+                                        <h2>Keanu: Enter the Model.Matrix</h2>
+                                    </a>
+                                    <span>Mar 28th, 2018 by Jacob Dink</span>
+                                </div>
+                                <!--end article title-->
+                                <div class="article__body">
+                                    <p>One of R’s strengths is its powerful formula-based interface to modelling. It saves you the headache of one-hot-encoding categorical variables, manually constructing higher-level interactions, and rewriting models just to add or drop terms. Instead, you just specify the model you want in high-level notation, and R will handle transforming it into the raw numerical model-matrix that’s needed for model-fitting. We wrote keanu to make tackling situations where R&#039;s built-in interfaces fall short. It allows you to focus on the core aspects of your models, providing the tools that handle the busywork of translating abstract model-specifications into the nuts-and-bolts of model-fitting.</p>
+                                    <a href="blog/keanu-enter-the-model-matrix.html">Continue reading &raquo;</a>
+                                </div>
+                            </article>
+                            
+                            <p>&nbsp;</p>
+                            <hr>
+                            <p>&nbsp;</p>
+
+                                                        
+                            <article>
+                                <div class="article__title text-center">
+                                    <a href="blog/data-science-consulting-dream-job.html">
+                                        <h2>Data Science Consulting is our Dream Job</h2>
+                                    </a>
+                                    <span>Mar 5th, 2018 by Jacob</span>
+                                </div>
+                                <!--end article title-->
+                                <div class="article__body">
+                                    <p>Our co-founder, Jacob, wrote on Medium recently about why data science consulting is his dream job.</p>
+                                    <a href="blog/data-science-consulting-dream-job.html">Continue reading &raquo;</a>
+                                </div>
+                            </article>
+                            
+                            <p>&nbsp;</p>
+                            <hr>
+                            <p>&nbsp;</p>
+
+                                                        
+                            <article>
+                                <div class="article__title text-center">
+                                    <a href="blog/data-scientist-role.html">
+                                        <h2>Open Role: Data Scientist</h2>
+                                    </a>
+                                    <span>Dec 1st, 2017 by Brock</span>
+                                </div>
+                                <!--end article title-->
+                                <div class="article__body">
+                                    <p>Strong Analytics is seeking a data scientist to join our team in developing machine learning pipelines, building and validating statistical models, and helping our clients discover value in their data.</p>
+                                    <a href="blog/data-scientist-role.html">Continue reading &raquo;</a>
+                                </div>
+                            </article>
+                            
+                            <p>&nbsp;</p>
+                            <hr>
+                            <p>&nbsp;</p>
+
+                                                        
+                            <article>
+                                <div class="article__title text-center">
+                                    <a href="blog/deep-learning-applications-saas.html">
+                                        <h2>How can Deep Learning Help Your SaaS Business?</h2>
+                                    </a>
+                                    <span>Apr 20th, 2017 by Jacob</span>
+                                </div>
+                                <!--end article title-->
+                                <div class="article__body">
+                                    <p>It&#039;s easy to see how deep learning is a powerful tool for companies like Google, Twitter, Facebook, and Amazon. In this post, I review several ways that deep learning can have immense value for smaller SaaS companies. The same technology that powers self-driving cars can even help you win new customers, make recommendations, and decrease churn.</p>
+                                    <a href="blog/deep-learning-applications-saas.html">Continue reading &raquo;</a>
+                                </div>
+                            </article>
+                            
+                            <p>&nbsp;</p>
+                            <hr>
+                            <p>&nbsp;</p>
+
+                                                        
+                            <article>
+                                <div class="article__title text-center">
+                                    <a href="blog/predictive-model-roi-calculator.html">
+                                        <h2>Predictive Model ROI ($) Calculator</h2>
+                                    </a>
+                                    <span>Mar 15th, 2017 by Brock</span>
+                                </div>
+                                <!--end article title-->
+                                <div class="article__body">
+                                    <p>Understanding the value that a predictive model can add to your business is often challenging. We wanted to make things simpler by building a free tool to calculate the ROI ($) of your predictive model based on its performance, number of possible events, baseline rate of events, and profits/costs of your intervention.</p>
+                                    <a href="blog/predictive-model-roi-calculator.html">Continue reading &raquo;</a>
+                                </div>
+                            </article>
+                            
+                            <p>&nbsp;</p>
+                            <hr>
+                            <p>&nbsp;</p>
+
+                                                        
+                            <article>
+                                <div class="article__title text-center">
+                                    <a href="blog/data-science-audit.html">
+                                        <h2>The Strong Data Science Audit: How does your Organization&#039;s Data Strategy Stack Up?</h2>
+                                    </a>
+                                    <span>Dec 13th, 2016 by Brock</span>
+                                </div>
+                                <!--end article title-->
+                                <div class="article__body">
+                                    <p>Data science is a new and growing field. As such, most organizations are still figuring out how to use these new tools and strategies to unlock new opportunities. We want to help! Take our free data science audit to find weaknesses and opportunities for you to pursue and, in turn, leverage the power of data science in your organization.</p>
+                                    <a href="blog/data-science-audit.html">Continue reading &raquo;</a>
+                                </div>
+                            </article>
+                            
+                            <p>&nbsp;</p>
+                            <hr>
+                            <p>&nbsp;</p>
+
+                                                        
+                            <article>
+                                <div class="article__title text-center">
+                                    <a href="blog/optimail-email-marketing-artificial-intelligence.html">
+                                        <h2>Introducing Optimail: Email Marketing powered by Artificial Intelligence</h2>
+                                    </a>
+                                    <span>Sep 18th, 2016 by Brock</span>
+                                </div>
+                                <!--end article title-->
+                                <div class="article__body">
+                                    <p>Optimail offers its users the opportunity to continuously and automatically optimize their email campaigns using artificial intelligence. Marketers can simply draft the emails they want to send (or many versions thereof), define the goals they want these emails to achieve, then sit back and watch as Optimail learns the strategy that drives customers most effectively toward those goals.</p>
+                                    <a href="blog/optimail-email-marketing-artificial-intelligence.html">Continue reading &raquo;</a>
+                                </div>
+                            </article>
+                            
+                            <p>&nbsp;</p>
+                            <hr>
+                            <p>&nbsp;</p>
+
+                                                        
+                            <article>
+                                <div class="article__title text-center">
+                                    <a href="blog/customer-lifetime-value-avoid-common-pitfalls-and-build-smarter-metrics.html">
+                                        <h2>Customer Lifetime Value: How to Avoid Common Pitfalls and Build Smarter Metrics</h2>
+                                    </a>
+                                    <span>Jun 22nd, 2016 by Jacob</span>
+                                </div>
+                                <!--end article title-->
+                                <div class="article__body">
+                                    <p>In this post we talk about customer lifetime value, a critical metric for any business. We describe problems with the traditional way of calculating this metric, and go into detail about a method we prefer, based in survival analysis. </p>
+                                    <a href="blog/customer-lifetime-value-avoid-common-pitfalls-and-build-smarter-metrics.html">Continue reading &raquo;</a>
+                                </div>
+                            </article>
+                            
+                            <p>&nbsp;</p>
+                            <hr>
+                            <p>&nbsp;</p>
+
+                                                        
+                            <article>
+                                <div class="article__title text-center">
+                                    <a href="blog/predicting-customer-behavior-machine-learning-to-identify-paying-customers.html">
+                                        <h2>Predicting Customer Behavior: How we use Machine Learning to Identify Paying Customers before they Subscribe</h2>
+                                    </a>
+                                    <span>Jun 14th, 2016 by Brock</span>
+                                </div>
+                                <!--end article title-->
+                                <div class="article__body">
+                                    <p>We used machine learning to predict whether customers on a free trial would convert to a paid subscription, significantly increasing the conversion rate at a small SaaS company.</p>
+                                    <a href="blog/predicting-customer-behavior-machine-learning-to-identify-paying-customers.html">Continue reading &raquo;</a>
+                                </div>
+                            </article>
+                            
+                            <p>&nbsp;</p>
+                            <hr>
+                            <p>&nbsp;</p>
+
+                                                        
+                            <article>
+                                <div class="article__title text-center">
+                                    <a href="blog/landing-page-science-optimizing-conversion-rates.html">
+                                        <h2>Landing Page Science: How we Optimized the Conversion Rates of over Ten Thousand Landing Pages</h2>
+                                    </a>
+                                    <span>May 24th, 2016 by Brock</span>
+                                </div>
+                                <!--end article title-->
+                                <div class="article__body">
+                                    <p>We worked with a software-as-a-service startup to analyze their customers&#039; landing pages. With a little help from machine learning, we determined what kinds of pages had the highest conversion rates, and made our customer (and their customers) happy in the process.</p>
+                                    <a href="blog/landing-page-science-optimizing-conversion-rates.html">Continue reading &raquo;</a>
+                                </div>
+                            </article>
+                            
+                            <p>&nbsp;</p>
+                            <hr>
+                            <p>&nbsp;</p>
+
+                                                        
+                            <article>
+                                <div class="article__title text-center">
+                                    <a href="blog/is-data-science-only-useful-for-organizations-with-big-data.html">
+                                        <h2>Is Data Science only Useful for Organizations with &#039;Big Data&#039;?</h2>
+                                    </a>
+                                    <span>May 3rd, 2016 by Brock</span>
+                                </div>
+                                <!--end article title-->
+                                <div class="article__body">
+                                    <p>Some think that making data-driven decisions requires &#039;big data,&#039; leaving smaller organizations out of the recent data science movement. I argue to the contrary that thinking about data science early on can not only prepare your organization for future growth, but offer insights even from the small data you have now.</p>
+                                    <a href="blog/is-data-science-only-useful-for-organizations-with-big-data.html">Continue reading &raquo;</a>
+                                </div>
+                            </article>
+                            
+                            <p>&nbsp;</p>
+                            <hr>
+                            <p>&nbsp;</p>
+
+                                                        
+                            <article>
+                                <div class="article__title text-center">
+                                    <a href="blog/five-things-every-startup-should-be-doing-with-its-data.html">
+                                        <h2>Five Things Every Startup Should be Doing with its Data</h2>
+                                    </a>
+                                    <span>Apr 16th, 2016 by Brock</span>
+                                </div>
+                                <!--end article title-->
+                                <div class="article__body">
+                                    <p>We lay out a comprehensive data strategy for your business to make data-driven decisions about strategy, marketing, and product development.</p>
+                                    <a href="blog/five-things-every-startup-should-be-doing-with-its-data.html">Continue reading &raquo;</a>
+                                </div>
+                            </article>
+                            
+                            <p>&nbsp;</p>
+                            <hr>
+                            <p>&nbsp;</p>
+
+                                                        
+                            <article>
+                                <div class="article__title text-center">
+                                    <a href="blog/deep-neural-networks-go-to-the-movies.html">
+                                        <h2>Deep Neural Networks Go to the Movies</h2>
+                                    </a>
+                                    <span>Feb 23rd, 2016 by Jacob</span>
+                                </div>
+                                <!--end article title-->
+                                <div class="article__body">
+                                    <p>What&#039;s the difference between posters of good movies and bad movies? We use a Convolutional Neural Network to classify good vs. bad posters and explore the visual features that drive this distinction.</p>
+                                    <a href="blog/deep-neural-networks-go-to-the-movies.html">Continue reading &raquo;</a>
+                                </div>
+                            </article>
+                            
+                            <p>&nbsp;</p>
+                            <hr>
+                            <p>&nbsp;</p>
+
+                                                        
+                            <article>
+                                <div class="article__title text-center">
+                                    <a href="blog/movie-ratings.html">
+                                        <h2>Movie Ratings: Do Critics and Fans See Eye-to-Eye?</h2>
+                                    </a>
+                                    <span>Feb 10th, 2016 by Brock</span>
+                                </div>
+                                <!--end article title-->
+                                <div class="article__body">
+                                    <p>I took a look at movie ratings in IMDB and Metacritic from the last fifteen years to examine agreement between critics&#039; and fans&#039; movie ratings, how they&#039;ve changed over time, and which movies they disagree on most.</p>
+                                    <a href="blog/movie-ratings.html">Continue reading &raquo;</a>
+                                </div>
+                            </article>
+                            
+                            <p>&nbsp;</p>
+                            <hr>
+                            <p>&nbsp;</p>
+
+                                                    </div>
+                    </div>
+                    <!--end of row-->
+                </div>
+                <!--end of container-->
+            </section>
+	        
+	        <footer class="text-center-xs space--xs ">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-sm-7">
+                            <ul class="list-inline">
+                                <li>
+                                    <a href="team.html">
+                                        <span class="h6 type--uppercase">Our Team</span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="careers.html">
+                                        <span class="h6 type--uppercase">Careers</span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="contact.html">
+                                        <span class="h6 type--uppercase">Contact Us</span>
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="col-sm-5 text-right text-center-xs">
+                            <ul class="social-list list-inline list--hover">
+                                <li>
+                                    <a href="http://www.twitter.com/stronganalytics">
+                                        <i class="socicon socicon-twitter icon icon--xs"></i>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="https://www.linkedin.com/company/strong-analytics">
+                                        <i class="socicon socicon-linkedin icon icon--xs"></i>
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    <!--end of row-->
+                    <div class="row">
+                        <div class="col-sm-7">
+                            <span class="type--fine-print">&copy;
+                                <span class="update-year"></span> Strong Analytics LLC &mdash; Chicago, IL, USA &amp; Vancouver, BC, Canada</span>
+                        </div>
+                        <div class="col-sm-5 text-right text-center-xs">
+                            <a class="type--fine-print" href="mailto:contact@strong.io">contact@strong.io</a>
+                        </div>
+                    </div>
+                    <!--end of row-->
+                </div>
+                <!--end of container-->
+            </footer>
+        </div>
+        <!--<div class="loader"></div>-->
+        <a class="back-to-top inner-link" href="#start" data-scroll-class="100vh:active">
+            <i class="stack-interface stack-up-open-big"></i>
+        </a>
+        
+        <!-- Intercom -->
+		<script>window.intercomSettings={app_id:"yhiz5h5i"};</script>
+		<script>(function(){var w=window;var ic=w.Intercom;if(typeof ic==="function"){ic('reattach_activator');ic('update',intercomSettings);}else{var d=document;var i=function(){i.c(arguments)};i.q=[];i.c=function(args){i.q.push(args)};w.Intercom=i;function l(){var s=d.createElement('script');s.type='text/javascript';s.async=true;s.src='https://widget.intercom.io/widget/yhiz5h5i';var x=d.getElementsByTagName('script')[0];x.parentNode.insertBefore(s,x);}if(w.attachEvent){w.attachEvent('onload',l);}else{w.addEventListener('load',l,false);}}})()</script>
+    </body>
+
+<!-- Mirrored from www.strong.io/blog by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 26 Mar 2019 06:08:32 GMT -->
+</html>
