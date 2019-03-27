@@ -13465,6 +13465,11 @@ a:active, a:focus, a:hover {
     padding: 5em 0
 }
 
+.height-j {
+    height: auto;
+    padding: 5em 0
+}
+
 @media all and (max-width: 767px) {
     .block--xs {
         display: block
