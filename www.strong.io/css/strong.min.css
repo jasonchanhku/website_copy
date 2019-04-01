@@ -27,6 +27,7 @@ audio:not([controls]) {
     display: none
 }
 
+
 a {
     background-color: transparent
 }
@@ -1282,10 +1283,19 @@ p {
 
 .text-center {
     text-align: center
+
+}
+
+.bg1{
+    background-image: url("../img/solar-panel-home2.jpg")
+}
+
+.bg2{
+    background-image: url("../img/team2.jpg")
 }
 
 .text-justify {
-    text-align: justify
+    text-align: center
 }
 
 .text-nowrap {
@@ -13204,7 +13214,7 @@ body {
     line-height: 1.85714286em;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
-    color: #666;
+    color: #252525;
     font-weight: 400
 }
 
@@ -17152,7 +17162,7 @@ hr {
 
 .lead {
     font-weight: 400;
-    color: grey
+    color: #252525
 }
 
 .lead:not(:last-child) {
